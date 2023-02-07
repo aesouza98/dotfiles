@@ -1,0 +1,61 @@
+#!/bin/bash
+myTerm=alacritty
+scripts="/home/adriano.elias/.local/bin"
+
+menu(){
+	printf "Oi meu amor!\n"
+	printf "Nesse dia especial\n"
+	printf "Eu queria dizer que você é meu bebê\n"
+	printf "E que com você, sou a pessoa mais feliz do mundo\n"
+	printf "Você alegra meu dia\n"
+	printf "Você ilumina minha vida\n"
+	printf "Você faz todas as coisas fazerem sentido\n"
+	printf "E por isso eu quero te dizer\n"
+	printf "EU TE AMO MAIS QUE TUDO!     \n"
+	printf "       \n"
+	printf "FELIZ DIA DOS NAMORADOS MEU AMOR!!!\n"
+}
+
+main(){
+    choice=$(menu | rofi -dmenu | cut -d. -f1)
+
+	case $choice in
+		"Oi meu amor!")
+			$myTerm -e sh -c "echo 'oi meu amor!' | figlet -f banner  -w 200 ; sleep 10"
+            ;;
+		"Nesse dia especial")
+			xdg-open "https://www.facebook.com/photo/?fbid=1050370018378406&set=a.1050370011711740"
+            ;;
+		"Eu queria dizer que você é meu bebê")
+			xdg-open "https://scontent.fbfh15-1.fna.fbcdn.net/v/t31.18172-8/10620451_712804535439875_5041988401508128010_o.jpg?_nc_cat=110&ccb=1-7&_nc_sid=174925&_nc_ohc=Jw8-W_fHlSAAX_IOdAU&_nc_ht=scontent.fbfh15-1.fna&oh=00_AT9ivySCaHV9TJZnT0NjFVVZG7yzKsZfLIQhm5Fw_134Zw&oe=62CA5577"
+            ;;
+		"E que com você, sou a pessoa mais feliz do mundo")
+			xdg-open "https://www.facebook.com/photo.php?fbid=1352274971492825&set=pb.100001310063047.-2207520000..&type=3"
+            ;;
+		"Você alegra meu dia")
+			xdg-open "/home/adriano.elias/images/bomdia.png"
+            ;;
+		"Você ilumina minha vida")
+			xdg-open "https://scontent.fbfh15-1.fna.fbcdn.net/v/t31.18172-8/27908088_1581061198614200_452209856016254040_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=174925&_nc_ohc=DqcPB7fDCIoAX-Y_muU&_nc_ht=scontent.fbfh15-1.fna&oh=00_AT8lIAXq2J191I7cUUMJ9dF6J5Uqa5QJlGJw8FIZAs4JFQ&oe=62C978F6"
+            ;;
+		"Você faz todas as coisas fazerem sentido")
+			xdg-open "https://www.instagram.com/p/BFeps6eOZna/"
+            ;;
+		"E por isso eu quero te dizer")
+			xdg-open "/home/adriano.elias/audio/audio.ogg"
+            ;;
+	  "EU TE AMO MAIS QUE TUDO!     ")
+			xdg-open "/home/adriano.elias/audio/respirar.ogg"
+            ;;
+		"       ")
+			xdg-open "https://www.facebook.com/photo.php?fbid=992574090824666&set=t.100002162544613&type=3"
+            ;;
+		"FELIZ DIA DOS NAMORADOS MEU AMOR!!!")
+			xdg-open "https://www.instagram.com/stories/nannow1/2858639005781747116/"
+            ;;
+
+        esac
+}
+
+main
+

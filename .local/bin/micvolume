@@ -1,0 +1,36 @@
+#!/bin/bash
+
+pamixer --list-sources | grep -i kraken >/dev/null
+if [ $? == 0 ]; then
+	sink=$(pamixer --list-sources | grep "Kraken" | grep -v "Monitor" | awk \{'print $1'\})
+else
+	sink=$(pamixer --list-sources | grep "Tiger Lake-LP Smart Sound Technology Audio Controller Digital Microphone" | awk \{'print $1'\})
+fi
+
+
+function send_notification() {
+	micvolume=$(pamixer --source $sink --get-volume)
+	dunstify -a "micvolume" -u low -r "9994" -h int:value:"$micvolume" -i "volume-$1" "Microphone: ${micvolume}%" -t 2000
+}
+
+case $1 in
+up)
+	# Set the volume on (if it was muted)
+	pamixer --source $sink -u
+	pamixer --source $sink -i 5
+	send_notification $1
+	;;
+down)
+	pamixer --source $sink -u
+	pamixer --source $sink -d 5
+	send_notification $1
+	;;
+mute)
+	pamixer --source "$sink" --toggle-mute
+	if [[ $(pamixer --source $sink --get-mute) == "true" ]]; then
+		dunstify -i volume-mute -a "changevolume" -t 2000 -r 9994 -u low "Microphone Muted"
+	else
+		send_notification up
+	fi
+	;;
+esac

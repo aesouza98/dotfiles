@@ -1,0 +1,66 @@
+#!/bin/bash
+term=alacritty
+config="/home/adriano/.config"
+editor=code
+
+menu(){
+	printf "1. bspwm\n"
+	printf "2. autostart\n"
+	printf "3. sxhkd\n"
+	printf "4. polybar\n"
+	printf "5. rofi\n"
+	printf "6. dunst\n"
+	printf "7. picom\n"
+	printf "8. awesome\n"
+	printf "9. qtile\n"
+	printf "10. aliases\n"
+	printf "11. scripts\n"
+	printf "12. alacritty\n"
+}
+
+main(){
+    choice=$(menu | rofi -dmenu | cut -d. -f1)
+
+	case $choice in
+		"1")
+			$term -e sh -c "code $config/bspwm"
+            ;;
+		"2")
+			$term -e sh -c "code $config/autostart"
+            ;;
+		"3")
+			$term -e sh -c "code $config/sxhkd"
+            ;;
+		"4")
+			$term -e sh -c "code $config/polybar"
+            ;;
+		"5")
+			$term -e sh -c "code $config/rofi"
+            ;;
+		"6")
+			$term -e sh -c "code $config/dunst"
+            ;;
+		"7")
+			$term -e sh -c "code $config/picom"
+            ;;
+	  	"8")
+			$term -e sh -c "code $config/awesome"
+            ;;
+		"9")
+			$term -e sh -c "code $config/qtile"
+            ;;
+		"10")
+			$term -e sh -c "code $config/shell"
+            ;;
+		"11")
+			$term -e sh -c "code ~/.local/bin"
+            ;;
+		"12")
+			$term -e sh -c "code $config/alacritty"
+            ;;
+	 esac
+}
+
+main
+
+
