@@ -5,7 +5,6 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 
 #variables
 export DUNST="$HOME/.config/dunst/dunstrc"
-export PICOM="$HOME/.config/picom/picom.conf"
 export POLYBAR="$HOME/.config/polybar"
 export ROFI_CFG="$HOME/.config/rofi/config.rasi"
 export ROFI_PWR="$HOME/.config/rofi/powermenu.rasi"
@@ -27,10 +26,9 @@ ln -s "$DIR"/down /tmp/leftwm-theme-down
 leftwm-command "LoadTheme $DIR/theme.ron"
 
 # Remove old theme links
-rm $PICOM $DUNST $POLYBAR/colors.ini $ROFI_CFG $ROFI_PWR $ROFI_THM $KITTY
+rm $DUNST $POLYBAR/colors.ini $ROFI_CFG $ROFI_PWR $ROFI_THM $KITTY
 
 # Link new files
-ln -s $HOME/.config/leftwm/themes/current/picom/picom.conf $HOME/.config/picom/picom.conf
 ln -s $HOME/.config/leftwm/themes/current/dunst/dunstrc $HOME/.config/dunst/dunstrc
 ln -s $HOME/.config/leftwm/themes/current/polybar/colors.ini $HOME/.config/polybar/colors.ini
 ln -s $HOME/.config/leftwm/themes/current/rofi/config.rasi $HOME/.config/rofi/config.rasi
@@ -39,7 +37,7 @@ ln -s $HOME/.config/leftwm/themes/current/rofi/theme.rasi $HOME/.config/rofi/the
 ln -s $HOME/.config/leftwm/themes/current/kitty/theme.conf $HOME/.config/kitty/theme.conf
 
 #Applications to 2run at startup
-picom -f --config $PICOM &
+picom -f &
 dunst -config $DUNST &
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

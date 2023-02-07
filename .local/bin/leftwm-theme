@@ -13,6 +13,7 @@ echo $chosen_theme
 if [ -z "$chosen_theme" ]; then
 		exit
 else 
+		~/.config/leftwm/themes/current/down
 		rm -rf ~/.config/leftwm/themes/current
 		ln -s ~/.config/leftwm/themes/$chosen_theme ~/.config/leftwm/themes/current
 		~/.config/leftwm/themes/current/up
