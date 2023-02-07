@@ -1,7 +1,7 @@
 #!/bin/bash
 term=alacritty
-config="/home/adriano/.config"
-editor=code
+config="$HOME/.config"
+editor=nvim
 
 menu(){
 	printf "1. bspwm\n"
@@ -23,40 +23,40 @@ main(){
 
 	case $choice in
 		"1")
-			$term -e sh -c "code $config/bspwm"
+			$term -e sh -c "nvim $config/bspwm"
             ;;
 		"2")
-			$term -e sh -c "code $config/autostart"
+			$term -e sh -c "nvim $config/autostart"
             ;;
 		"3")
-			$term -e sh -c "code $config/sxhkd"
+			$term -e sh -c "nvim $config/sxhkd"
             ;;
 		"4")
-			$term -e sh -c "code $config/polybar"
+			$term -e sh -c "nvim $config/polybar"
             ;;
 		"5")
-			$term -e sh -c "code $config/rofi"
+			$term -e sh -c "nvim $config/rofi"
             ;;
 		"6")
-			$term -e sh -c "code $config/dunst"
+			$term -e sh -c "nvim $config/dunst"
             ;;
 		"7")
-			$term -e sh -c "code $config/picom"
+			$term -e sh -c "nvim $config/picom"
             ;;
 	  	"8")
-			$term -e sh -c "code $config/awesome"
+			$term -e sh -c "nvim $config/awesome"
             ;;
 		"9")
-			$term -e sh -c "code $config/qtile"
+			$term -e sh -c "nvim $config/qtile"
             ;;
 		"10")
-			$term -e sh -c "code $config/shell"
+			$term -e sh -c "nvim $config/shell"
             ;;
 		"11")
-			$term -e sh -c "code ~/.local/bin"
+			$term -e sh -c "nvim ~/.local/bin"
             ;;
 		"12")
-			$term -e sh -c "code $config/alacritty"
+			$term -e sh -c "nvim $config/alacritty"
             ;;
 	 esac
 }
