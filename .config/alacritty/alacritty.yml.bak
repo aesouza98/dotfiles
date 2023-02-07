@@ -1,0 +1,189 @@
+env:
+  TERM: xterm-256color
+
+window:
+  padding:
+    x: 2
+    y: 2
+  opacity: 0.85
+
+scrolling:
+  history: 100000
+  multiplier: 5
+
+font:
+  normal:
+    family: JetBrains Mono 
+    style: SemiBold
+  bold:
+    family: JetBrainsMono
+    style: Bold
+  italic:
+    family: JetBrainsMono
+    style: Italic
+  bolt_italic:
+    family: JetBrainsMono
+    style: BoldItalic
+  size: 11.0
+
+draw_bold_text_with_bright_colors: true
+
+color_schemes:
+  mocha: &mocha
+    primary:
+      #background: '#151515' # base
+      background: '#1E1E2E' # base
+      foreground: '#E8E3E3' # text
+      dim_foreground: '#E8E3E3' # text
+      bright_foreground: '#cdd6f4' # text
+    cursor:
+      text: '#1e1e2e' # base
+      cursor: '#f5e0dc' # rosewater
+    vi_mode_cursor:
+      text: '#1e1e2e' # base
+      cursor: '#b4befe' # lavender
+    search:
+      matches:
+        foreground: '#E8E3E3' # base
+        background: '#a6adc8' # subtext0
+      focused_match:
+        foreground: '#1e1e2e' # base
+        background: '#a6e3a1' # green
+      bar:
+        foreground: '#16161e' # base
+        background: '#a6adc8' # subtext0
+    hints:
+      start:
+        foreground: '#16161e' # base
+        background: '#f9e2af' # yellow
+      end:
+        foreground: '#16161e' # base
+        background: '#a6adc8' # subtext0
+    selection:
+      text: '#16161e' # base
+      background: '#f5e0dc' # rosewater
+    normal:
+      black:   '#E8E3E3' # surface1
+      red:     '#f38ba8' # red
+      green:   '#a6e3a1' # green
+      yellow:  '#f9e2af' # yellow
+      blue:    '#89b4fa' # blue
+      magenta: '#f5c2e7' # pink
+      cyan:    '#94e2d5' # teal
+      white:   '#bac2de' # subtext1
+    bright:
+      black:   '#E8E3E3' # surface1
+      red:     '#f38ba8' # red
+      green:   '#a6e3a1' # green
+      yellow:  '#f9e2af' # yellow
+      blue:    '#89b4fa' # blue
+      magenta: '#f5c2e7' # pink
+      cyan:    '#94e2d5' # teal
+      white:   '#bac2de' # subtext1
+    dim:
+      black:   '#E8E3E3' # surface1
+      red:     '#f38ba8' # red
+      green:   '#a6e3a1' # green
+      yellow:  '#f9e2af' # yellow
+      blue:    '#87B0F9' # blue
+      magenta: '#f5c2e7' # pink
+      cyan:    '#94e2d5' # teal
+      white:   '#bac2de' # subtext1
+
+  paradise: &paradise
+    # Default colors
+    primary:
+      background: '#151515'
+      foreground: '#E8E3E3'
+
+    # Normal colors
+    normal:
+      black:   '#151515'
+      red:     '#B66467'
+      green:   '#8C977D'
+      yellow:  '#D9BC8C'
+      blue:    '#8DA3B9'
+      magenta: '#A988B0'
+      cyan:    '#8AA6A2'
+      white:   '#E8E3E3'
+
+    # Bright colors
+    bright:
+      black:   '#CACACE'
+      red:     '#B66467'
+      green:   '#8C977D'
+      yellow:  '#D9BC8C'
+      blue:    '#8DA3B9'
+      magenta: '#A988B0'
+      cyan:    '#8AA6A2'
+      white:   '#E8E3E3'
+
+  tokyo-night: &tokyo-night
+    # Default colors
+    primary:
+      background: '#151515'
+      foreground: '#E8E3E3'
+
+    # Normal colors
+    normal:
+      black:   '0x32344a'
+      red:     '0xf7768e'
+      green:   '0x9ece6a'
+      yellow:  '0xe0af68'
+      blue:    '0x7aa2f7'
+      magenta: '0xad8ee6'
+      cyan:    '0x449dab'
+      white:   '0x787c99'
+
+    # Bright colors
+    bright:
+      black:   '0xa9b1d6'
+      red:     '0xff7a93'
+      green:   '0xb9f27c'
+      yellow:  '0xff9e64'
+      blue:    '0x7da6ff'
+      magenta: '0xbb9af7'
+      cyan:    '0x0db9d7'
+      white:   '0xacb0d0'
+
+  tokyo-night-storm: &tokyo-night-storm
+    # Default colors
+    primary:
+      background: '#151515'
+     # background: '#0E0E0E'
+      foreground: '#E8E3E3'
+
+    # Normal colors
+    normal:
+      black:   '0x32344a'
+      red:     '0xf7768e'
+      green:   '0x9ece6a'
+      yellow:  '0xe0af68'
+      blue:    '0x7aa2f7'
+      magenta: '0xad8ee6'
+      cyan:    '0x449dab'
+      white:   '0x9699a8'
+
+    # Bright colors
+    bright:
+      black:   '0x444b6a'
+      red:     '0xff7a93'
+      green:   '0xb9f27c'
+      yellow:  '0xff9e64'
+      blue:    '0x7da6ff'
+      magenta: '0xbb9af7'
+      cyan:    '0x0db9d7'
+      white:   '0xacb0d0'
+
+colors: *tokyo-night-storm
+
+selection:
+    save_to_clipboard: true
+
+live_config_reload: true
+
+shell:
+  program: /bin/fish
+
+key_bindings:
+  - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
