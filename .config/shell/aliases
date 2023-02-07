@@ -1,0 +1,42 @@
+#Aliases
+### É difícil digitar clear
+alias clera='clear'
+alias claer='clear'
+alias clrea='clear'
+alias celar='clear'
+alias caler='clear'
+alias clrae='clear'
+alias clrea='clear'
+alias clare='clear'
+
+#Addons
+alias ls='exa --icons -s type'
+alias find='fd'
+alias grep='rg'
+alias cat='bat --style=auto'
+alias ccat='bat -pp'
+alias vim='nvim'
+alias c='z'
+alias emacs='emacs -nw'
+
+#Packages
+alias finstall='flatpak install'
+alias fsearch='flatpak search'
+alias fremove='flatpak remove'
+alias yay='paru'
+
+#Others
+alias ping='ping -i 0.2'
+#alias code='vscodium'
+alias kde-restart='kquitapp5 plasmashell && kstart5 plasmashell'
+
+#Git
+alias gpush='git push'
+alias gpull='git pull'
+alias gcommit='git commit'
+alias gcheckout='git checkout'
+alias gadd='git add'
+alias gstatus='git status'
+alias gdiff='git diff | bat'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
