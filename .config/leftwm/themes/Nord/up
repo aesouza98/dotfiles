@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+export DIR="$( cd "$(dirname "$0")" ; pwd -P )"
+export QT_QPA_PLATFORMTHEME="qt5ct"
+autorandr -c
+
+# Down the last running theme
+if [ -f "/tmp/leftwm-theme-down" ]; then
+    /tmp/leftwm-theme-down
+    rm /tmp/leftwm-theme-down
+fi
+ln -s "$DIR"/down /tmp/leftwm-theme-down
+
+ Set the theme.toml config
+leftwm-command "LoadTheme $DIR/theme.ron"
+
+#Applications to 2run at startup
+picom -f --config $DIR/picom/picom.conf &
+dunst -config $DIR/dunst/dunstrc &
+
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+nitrogen --set-auto --random ~/Imagens/wallpapers/nord/ &
+
+#Mouse Configs
+xinput --set-prop 'Logitech Wireless Mouse PID:4022' 'libinput Accel Profile Enabled' 0 0 &
+xinput --set-prop 'Logitech Wireless Mouse PID:4022' 'Coordinate Transformation Matrix' 1.0 0 0 0 1.0 0 0 0 1.5 &
+
+xinput set-prop 11 156 1.0 0 0 0 1.0 0 0 0 1.5 &
+xinput set-prop 11 297 0, 0 &
+
+#Start Polybar
+$DIR/polybar/launch.sh

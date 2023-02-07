@@ -1,0 +1,82 @@
+configuration {
+  display-drun: "Search:";
+  display-window: "Windows:";
+  drun-display-format: "{name}";
+  font: "JetBrainsMono NerdFont Medium 10";
+  modi: "window,run,drun,filebrowser,ssh";
+  show-icons: true;
+  icon-theme: "Papirus";
+}
+
+@theme "/dev/null"
+
+* {
+    foreground:                 #EBDBB2;
+    background-color:           #1D2021;
+    selected-foreground:        #458588;
+    selected-background:        #1D2021;
+    transparent:                #00000000;
+
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+#window {
+	width:							20%;
+}
+
+inputbar {
+  children: [prompt, entry];
+}
+
+entry {
+  padding: 10;
+  text-color: @foreground;
+}
+
+#listview {
+    background-color:               @transparent;
+    padding:                        8 12;
+    columns:                        1;
+    lines:                          8;
+}
+
+#mainbox {
+    children:                       [ inputbar, listview ];
+    background-color:               @transparent;
+}
+
+#element {
+    background-color:               @transparent;
+    text-color:                     @foreground;
+    orientation:                    horizontal;
+    border-radius:                  8;
+    padding:                        5 0;
+}
+
+#element.selected {
+    background-color:               @background-color;
+    text-color:                     @selected-foreground;
+	border:							0;
+    border-radius:                  8;
+}
+
+element-text {
+    background-color: @transparent;
+    text-color:       inherit;
+    vertical-align: 0.5;
+}
+
+element-icon {
+    background-color: @transparent;
+    text-color:       inherit;
+    size: 30;
+}
+
+prompt {
+  enabled: true;
+  padding: 12 0 0 12;
+  text-color: @foreground;
+}

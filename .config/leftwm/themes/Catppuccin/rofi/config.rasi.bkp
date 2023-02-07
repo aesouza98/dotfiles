@@ -1,0 +1,74 @@
+configuration {
+  display-drun: "Search:";
+  display-window: "Windows:";
+  drun-display-format: "{name}";
+  font: "JetBrainsMono NerdFont Medium 10";
+  modi: "window,run,drun,filebrowser,ssh";
+  show-icons: true;
+  icon-theme: "Papirus";
+}
+
+@theme "/dev/null"
+
+* {
+  background-color: #2e344099;
+  foreground: #d8dee9;
+
+  selected-background: #2e344099;
+  selected-foreground: #81a1c1;
+
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+}
+
+window {
+  width: 20%;
+}
+
+element {
+  padding: 5 5;
+  text-color: @foreground;
+}
+
+#element.selected {
+  text-color: @selected-foreground;
+}
+
+element-text {
+  text-color: @foreground;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 30;
+}
+
+entry {
+  padding: 10;
+  text-color: @foreground;
+}
+
+inputbar {
+  children: [prompt, entry];
+}
+
+listview {
+  padding: 8 12;
+  text-color: @foreground;
+  columns: 1;
+  lines: 6;
+}
+
+mainbox {
+  children: [inputbar, listview];
+}
+
+prompt {
+  enabled: true;
+  padding: 12 0 0 12;
+  text-color: @foreground;
+}
+
+/* vim: ft=sass
