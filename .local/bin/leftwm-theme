@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-
-CMD=$(ls ~/.config/leftwm/themes | grep -v current | sed '/^$/d' | awk '{printf "%s\\n", $0}')
+CMD=$(echo -n $(/bin/ls ~/.config/leftwm/themes | grep -v current | sed '/^$/d') | sed 's/ /\\n/g')
 THEME="~/.config/leftwm/themes/current/rofi/theme.rasi"
 rofi_command="rofi -no-config -theme $THEME"
-# Variable passed to rofi
+
 options=$CMD
 
 chosen_theme="$(echo -e "$options" | $rofi_command -dmenu -selected-row 0)"
