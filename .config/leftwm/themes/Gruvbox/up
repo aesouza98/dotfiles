@@ -41,7 +41,7 @@ picom -f &
 dunst -config $DUNST &
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-nitrogen --set-auto --random $WALL &
+nitrogen --set-scaled --random $WALL &
 
 #Mouse Configs
 xinput --set-prop 'Logitech Wireless Mouse PID:4022' 'libinput Accel Profile Enabled' 0 0 &

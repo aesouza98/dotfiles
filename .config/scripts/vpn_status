@@ -2,6 +2,8 @@
 vpn=$(pgrep -a ^openvpn | head -n 1 | awk '{print $NF }' | cut -d '.' -f 1)
 if [[ $vpn == "" ]]; then
   vpn='down'
+elif [[ $vpn == "/tmp/pritunl/86983f91d012c526" ]]; then
+  vpn='aiqfome'
 fi
 
 printf " " && (echo -n $vpn)
