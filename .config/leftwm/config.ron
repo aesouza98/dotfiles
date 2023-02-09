@@ -48,7 +48,9 @@
         (name: "Pritunl", value: "pritunl-client-electron", x: 560, y: 290, height: 500, width: 800),
         (name: "Bitwarden", value: "bitwarden-desktop", x: 560, y: 290, height: 500, width: 800),
     ],
-    window_rules: [],
+    window_rules: [
+		( window_title: "Picture-in-Picture", spawn_floating: true, spanw_on_workspace: 1 ),
+	],
     disable_current_tag_swap: false,
     disable_tile_drag: false,
     disable_window_snap: true,

@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+export DIR="$( cd "$(dirname "$0")" ; pwd -P )"
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
+#variables
+export DUNST="$HOME/.config/dunst/dunstrc"
+export POLYBAR="$HOME/.config/polybar"
+export ROFI_CFG="$HOME/.config/rofi/config.rasi"
+export ROFI_PWR="$HOME/.config/rofi/powermenu.rasi"
+export ROFI_THM="$HOME/.config/rofi/theme.rasi"
+export KITTY="$HOME/.config/kitty/theme.conf"
+
+export WALL="$HOME/Imagens/wallpapers/catppuccin/"
+
+autorandr -c
+
+# Down the last running theme
+if [ -f "/tmp/leftwm-theme-down" ]; then
+    /tmp/leftwm-theme-down
+    rm /tmp/leftwm-theme-down
+fi
+ln -s "$DIR"/down /tmp/leftwm-theme-down
+
+# Set the theme.toml config
+leftwm-command "LoadTheme $DIR/theme.ron"
+
+# Remove old theme links
+rm $DUNST $POLYBAR/colors.ini $ROFI_CFG $ROFI_PWR $ROFI_THM $KITTY
+
+# Link new files
+ln -s $HOME/.config/leftwm/themes/current/dunst/dunstrc $HOME/.config/dunst/dunstrc
+ln -s $HOME/.config/leftwm/themes/current/polybar/colors.ini $HOME/.config/polybar/colors.ini
+ln -s $HOME/.config/leftwm/themes/current/rofi/config.rasi $HOME/.config/rofi/config.rasi
+ln -s $HOME/.config/leftwm/themes/current/rofi/powermenu.rasi $HOME/.config/rofi/powermenu.rasi
+ln -s $HOME/.config/leftwm/themes/current/rofi/theme.rasi $HOME/.config/rofi/theme.rasi
+ln -s $HOME/.config/leftwm/themes/current/kitty/theme.conf $HOME/.config/kitty/theme.conf
+
+#Applications to 2run at startup
+picom -f &
+dunst -config $DUNST &
+
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+nitrogen --set-auto --random $WALL &
+
+#Mouse Configs
+xinput --set-prop 'Logitech Wireless Mouse PID:4022' 'libinput Accel Profile Enabled' 0 0 &
+xinput --set-prop 'Logitech Wireless Mouse PID:4022' 'Coordinate Transformation Matrix' 1.0 0 0 0 1.0 0 0 0 1.5 &
+
+xinput set-prop 11 156 1.0 0 0 0 1.0 0 0 0 1.5 &
+xinput set-prop 11 297 0, 0 &
+
+#Start Polybar
+$POLYBAR/launch.sh &

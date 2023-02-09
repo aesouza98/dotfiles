@@ -1,0 +1,76 @@
+configuration {
+  font: "JetBrainsMono NerdFont Medium 10";
+}
+
+@theme "/dev/null"
+
+* {
+    foreground:                 #7f9bb0;
+    background-color:           #221322;
+    selected-foreground:        #628c70;
+    selected-background:        #221322;
+    transparent:                #00000000;
+
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+#window {
+	width:							8%;
+}
+
+inputbar {
+  children: [prompt, entry];
+}
+
+entry {
+  padding: 10;
+  text-color: @foreground;
+}
+
+#listview {
+    background-color:               @transparent;
+    padding:                        8 12;
+    columns:                        1;
+    lines:                          5;
+}
+
+#mainbox {
+    children:                       [ listview ];
+    background-color:               @transparent;
+}
+
+#element {
+    background-color:               @transparent;
+    text-color:                     @foreground;
+    orientation:                    horizontal;
+    border-radius:                  8;
+    padding:                        5 0;
+}
+
+#element.selected {
+    background-color:               @background-color;
+    text-color:                     @selected-foreground;
+	border:							0;
+    border-radius:                  8;
+}
+
+element-text {
+    background-color: @transparent;
+    text-color:       inherit;
+    vertical-align: 0.5;
+}
+
+element-icon {
+    background-color: @transparent;
+    text-color:       inherit;
+    size: 30;
+}
+
+prompt {
+  enabled: true;
+  padding: 12 0 0 12;
+  text-color: @foreground;
+}

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+SCRIPTPATH="$( cd "$(dirname "$0")" || return ; pwd -P )"
+
+leftwm-command UnloadTheme
+
+pkill picom
+pkill polybar
+pkill dunst
+systemctl --user stop plasma-kglobalaccel.service
+#pkill xss-lock
