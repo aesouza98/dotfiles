@@ -47,8 +47,8 @@ nitrogen --set-scaled --random $WALL &
 xinput --set-prop 'Logitech Wireless Mouse PID:4022' 'libinput Accel Profile Enabled' 0 0 &
 xinput --set-prop 'Logitech Wireless Mouse PID:4022' 'Coordinate Transformation Matrix' 1.0 0 0 0 1.0 0 0 0 1.5 &
 
-xinput set-prop 11 156 1.0 0 0 0 1.0 0 0 0 1.5 &
-xinput set-prop 11 297 0, 0 &
+xinput set-prop 'USB Gaming Mouse' 156 1.0 0 0 0 1.0 0 0 0 1.5 &
+xinput set-prop 'USB Gaming Mouse' 297 0, 0 &
 
 #Start Polybar
 $POLYBAR/launch.sh &

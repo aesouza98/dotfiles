@@ -2,7 +2,7 @@
 vpn=$(pgrep -a ^openvpn | head -n 1 | awk '{print $NF }' | cut -d '.' -f 1)
 if [[ $vpn == "" ]]; then
   vpn='down'
-elif [[ $vpn == "/tmp/pritunl/86983f91d012c526" ]]; then
+elif [[ $vpn == "/tmp/pritunl/5e98bc49bd02e66c" ]]; then
   vpn='aiqfome'
 fi
 

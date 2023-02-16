@@ -23,7 +23,6 @@ alias emacs='emacs -nw'
 alias finstall='flatpak install'
 alias fsearch='flatpak search'
 alias fremove='flatpak remove'
-alias yay='paru'
 
 #Others
 alias ping='ping -i 0.2'

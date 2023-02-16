@@ -1,0 +1,89 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "height": 0,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "modules-left": [
+		"custom/spotify",
+        "custom/weather",
+        "wlr/workspaces"
+    ],
+    "modules-center": ["hyprland/window"],
+    "modules-right": [
+        "tray",
+        "custom/updates",
+        "pulseaudio",
+        "pulseaudio#microphone",
+		"clock"
+    ],
+
+    "hyprland/window": {
+        "format": "{}"
+    },
+	"wlr/workspaces": {
+     "format": "{icon}",
+	 "on-click": "activate",
+     "on-scroll-up": "hyprctl dispatch workspace e+1",
+     "on-scroll-down": "hyprctl dispatch workspace e-1"
+    },
+	"custom/spotify": {
+		"exec": ".config/scripts/get_spotify_status.sh",
+		"interval": 1,
+		"on-click": "playerctl --player=spotify play-pause",
+		"on-click-middle": "playerctl --player=spotify previous",
+		"on-click-right": "playerctl --player=spotify next",
+		"on-scroll-up": "playerctl --player=spotify volume 0.05+",
+		"on-scroll-down": "playerctl --player=spotify volume 0.05-",
+		"format": {}
+	},
+    "custom/updates": {
+        "exec": "(pacman -Qu ; yay -Qua) | wc -l",
+        "interval": 7200,
+        "format": " {}"
+    },
+   "custom/weather" : {
+        "tooltip" : true,
+        "format" : "{}",
+        "interval" : 30,
+        "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
+        "return-type" : "json"
+    },
+    "tray": {
+        "icon-size": 13,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{: %R   %d/%m}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": " Muted",
+        "on-click": "~/.local/bin/changevolume mute",
+        "on-scroll-up": "pamixer -i 5",
+        "on-scroll-down": "pamixer -d 5",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": " Muted",
+        "on-click": "~/.local/bin/micvolume mute",
+        "on-scroll-up": "pamixer --default-source -i 5",
+        "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5
+    }
+}
