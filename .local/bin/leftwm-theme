@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 CMD=$(echo -n $(/bin/ls ~/.config/leftwm/themes | grep -v current | sed '/^$/d') | sed 's/ /\\n/g')
-THEME="~/.config/leftwm/themes/current/rofi/theme.rasi"
+THEME="~/.config/rofi/theme.rasi"
 rofi_command="rofi -no-config -theme $THEME"
 
 options=$CMD

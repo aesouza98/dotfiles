@@ -1,15 +1,15 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Cartograph CF Nerd Font, monospace;
-    /*font-family: JetBrainsMono NerdFont, monospace;*/
+    /*font-family: Cartograph CF Nerd Font, monospace;*/
+    font-family: JetBrainsMono NerdFont, monospace;
     font-weight: 500;
     font-size: 14px;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(21, 18, 27, 0);
+    background: rgba(30, 30, 46, 0.85);
     color: #cdd6f4;
 	margin: 0px;
 	padding: 0px;
@@ -18,14 +18,15 @@ window#waybar {
 tooltip {
     background: #1e1e2e;
     border-radius: 5px;
-    border-width: 1px;
+	margin-top: 0px;
+    border-width: 0px;
     border-style: solid;
     border-color: #11111b;
 }
 
 #workspaces button {
     padding: 5px;
-    color: #313244;
+    color: #515264;
     margin-right: 5px;
 }
 
@@ -67,8 +68,8 @@ tooltip {
     background: #1e1e2e;
     padding: 0px 10px;
     margin: 0px;
-    margin-top: 3px;
-    border: 2px solid #181825;
+    margin-top: 0px;
+    border: 0px solid #181825;
 }
 
 #tray {
