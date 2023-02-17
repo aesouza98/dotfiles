@@ -64,8 +64,8 @@
         "tooltip": false,
         "format-muted": " Muted",
         "on-click": "~/.local/bin/changevolume mute",
-        "on-scroll-up": "pamixer -i 5",
-        "on-scroll-down": "pamixer -d 5",
+        "on-scroll-up": "pamixer -i 2",
+        "on-scroll-down": "pamixer -d 2",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",
@@ -82,8 +82,8 @@
         "format-source": " {volume}%",
         "format-source-muted": " Muted",
         "on-click": "~/.local/bin/micvolume mute",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
+        "on-scroll-up": "pamixer --default-source -i 2",
+        "on-scroll-down": "pamixer --default-source -d 2",
         "scroll-step": 5
     }
 }
