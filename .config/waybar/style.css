@@ -79,8 +79,7 @@ tooltip {
 
 #workspaces {
     background: #1e1e2e;
-    border-radius: 10px;
-    margin-left: 10px;
+    border-radius: 0px 10px 10px 0px;
     padding-right: 0px;
     padding-left: 5px;
 }
@@ -107,7 +106,6 @@ tooltip {
 
 #custom-spotify {
     color: #a6e3a1;
-    border-radius: 10px 0px 0px 10px;
     border-left: 0px;
     border-right: 0px;
 }
