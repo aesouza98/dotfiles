@@ -9,7 +9,7 @@
 }
 
 window#waybar {
-    background: rgba(30, 30, 46, 0.85);
+    background: rgba(30, 30, 46, 0);
     color: #cdd6f4;
 	margin: 0px;
 	padding: 0px;
@@ -106,6 +106,7 @@ tooltip {
 
 #custom-spotify {
     color: #a6e3a1;
+    border-radius: 10px 0px 0px 10px;
     border-left: 0px;
     border-right: 0px;
 }
