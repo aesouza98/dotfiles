@@ -1,0 +1,29 @@
+[colors.rosepine.bright]
+black = "#56526E"
+blue = "#3e8fb0"
+cyan = "#9ccfd8"
+green = "#a6e3a1"
+magenta = "#c4a7e7"
+red = "#eb6f92"
+white = "#e0def4"
+yellow = "#f6c177"
+
+[colors.rosepine.cursor]
+cursor = "#f5e0dc"
+text = "#1e1e2e"
+
+[colors.rosepine.normal]
+black = "#56526E"
+blue = "#3e8fb0"
+cyan = "#9ccfd8"
+green = "#a6e3a1"
+magenta = "#c4a7e7"
+red = "#eb6f92"
+white = "#e0def4"
+yellow = "#f6c177"
+
+[colors.rosepine.primary]
+background = "#191724"
+bright_foreground = "#cdd6f4"
+dim_foreground = "#908CAA"
+foreground = "#E0DEF4"

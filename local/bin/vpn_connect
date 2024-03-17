@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# List configured VPNs
+vpn_list=$(printf "Disconnect\nDevops\nPlusdelivery Prod\nPlusdelivery Dev")
+chosen_vpn=$(echo -e "$vpn_list" | uniq -u | wofi -d -L 6 -W '10%' -p "Chosen VPN: ")
+config_dir="/home/adriano/Aiqfome/VPN"
+
+success_message="Conectado na VPN \"$chosen_vpn\"."
+
+if [[ "$chosen_vpn" = "Devops" ]]; then
+    vpn_password=$(wofi -d -P -L 1 -W '10%' -p "Password: " )
+    printf "adriano.souza\n$vpn_password" > /tmp/vpn_creds
+    sudo openvpn --config $config_dir/$chosen_vpn.ovpn --auth-user-pass /tmp/vpn_creds
+elif [[ "$chosen_vpn" == *Plusdelivery* ]]; then
+    sudo openvpn --config "$config_dir/$chosen_vpn.ovpn" --auth-user-pass "$config_dir/$chosen_vpn.txt"
+elif [[ "$chosen_vpn" == *Disconnect* ]]; then
+    sudo killall openvpn
+else
+  exit 0
+fi

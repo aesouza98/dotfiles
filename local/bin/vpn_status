@@ -1,0 +1,15 @@
+#!/bin/bash
+
+vpn=$(pgrep -a ^openvpn | head -n 1 | awk '{print $NF }' | cut -d '.' -f 1)
+
+if [[ $vpn == "" ]]; then
+  vpn='disconnected'
+elif [[ $vpn == "/tmp/vpn_creds" ]]; then
+  vpn='aiqfome'
+elif [[ $vpn == "Prod" ]]; then
+  vpn='Plusdelivery Prod'
+elif [[ $vpn == "Dev" ]]; then
+  vpn='Plusdelivery Dev'
+fi
+
+echo -n $vpn

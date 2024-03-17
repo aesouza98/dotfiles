@@ -1,0 +1,30 @@
+@import ".config/colorschemes/catppuccin.css";
+
+window {
+  font-size: 12px;
+  font-family: "SF Pro";
+  background-color: @bg;
+  color: @fg;
+}
+
+#entry {
+  padding: 2px 5px;
+}
+
+#entry:selected {
+  background-color: @bg-alt;
+}
+
+#input {
+  padding: 0px 5px;
+  background-color: @bg;
+  color: @fg;
+}
+
+#outer-box {
+  padding: 0px;
+}
+
+#img {
+  padding: 0px 5px;
+}
