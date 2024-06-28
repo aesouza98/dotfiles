@@ -1,0 +1,28 @@
+# Colors (One Dark)
+
+# Default colors
+[colors.primary]
+background = '#0E1013'
+foreground = '#a0a8b7'
+
+# Normal colors
+[colors.normal]
+black   = '#323641'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#abb2bf'
+
+# Bright colors
+[colors.bright]
+black   = '#5c6370'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#ffffff'

@@ -1,0 +1,160 @@
+{
+  // Settings
+  "position": "bottom", // Waybar position (top|bottom|left|right)
+  "layer": "top",
+  "height": 0, // Waybar height (to be removed for auto height)
+  "spacing": 4, // Gaps between modules (4px)
+  // Modules
+  "modules-left": [
+    "hyprland/workspaces",
+    //"custom/separator",
+    "custom/spotify"
+  ],
+  "modules-center": [
+    "clock#date",
+    "clock"
+  ],
+  "modules-right": [
+    "tray",
+    // "custom/separator",
+    "custom/vpn1",
+    "network",
+    //"custom/separator",
+    "pulseaudio#speaker",
+    //"custom/separator",
+    "pulseaudio#microphone"
+    //"custom/separator",
+    //"network"
+    //"custom/separator",
+  ],
+  // Module Configuration
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "all-outputs": false,
+    "active-only": false,
+    "show-special": false
+    //    "persistent-workspaces": {
+    //      "DP-1": [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+    //      "HDMI-A-1": [ 10 ]
+    //    }
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "$1",
+      "(.*) — fish": "> [$1]",
+      "(.*) - Chromium": "$1"
+    },
+    "separate-outputs": true
+  },
+  "custom/vpn": {
+    "exec": "vpn_status",
+    "on-click": "vpn_connect",
+    "format": " {}",
+    "interval": 1
+  },
+  "custom/vpn1": {
+    "format": " VPN",
+    "exec": "echo '{\"class\": \"connected\"}'",
+    "exec-if": "test -d /proc/sys/net/ipv4/conf/tun0",
+    "return-type": "json",
+    "on-click": "vpn_connect",
+    "interval": 5
+  },
+  "custom/separator": {
+    "format": "|"
+  },
+  "custom/spotify": {
+    "exec": "~/.config/scripts/get_spotify_status.sh",
+    "interval": 1,
+    "icon": "",
+    "on-click": "playerctl --player=spotify play-pause",
+    "on-click-middle": "playerctl --player=spotify previous",
+    "on-click-right": "playerctl --player=spotify next",
+    "on-scroll-up": "playerctl --player=spotify volume 0.05+",
+    "on-scroll-down": "playerctl --player=spotify volume 0.05-",
+    "format": "  {}"
+  },
+  "custom/playerctl": {
+    "interval": 1,
+    "format": "{icon} {}",
+    "max-length": 80,
+    "exec": "~/.config/scripts/playerctl.sh",
+    "on-click": "playerctl --player=chromium play-pause",
+    "on-click-middle": "playerctl --player=chromium previous",
+    "on-click-right": "playerctl --player=chromium next",
+    "on-scroll-up": "playerctl --player=chromium volume 0.05+",
+    "on-scroll-down": "playerctl --player=chromium volume 0.05-",
+    "scroll-step": 10,
+    "return-type": "json",
+    "format-icons": {
+      "Playing": "󰎈",
+      "Paused": "󰏤"
+    }
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 10
+  },
+  "clock": {
+    "format": " {:%R}"
+  },
+  "clock#date": {
+    "format": " {:%A, %B %d}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{icon}{time}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "network": {
+    "interface": "wlp3s0",
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀 connected",
+    "format-disconnected": "󰈂 disconnected",
+    "on-click": "vpn_connect"
+  },
+  "pulseaudio#speaker": {
+    // "format": "{icon} {volume}%",
+    "format": "{icon} {volume}%",
+    "tooltip": false,
+    "format-muted": " Muted",
+    "on-click": "soundvolume mute",
+    "on-scroll-up": "pamixer -i 2",
+    "on-scroll-down": "pamixer -d 2",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "default": [
+        "",
+        "",
+        " "
+      ]
+    }
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "",
+    "format-source-muted": "",
+    "on-click": "micvolume mute",
+    "scroll-step": 5
+  }
+}

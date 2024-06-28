@@ -1,0 +1,202 @@
+set $mod Mod4
+
+# fonte - usado na barra do i3 e títulos de janela
+font pango:JetBrainsMono NerdFont 10
+
+# execução automática de programas
+exec --no-startup-id dex --autostart --environment i3
+
+exec_always --no-startup-id picom &
+exec_always --no-startup-id killall dunst ; dunst &
+exec_always --no-startup-id feh --no-fehbg --bg-scale $HOME/Imagens/wallpaper
+exec_always --no-startup-id killall -q
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Dual Mode Mouse' 'libinput Accel Profile Enabled' 0 0 &
+exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Dual Mode Mouse' 'Coordinate Transformation Matrix' 0.5 0 0 0 0.5 0 0 0 1 &
+exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Wireless Receiver' 'libinput Accel Profile Enabled' 0 0 &
+exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Wireless Receiver' 'Coordinate Transformation Matrix' 0.5 0 0 0 0.5 0 0 0 1 &
+exec_always --no-startup-id setxkbmap us intl
+exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id /usr/libexec/gsd-xsettings
+
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+exec --no-startup-id sudo openvpn --cd "/home/adriano/Crmall/VPN/MGA/" --config "config.conf" --auth-user-pass "pass.txt"
+exec --no-startup-id greenclip daemon
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start
+
+
+## lançadores de aplicação - keybindings
+bindsym $mod+e exec --no-startup-id nautilus
+bindsym $mod+b exec --no-startup-id flatpak run com.google.Chrome
+bindsym $mod+Shift+b exec --no-startup-id flatpak run com.brave.Browser
+bindsym $mod+s exec --no-startup-id flatpak run com.github.IsmaelMartinez.teams_for_linux
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui
+bindsym $mod+n exec --no-startup-id flatpak run md.obsidian.Obsidian
+bindsym $mod+v exec --no-startup-id vpn_rofi
+bindsym $mod+x exec --no-startup-id powermenu_rofi
+bindsym Mod1 + v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
+
+# controle de volume
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id soundvolume up
+bindsym XF86AudioLowerVolume exec --no-startup-id soundvolume down
+bindsym XF86AudioMute exec --no-startup-id soundvolume mute
+bindsym $mod+F1 exec --no-startup-id micvolume
+bindsym XF86AudioMicMute exec --no-startup-id micvolume
+
+# permite arrastar janelas flutuantes
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+# terminal
+bindsym $mod+Return exec alacritty
+#bindsym $mod+Return exec warp-terminal
+
+# fechar/encerrar janela
+bindsym $mod+c kill
+
+# lançador de programas - rofi
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym Mod1+Tab exec --no-startup-id rofi -show window
+
+# scratchpads
+bindsym $mod+Shift+dead_grave move scratchpad
+bindsym $mod+dead_grave scratchpad show
+bindsym $mod+Shift+n [title="*Obsidian*"] scratchpad show
+bindsym $mod+Shift+Tab scratchpad show; scratchpad show 
+
+# controle de foco
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# mover janelas
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# controle de foco - usado em abas
+bindsym --whole-window --border $mod+Tab focus next
+bindsym --whole-window --border $mod+Mod1+Tab focus prev
+
+# altera split para horizontal ou vertical
+bindsym $mod+Shift+h split h
+bindsym $mod+Shift+v split v
+
+# modo fullscreen
+bindsym $mod+f fullscreen toggle
+
+# definição de layout (stack, abas, split)
+bindsym $mod+Shift+t layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+j layout toggle split
+
+# alterna entre janela flutuante e tile
+bindsym $mod+Shift+space floating toggle
+
+# alterna o foco entre janelas flutuantes e tile
+bindsym $mod+space focus mode_toggle
+
+# alterna o foco entre a janela 'pai' ou os filhos (útil para quando tem mais de um grupo de janelas)
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
+
+# controles de scroll do mouse (trocar workspace/foco)
+bindsym --whole-window --border $mod+button4 workspace prev
+bindsym --whole-window --border $mod+button5 workspace next
+bindsym --whole-window --border $mod+Shift+button4 focus left
+bindsym --whole-window --border $mod+Shift+button5 focus right
+
+# definição de workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# alterna workspaces
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# mandar janela para workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# recarrega arquivo de config
+bindsym $mod+Shift+c reload
+
+# restarta i3
+bindsym $mod+Shift+r restart
+
+# sair do i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# redimensionamento de janelas - modo resize (não está em uso)
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# bordas
+default_border pixel 2
+default_floating_border pixel 2
+for_window [class="^.*"] border pixel 2
+
+# cores de borda
+# target                  title   bg      text    indicator border
+client.focused            #181926 #494d64 #cad3f5 #cad3f5   #cad3f5
+client.focused_inactive   #181926 #181926 #cad3f5 #363a4f   #363a4f
+client.unfocused          #181926 #181926 #cad3f5 #363a4f   #363a4f
+
+# gaps
+gaps inner 7
+gaps outer 0
+
+# barra
+bar {
+        mode invisible
+        tray_output none
+}
+
+# regras
+for_window [class="pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="org.remmina.Remmina" instance="org.remmina.Remmina"] floating enable
+for_window [class="Virt-manager" instance="virt-manager"] floating enable

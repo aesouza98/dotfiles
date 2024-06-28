@@ -1,0 +1,31 @@
+{
+    "wallpaper": "/home/adriano/Imagens/Wallpapers/MountainHighway.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#101919",
+        "foreground": "#e0e5e4",
+        "active": "#e0e5e4",
+        "inactive": "#9ca09f",
+        "urgent": "#6E726C",
+        "focus": "#556569"
+    },
+    "colors": {
+        "color0": "#101919",
+        "color1": "#556569",
+        "color2": "#6E726C",
+        "color3": "#798375",
+        "color4": "#8F8975",
+        "color5": "#989E99",
+        "color6": "#BCC4C0",
+        "color7": "#e0e5e4",
+        "color8": "#9ca09f",
+        "color9": "#556569",
+        "color10": "#6E726C",
+        "color11": "#798375",
+        "color12": "#8F8975",
+        "color13": "#989E99",
+        "color14": "#BCC4C0",
+        "color15": "#e0e5e4"
+    }
+}

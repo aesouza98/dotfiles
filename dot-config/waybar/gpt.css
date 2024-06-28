@@ -1,0 +1,19 @@
+@define-color bg rgba (21, 21, 21, 0.8); 
+@define-color fg #BCBCBC;
+@define-color prim #5F87AF;
+
+@define-color red     #BF4F4F;
+@define-color blue		#8ecae6;
+@define-color yellow  #ffd166;
+@define-color orange  #f0a500;
+@define-color purple  #b19cd9;
+@define-color magenta	#e58dc2;
+@define-color black		#212529;
+@define-color green		#6F976F;
+@define-color cyan		#a0c4ff;
+@define-color white		#F8F9FA;
+
+@define-color fg-active   #8747AF;
+@define-color fg-inactive #BCBCBC;
+@define-color fg-empty    #a2a2a2;
+@define-color fg-urgent   #ff6961;

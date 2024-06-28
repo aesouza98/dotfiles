@@ -1,0 +1,14 @@
+#!/bin/bash
+
+base=$1
+ping="api/monitor/ping"
+queue="api/monitor/queue/status"
+
+echo "### Testando ping:"
+curl "https://$base.crmall.com/$ping"
+echo 
+echo 
+echo "### Testando queue"
+curl -s "https://$base.crmall.com/$queue" | jq .
+
+exit 0

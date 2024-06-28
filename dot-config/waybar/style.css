@@ -1,0 +1,149 @@
+  @import "../colorschemes/catppuccin.css";
+
+* {
+  /* `otf-font-awesome` is required to be installed for icons */
+  font-family: JetBrainsMono NerdFont;
+  /* font-family: JetBrainsMono NerdFont; */
+  font-size: 13px;
+}
+
+window#waybar {
+  background-color: @bg;
+  border-bottom: 0px solid @prim;
+  color: @fg;
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+
+tooltip {
+  background: @bg;
+  border-radius: 5px;
+  margin-top: 0px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: @black;
+}
+
+tooltip label {
+  color: @fg;
+}
+
+window#waybar.hidden {
+  opacity: 0.8;
+}
+
+button {
+  box-shadow: none; 
+  border: none;
+  border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+  background: inherit;
+  box-shadow: inset 0 -0.5px @prim;
+}
+
+#workspaces {
+  padding: 0px 0px;
+  background: @bg-alt;
+  margin: 3px 0px 3px 0px;
+  border-radius: 5px;
+}
+
+#workspaces button { /* Unfocused workspace */
+  padding: 0px 5px;
+  color: @fg;
+  margin: 0px;
+}
+
+#workspaces button.empty { /* empty workspace */
+  padding: 0px 5px;
+  color: @empty;
+  margin: 0px;
+}
+
+#workspaces button.active { /* Focused workspace */
+  color: @prim;
+  box-shadow: inset 0 -2px @prim;
+  border-radius: 0px;
+}
+
+#workspaces button.urgent {
+  color: @bg;
+  background: @red;
+  border-radius: 5px;
+}
+
+#workspaces button:hover { /* Cursor hovered workspace */
+  color: @fg;
+  background-color: @bg;
+  border-radius: 5px;
+  box-shadow: inset 0 -2px @green;
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#pulseaudio.microphone,
+#tray,
+#window,
+#custom-spotify,
+#custom-playerctl,
+#custom-vpn1,
+#custom-vpn{
+  padding: 0px 5px;
+  margin: 3px 0px 3px 0px;
+  background: @bg-alt;
+  border-radius: 5px;
+}
+
+/* Muted and Disconnected */
+#network.disconnected,
+#pulseaudio.speaker.muted {
+  color: @red;
+  /*box-shadow: inset 0 -2px @red;*/
+}
+
+#pulseaudio.microphone.source-muted {
+  color: @red;
+  box-shadow: inset 0 -2px @red;
+}
+
+/* Tray */
+#tray{
+  border-radius: 5px;
+}
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background: @red;
+}
+/* Separator */
+#custom-separator{
+  color: #343B3a;
+}
+
+/* Battery  */
+#battery {
+  color: @green;
+}
+
+#battery.charging, #battery.plugged {
+  color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+  background-color: @red;
+  color: @fg;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+

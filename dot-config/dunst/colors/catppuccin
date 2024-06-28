@@ -1,0 +1,66 @@
+[global]
+  # General
+  monitor = 0
+  follow = mouse
+
+  # Appearance
+  font = JetBrainsMono NerdFont 10
+  shrink = yes
+  padding = 8
+  horizontal_padding = 8
+  frame_width = 1
+  frame_color = "#cad3f5"
+  separator_height = 0
+  separator_color = frame
+  corner_radius = 5
+  alignment = center
+
+  # Size
+  width = 250
+  height = 100
+  offset = 6x6
+
+
+  sort = no
+  markup = full
+  format = "<b>%s</b>\n%b"
+  show_age_threshold = 60
+  word_wrap = yes
+  ignore_newline = no
+  stack_duplicates = true
+  hide_duplicate_count = no
+  show_indicators = yes
+
+  enable_recursive_icon_lookup = true
+  icon_theme = Adwaita
+
+  icon_position = left
+  max_icon_size= 60
+  sticky_history = no
+  history_length = 5
+  history = ctrl+dead_grave
+
+  # Actions
+  mouse_left_click = close_current
+  mouse_middle_click = do_action
+  mouse_right_click = close_all
+
+[experimental]
+  per_monitor_dpi = false
+
+[urgency_low]
+    background = "#18192690"
+    foreground = "#cad3f5"
+	  highlight = "#8aadf4"
+    timeout = 5
+
+[urgency_normal]
+    background = "#1d202190"
+    foreground = "#cad3f5"
+    timeout = 5
+
+[urgency_critical]
+    background = "#18192690"
+    foreground = "#ed8796"
+    frame_color = "#d20f39"
+    timeout = 0

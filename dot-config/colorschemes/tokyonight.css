@@ -1,0 +1,9 @@
+@define-color bg      rgba(36, 40, 59, 0.9); 
+@define-color bg-alt  #44486b;
+@define-color empty   #7C869A;
+@define-color fg      #c0caf5;
+@define-color prim    #bb9af7;
+@define-color red     #f7768e;
+@define-color green   #9ece6a;
+@define-color yellow  #e0af68;
+@define-color black   #1d202f;

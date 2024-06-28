@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# List configured VPNs
+vpn_list=$(printf "Disconnect\nCTA\nMGA")
+chosen_vpn=$(echo -e "$vpn_list" | uniq -u | wofi -d -L 6 -W '10%' -p "Chosen VPN: ")
+config_dir="/home/adriano/Crmall/VPN"
+
+success_message="Conectado na VPN \"$chosen_vpn\"."
+
+if [[ "$chosen_vpn" != "Disconnect" ]]; then
+    sudo openvpn --cd "$config_dir/$chosen_vpn" --config "config.conf" --auth-user-pass "$config_dir/$chosen_vpn/pass.txt"
+elif [[ "$chosen_vpn" == *Disconnect* ]]; then
+    sudo killall openvpn
+else
+  exit 0
+fi
