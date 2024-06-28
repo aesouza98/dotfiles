@@ -17,7 +17,6 @@ alias ggrep='rg --no-ignore-vcs'
 alias cat='bat --style=auto'
 alias ccat='bat -pp'
 alias vim='nvim'
-alias vvim='NVIM_APPNAME=newnvim nvim'
 alias c='z'
 alias emacs='emacs -nw'
 
@@ -42,7 +41,3 @@ alias gcm='git commit -m'
 alias gpsh='git push'
 alias gtg='git tag'
 alias gst='git status'
-
-# Docker
-alias rmc="docker container ls -a | grep -v CONTAINER | awk '{print \$1}' | xargs docker container rm"
-alias rmi="docker image ls -a | grep -v REPOSITORY | awk '{print \$3}' | xargs docker image rm"
