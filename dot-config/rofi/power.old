@@ -1,0 +1,28 @@
+configuration {
+  font: "JetBrainsMono Nerd Font Medium 8";
+}
+
+inputbar {
+  children: [entry];
+  padding: 5;
+}
+
+listview {
+	lines: 4;
+}
+
+entry {
+  padding: 5;
+}
+
+prompt {
+  padding: 5;
+}
+
+element {
+  padding: 5 0;
+}
+
+window {
+  width: 10%;
+}

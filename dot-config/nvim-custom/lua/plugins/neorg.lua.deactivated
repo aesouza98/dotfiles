@@ -1,0 +1,33 @@
+return {
+	{
+		"nvim-neorg/neorg",
+		ft = "norg", -- lazy load on filetype
+		cmd = "Neorg", -- lazy load on command, allows you to autocomplete :Neorg regardless of whether it's loaded yet
+		build = ":Neorg sync-parsers",
+		--  (you could also just remove both lazy loading things)
+		priority = 30, -- treesitter is on default priority of 50, neorg should load after it.
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-neorg/neorg-telescope",
+		},
+		run = ":Neorg sync-parsers",
+		config = function()
+			require("neorg").setup({
+				load = {
+					["core.defaults"] = {},
+					["core.concealer"] = {},
+					["core.integrations.telescope"] = {},
+					["core.dirman"] = {
+						config = {
+							workspaces = {
+								notes = "~/Documentos/notes",
+								aiq = "~/Aiqfome/notes",
+								devocional = "~/Documentos/devocional",
+							},
+						},
+					},
+				},
+			})
+		end,
+	},
+}

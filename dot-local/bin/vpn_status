@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Specify the file path
+file_path="/proc/sys/net/ipv4/conf/tun0"
+
+# Check if the file exists
+if [ -e "$file_path" ]; then
+    echo "VPN"
+else
+    echo "Disconnected"
+fi
+
