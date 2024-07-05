@@ -1,6 +1,6 @@
 {
   // Settings
-  "position": "bottom", // Waybar position (top|bottom|left|right)
+  "position": "top", // Waybar position (top|bottom|left|right)
   "layer": "top",
   "height": 0, // Waybar height (to be removed for auto height)
   "spacing": 4, // Gaps between modules (4px)
