@@ -41,3 +41,7 @@ alias gcm='git commit -m'
 alias gpsh='git push'
 alias gtg='git tag'
 alias gst='git status'
+
+# Docker
+alias rmc="docker container ls -a | grep -v CONTAINER | awk '{print \$1}' | xargs docker container rm"
+alias rmi="docker image ls -a | grep -v REPOSITORY | awk '{print \$3}' | xargs docker image rm"
