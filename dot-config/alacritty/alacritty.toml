@@ -39,8 +39,8 @@ multiplier = 5
 [selection]
 save_to_clipboard = true
 
-#[shell]
-#program = "/usr/bin/zsh"
+[shell]
+program = "/usr/bin/zsh"
 
 [window]
 opacity = 0.8
