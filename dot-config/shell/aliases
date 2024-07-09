@@ -28,6 +28,7 @@ alias fremove='flatpak remove'
 #Others
 alias ping='ping -i 0.2'
 alias kde-restart='kquitapp5 plasmashell && kstart plasmashell'
+alias dotfiles="nvim ~/dotfiles"
 #alias code='flatpak run com.visualstudio.code-oss'
 
 #Programs

@@ -1,6 +1,6 @@
 {
   // Settings
-  "position": "bottom", // Waybar position (top|bottom|left|right)
+  "position": "top", // Waybar position (top|bottom|left|right)
   "layer": "top",
   "height": 0, // Waybar height (to be removed for auto height)
   "spacing": 4, // Gaps between modules (4px)
@@ -19,6 +19,7 @@
     // "custom/separator",
     "custom/vpn1",
     "network",
+    "battery",
     //"custom/separator",
     "pulseaudio#speaker",
     //"custom/separator",
@@ -133,9 +134,10 @@
   "pulseaudio#speaker": {
     // "format": "{icon} {volume}%",
     "format": "{icon} {volume}%",
-    "tooltip": false,
+    // "tooltip": false,
     "format-muted": " Muted",
     "on-click": "soundvolume mute",
+    "on-click-middle": "pavucontrol",
     "on-scroll-up": "pamixer -i 2",
     "on-scroll-down": "pamixer -d 2",
     "scroll-step": 5,
@@ -155,6 +157,7 @@
     "format-source": "",
     "format-source-muted": "",
     "on-click": "micvolume mute",
+    "on-click-middle": "pavucontrol",
     "scroll-step": 5
   }
 }
