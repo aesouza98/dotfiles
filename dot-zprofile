@@ -4,3 +4,4 @@ export ANSIBLE_VAULT_PASSWORD_FILE=~/Crmall/Documentos/vault_pass
 export QT_QPA_PLATFORM=xcb
 export QT_QPA_PLATFORMTHEME=qt6ct
 export EDITOR=nvim
+export TERM=xterm-256color

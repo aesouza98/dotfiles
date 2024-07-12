@@ -2,3 +2,4 @@ export PATH=~/.spicetify:~/.local/bin:~/.config/scripts/:$PATH
 export XDG_SCREENSHOTS_DIR=~/Imagens/Screenshots/
 export ANSIBLE_VAULT_PASSWORD_FILE=~/Crmall/Documentos/vault_pass
 export QT_QPA_PLATFORM=wayland 
+export TERM=xterm-256color
