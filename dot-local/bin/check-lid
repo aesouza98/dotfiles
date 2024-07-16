@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Path to the lid state file
+LID_STATE_FILE="/proc/acpi/button/lid/LID/state"
+
+# Check if the lid state file exists
+if [ ! -f "$LID_STATE_FILE" ]; then
+  echo "Lid state file not found."
+  exit 1
+fi
+
+# Initial state
+PREV_LID_STATE=""
+
+while true; do
+  # Read the current lid state
+  CURRENT_LID_STATE=$(awk '{print $2}' $LID_STATE_FILE)
+
+  # Print the state if it has changed
+  if [ "$CURRENT_LID_STATE" != "$PREV_LID_STATE" ]; then
+    if [ "$CURRENT_LID_STATE" == "open" ]; then
+      hyprctl keyword monitor "eDP-1, 1920x1080, 1920x0, 1" #>/dev/null
+      ~/.local/bin/arrange-workspaces
+    else
+      hyprctl keyword monitor "DP-1, 1920x1080@60.00Hz, -1920x0, 1, vrr, 1"  #>/dev/null
+      hyprctl keyword monitor "HDMI-A-1, 1920x1080@120.00Hz, 0x0, 1, vrr, 1" #>/dev/null
+      hyprctl keyword monitor "eDP-1, disable"                               #>/dev/null
+      ~/.local/bin/arrange-workspaces
+    fi
+    # Update the previous state
+    PREV_LID_STATE=$CURRENT_LID_STATE
+  fi
+
+  # Wait for 1 second before checking again
+  sleep 1
+done
