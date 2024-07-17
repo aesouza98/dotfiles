@@ -14,7 +14,7 @@ export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
 
 # Define Aliases
 source ~/.config/shell/aliases
-source /bin/virtualenvwrapper.sh
+#source /bin/virtualenvwrapper.sh
 #source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # Set PATH
