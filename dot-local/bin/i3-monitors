@@ -1,0 +1,16 @@
+#!/bin/bash -x
+
+# Get the status of the laptop lid
+LID_STATUS=$(cat /proc/acpi/button/lid/LID/state | awk '{print $2}')
+
+if [ "$LID_STATUS" = "closed" ]; then
+  # When the lid is closed, disable eDP-1 and set up the external monitors
+  xrandr --output eDP-1 --off \
+    --output HDMI-1 --mode 1920x1080 --rate 60 \
+    --output DP-1 --mode 1920x1080 --rate 144 --left-of HDMI-1 --primary
+else
+  # When the lid is open, set up eDP-1 and HDMI-1, placing HDMI-1 in the center and eDP-1 to the right
+  xrandr --output eDP-1 --mode 1920x1080 --rate 60 --right-of HDMI-1 \
+    --output HDMI-1 --mode 1920x1080 --rate 60 --left-of eDP-1 \
+    --output DP-1 --mode 1920x1080 --rate 144 --left-of HDMI-1 --primary
+fi

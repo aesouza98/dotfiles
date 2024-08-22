@@ -15,8 +15,8 @@ if [[ "$monitor_count" == 1 ]]; then
   done
   hyprctl keyword workspace $monitor_1,1
 elif [[ "$monitor_count" == 2 ]]; then
-  monitor_1=$(hyprctl monitors -j | jq -r '.[0].name')
-  monitor_2=$(hyprctl monitors -j | jq -r '.[1].name')
+  monitor_1=$(hyprctl monitors -j | jq -r '.[1].name')
+  monitor_2=$(hyprctl monitors -j | jq -r '.[0].name')
   for ((i = 1; i <= 9; i++)); do
     echo "Workspace $i on $monitor_1"
     hyprctl keyword wsbind $i,$monitor_1 >/dev/null

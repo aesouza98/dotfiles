@@ -1,0 +1,15 @@
+#!/bin/bash -x
+
+# List available sinks with human-readable names
+SOURCES=$(pactl list sources | grep 'Descrição' | cut -d':' -f2 | grep -v HDMI | grep -v Monitor | sed 's/^ '//)
+
+CHOSEN_SOURCE=$(echo -e "$SOURCES" | rofi -dmenu -p "Select Audio Output")
+
+# Find the index of the chosen sink
+SOURCE_INDEX=$(pactl list sources | grep -F -B 10 "$CHOSEN_SOURCE" | grep "Fonte" | awk '{print $2}' | cut -d'#' -f2)
+
+# If a sink was selected, switch to it
+if [ -n "$SOURCE_INDEX" ]; then
+  pactl set-default-source "$SOURCE_INDEX"
+  notify-send "Audio Input" "Switched to $CHOSEN_SOURCE"
+fi

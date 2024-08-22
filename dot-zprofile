@@ -5,3 +5,4 @@ export QT_QPA_PLATFORM=xcb
 export QT_QPA_PLATFORMTHEME=qt6ct
 export EDITOR=nvim
 export TERM=xterm-256color
+#export ADW_DISABLE_PORTAL=1

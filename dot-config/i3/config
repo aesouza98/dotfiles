@@ -6,32 +6,45 @@ font pango:JetBrainsMono NerdFont 10
 # execução automática de programas
 exec --no-startup-id dex --autostart --environment i3
 
+# Programs
 exec_always --no-startup-id picom &
 exec_always --no-startup-id killall dunst ; dunst &
 exec_always --no-startup-id feh --no-fehbg --bg-scale $HOME/Imagens/wallpaper
-exec_always --no-startup-id killall -q
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Dual Mode Mouse' 'libinput Accel Profile Enabled' 0 0 &
-exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Dual Mode Mouse' 'Coordinate Transformation Matrix' 0.5 0 0 0 0.5 0 0 0 1 &
-exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Wireless Receiver' 'libinput Accel Profile Enabled' 0 0 &
-exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Wireless Receiver' 'Coordinate Transformation Matrix' 0.5 0 0 0 0.5 0 0 0 1 &
-exec_always --no-startup-id setxkbmap us intl
-exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id /usr/libexec/gsd-xsettings
+
+# Input Settings
+exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Dual Mode Mouse' 'libinput Accel Profile Enabled' 0 1 &
+exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Wireless Receiver' "libinput Accel Speed" -0.3
+exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Wireless Receiver' 'libinput Accel Profile Enabled' 0 1 &
+exec_always --no-startup-id xinput --set-prop 'Compx 2.4G Dual Mode Mouse' "libinput Accel Speed" -0.3
+exec_always --no-startup-id setxkbmap us intl
+
+# Monitors
+exec_always --no-startup-id i3-monitors
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
+exec --no-startup-id sudo killall openvpn
 exec --no-startup-id sudo openvpn --cd "/home/adriano/Crmall/VPN/MGA/" --config "config.conf" --auth-user-pass "pass.txt"
 exec --no-startup-id greenclip daemon
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start
+exec --no-startup-id input-leap
 
+# Definição de variáveis
+set $terminal kitty
+set $filebrowser nautilus
+set $browser firefox
+set $workbrowser flatpak run net.waterfox.waterfox
 
 ## lançadores de aplicação - keybindings
-bindsym $mod+e exec --no-startup-id nautilus
-bindsym $mod+b exec --no-startup-id flatpak run com.google.Chrome
-bindsym $mod+Shift+b exec --no-startup-id flatpak run com.brave.Browser
+bindsym $mod+e exec --no-startup-id $filebrowser
+bindsym $mod+b exec --no-startup-id $browser
+bindsym $mod+Shift+b exec --no-startup-id $workbrowser
 bindsym $mod+s exec --no-startup-id flatpak run com.github.IsmaelMartinez.teams_for_linux
+
 bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 bindsym $mod+n exec --no-startup-id flatpak run md.obsidian.Obsidian
 bindsym $mod+v exec --no-startup-id vpn_rofi
@@ -45,13 +58,15 @@ bindsym XF86AudioLowerVolume exec --no-startup-id soundvolume down
 bindsym XF86AudioMute exec --no-startup-id soundvolume mute
 bindsym $mod+F1 exec --no-startup-id micvolume
 bindsym XF86AudioMicMute exec --no-startup-id micvolume
+bindsym $mod+m exec --no-startup-id change-audio
+bindsym $mod+Shift+m exec --no-startup-id change-mic
 
 # permite arrastar janelas flutuantes
 floating_modifier $mod
 tiling_drag modifier titlebar
 
 # terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec $terminal
 #bindsym $mod+Return exec warp-terminal
 
 # fechar/encerrar janela
@@ -80,8 +95,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # controle de foco - usado em abas
-bindsym --whole-window --border $mod+Tab focus next
-bindsym --whole-window --border $mod+Mod1+Tab focus prev
+bindsym --whole-window --border $mod+Tab focus prev
+bindsym --whole-window --border $mod+Mod1+Tab focus next
 
 # altera split para horizontal ou vertical
 bindsym $mod+Shift+h split h
@@ -200,3 +215,6 @@ bar {
 for_window [class="pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="org.remmina.Remmina" instance="org.remmina.Remmina"] floating enable
 for_window [class="Virt-manager" instance="virt-manager"] floating enable
+for_window [title="Picture-in-Picture"] sticky enable
+for_window [title="Picture-in-Picture"] resize set 264 149
+for_window [title="Picture-in-Picture"] move position 1653 px 902 px
