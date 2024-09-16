@@ -35,9 +35,9 @@ exec --no-startup-id input-leap
 
 # Definição de variáveis
 set $terminal kitty
-set $filebrowser nautilus
-set $browser firefox
-set $workbrowser flatpak run net.waterfox.waterfox
+set $filebrowser thunar
+set $browser flatpak run com.google.Chrome
+set $workbrowser flatpak run com.brave.Browser
 
 ## lançadores de aplicação - keybindings
 bindsym $mod+e exec --no-startup-id $filebrowser
