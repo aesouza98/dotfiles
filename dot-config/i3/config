@@ -11,8 +11,8 @@ exec_always --no-startup-id picom &
 exec_always --no-startup-id killall dunst ; dunst &
 exec_always --no-startup-id feh --no-fehbg --bg-scale $HOME/Imagens/wallpaper
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-#exec_always --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
-exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
+#exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id /usr/libexec/gsd-xsettings
 
 # Input Settings

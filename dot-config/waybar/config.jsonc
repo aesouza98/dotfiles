@@ -3,28 +3,30 @@
   "position": "top", // Waybar position (top|bottom|left|right)
   "layer": "top",
   "height": 0, // Waybar height (to be removed for auto height)
-  "spacing": 4, // Gaps between modules (4px)
+  "spacing": 6, // Gaps between modules (4px)
   // Modules
   "modules-left": [
     "hyprland/workspaces",
-    //"custom/separator",
+    "custom/separator",
     "custom/spotify"
   ],
   "modules-center": [
     "clock#date",
+    "custom/separator",
     "clock"
   ],
   "modules-right": [
     "tray",
-    // "custom/separator",
     "custom/vpn1",
+    "custom/separator",
     "network",
+    "custom/separator",
     "battery",
-    //"custom/separator",
+    "custom/separator",
     "pulseaudio#speaker",
-    //"custom/separator",
+    "custom/separator",
     "pulseaudio#microphone"
-    //"custom/separator",
+    // "custom/separator"
     //"network"
     //"custom/separator",
   ],
@@ -36,10 +38,10 @@
     "all-outputs": false,
     "active-only": false,
     "show-special": false
-    //    "persistent-workspaces": {
-    //      "DP-1": [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
-    //      "HDMI-A-1": [ 10 ]
-    //    }
+    // "persistent-workspaces": {
+    //   "DP-1": [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+    //   "HDMI-A-1": [ 10 ]
+    // }
   },
   "hyprland/window": {
     "format": "{}",
@@ -76,7 +78,7 @@
     "on-click-right": "playerctl --player=spotify next",
     "on-scroll-up": "playerctl --player=spotify volume 0.05+",
     "on-scroll-down": "playerctl --player=spotify volume 0.05-",
-    "format": "  {}"
+    "format": "   {}"
   },
   "custom/playerctl": {
     "interval": 1,
@@ -100,10 +102,10 @@
     "spacing": 10
   },
   "clock": {
-    "format": " {:%R}"
+    "format": "  {:%R}"
   },
   "clock#date": {
-    "format": " {:%A, %B %d}",
+    "format": "  {:%a, %d/%m}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "battery": {
@@ -113,20 +115,20 @@
       "critical": 15
     },
     "format": "{icon}  {capacity}%",
-    "format-charging": " {capacity}%",
-    "format-plugged": " {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": "  {capacity}%",
     "format-alt": "{icon}{time}",
     "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
     ]
   },
   "network": {
     "interface": "wlp0s20f3",
-    "format-wifi": "  {essid}",
+    "format-wifi": "   {essid}",
     "format-ethernet": "󰈀 connected",
     "format-disconnected": "󰈂 disconnected",
     "on-click": "vpn_connect"
@@ -135,16 +137,16 @@
     // "format": "{icon} {volume}%",
     "format": "{icon} {volume}%",
     // "tooltip": false,
-    "format-muted": " Muted",
-    "on-click": "soundvolume mute",
+    "format-muted": " muted",
+    "on-click": "~/.local/bin/soundvolume mute",
     "on-click-middle": "pavucontrol",
     "on-scroll-up": "pamixer -i 2",
     "on-scroll-down": "pamixer -d 2",
     "scroll-step": 5,
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
+      "headphone": " ",
+      "hands-free": " ",
+      "headset": " ",
       "default": [
         "",
         "",
@@ -156,7 +158,7 @@
     "format": "{format_source}",
     "format-source": "",
     "format-source-muted": "",
-    "on-click": "micvolume mute",
+    "on-click": "~/.local/bin/micvolume mute",
     "on-click-middle": "pavucontrol",
     "scroll-step": 5
   }
