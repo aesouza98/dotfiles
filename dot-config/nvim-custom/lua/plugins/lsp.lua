@@ -1,11 +1,12 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+    { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependents
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     { "j-hui/fidget.nvim",       opts = {} },
     { "folke/neodev.nvim",       opts = {} },
+    { "jose-elias-alvarez/null-ls.nvim" }, -- For linting/formatting
   },
   config = function()
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -38,14 +39,6 @@ return {
             group = highlight_augroup,
             callback = vim.lsp.buf.clear_references,
           })
-
-          vim.api.nvim_create_autocmd("LspDetach", {
-            group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
-            callback = function(event2)
-              vim.lsp.buf.clear_references()
-              vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
-            end,
-          })
         end
         if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
           map("<leader>th", function()
@@ -54,8 +47,10 @@ return {
         end
       end,
     })
+
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
     local servers = {
       lua_ls = {
         settings = {
@@ -66,13 +61,35 @@ return {
           },
         },
       },
+      bashls = {},
+      ansiblels = {},
+      terraformls = {},
+      dockerls = {},
+      marksman = {},
+      yamlls = {
+        -- settings = {
+        --   yaml = {
+        --     schemas = require("schemastore").yaml.schemas(),
+        --   },
+        -- },
+      },
+      esbonio = {},
+      pylsp = {},
     }
+
     require("mason").setup()
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      "stylua", -- Used to format Lua code
+      "stylua",   -- Lua formatter
+      "shellcheck", -- Bash linter
+      "shfmt",    -- Bash formatter
+      "yamllint", -- YAML linter
+      "hadolint", -- Dockerfile linter
+      "markdownlint", -- Markdown linter
     })
+
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
     require("mason-lspconfig").setup({
       handlers = {
         function(server_name)
@@ -82,5 +99,20 @@ return {
         end,
       },
     })
+
+    -- Configure null-ls for linting and formatting
+    local null_ls = require("null-ls")
+    null_ls.setup({
+      sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.shellcheck,
+        null_ls.builtins.formatting.shfmt,
+        null_ls.builtins.diagnostics.yamllint,
+        null_ls.builtins.diagnostics.hadolint,
+        null_ls.builtins.diagnostics.markdownlint,
+      },
+    })
+    vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, {})
   end,
 }
+

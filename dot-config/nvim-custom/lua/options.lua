@@ -51,7 +51,7 @@ vim.g.loaded_netrwPlugin = 1
 optbackspace = "indent,eol,start"
 
 -- Clipboard
--- opt.clipboard = 'unnamedplus'
+opt.clipboard = 'unnamedplus'
 
 -- Highlight Yanking
 vim.api.nvim_create_autocmd('TextYankPost', {

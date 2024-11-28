@@ -51,3 +51,4 @@ fpath+=($HOME/.zsh/pure)
 # .zshrc
 autoload -U promptinit; promptinit
 prompt pure
+export FZF_DEFAULT_COMMAND='fd'
