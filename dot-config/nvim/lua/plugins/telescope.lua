@@ -7,6 +7,7 @@ return {
             vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Fuzzy Find Files" })
             vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = "Fuzzy Find Git Files" })
             vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Grep files" })
+            vim.keymap.set('n', '<leader>/',  builtin.live_grep, { desc = "Grep files" })
             vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Navigate through buffers" })
             vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Find help commands" })
         end

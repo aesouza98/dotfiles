@@ -18,4 +18,4 @@ require("lazy").setup("plugins")
 require("keymaps")
 
 -- startup
-vim.cmd.colorscheme("onedark")
+vim.cmd.colorscheme("catppuccin-mocha")
