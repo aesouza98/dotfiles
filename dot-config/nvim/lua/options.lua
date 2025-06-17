@@ -2,11 +2,11 @@ local opt = vim.opt
 local keymap = vim.keymap
 local colorscheme = "catppuccin"
 
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
+opt.number = true
+opt.relativenumber = true
+opt.expandtab = true
+opt.shiftwidth = 2
+opt.tabstop = 2
 
 -- Setting termcolors
 opt.termguicolors = true
@@ -43,7 +43,7 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- File Scrolling
-opt.scrolloff = 10
+opt.scrolloff = 8
 opt.signcolumn = "yes"
 opt.isfname:append("@-@")
 
@@ -84,3 +84,9 @@ vim.diagnostic.config({
   virtual_text = true,     -- enable virtual text inline
   underline = true,        -- underline error/warning
 })
+
+-- Enable folding ( setup in nvim-ufo )
+vim.o.foldenable = true     -- Enable folding by default
+vim.o.foldmethod = "manual" -- Default fold method (change as needed)
+vim.o.foldlevel = 99        -- Open most folds by default
+vim.o.foldcolumn = "0"
