@@ -17,6 +17,7 @@ alias ggrep='rg --no-ignore-vcs'
 alias cat='bat --style=auto'
 alias ccat='bat -pp'
 alias vim='nvim'
+alias vvim='NVIM_APPNAME=newnvim nvim'
 alias c='z'
 alias emacs='emacs -nw'
 

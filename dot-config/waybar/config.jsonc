@@ -124,7 +124,7 @@
     ]
   },
   "network": {
-    "interface": "wlp3s0",
+    "interface": "wlan0",
     "format-wifi": "  {essid}",
     "format-ethernet": "󰈀 connected",
     "format-disconnected": "󰈂 disconnected",
