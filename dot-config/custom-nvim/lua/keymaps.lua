@@ -52,23 +52,41 @@ keymap.set("i", "<C-c>", "<Esc>")
 keymap.set("n", "<C-c>", ":nohl<CR>", { desc = "Clear search hl", silent = true })
 
 -- Replace the word cursor is on globally
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = "Replace word cursor is on globally" })
+keymap.set(
+  "n",
+  "<leader>S",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Replace word cursor is on globally" }
+)
+
+-- Globally replace selected text in visual mode
+keymap.set("v", "<leader>S", function()
+  -- Save the selected text into a register
+  local saved_reg = vim.fn.getreg("s")
+  vim.cmd('normal! "sy')
+  local selection = vim.fn.escape(vim.fn.getreg("s"), [[\/.*$^~\[\]])
+  vim.fn.setreg("s", saved_reg)
+
+  -- Feed keys to open the substitution command
+  local cmd = string.format(":%s/%s/%s/gI", "%s", selection, selection)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(cmd, true, false, true), "n", false)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Left><Left><Left>", true, false, true), "n", false)
+end, { desc = "Replace selected text globally" })
+
 
 -- Copy filepath to the clipboard
-vim.keymap.set("n", "<leader>fd", function()
-  local filePath = vim.fn.expand("%:~") -- Gets the file path relative to the home directory
-  vim.fn.setreg("+", filePath) -- Copy the file path to the clipboard register
+keymap.set("n", "<leader>fd", function()
+  local filePath = vim.fn.expand("%:~")               -- Gets the file path relative to the home directory
+  vim.fn.setreg("+", filePath)                        -- Copy the file path to the clipboard register
   print("File path copied to clipboard: " .. filePath) -- Optional: print message to confirm
 end, { desc = "Copy file path to clipboard" })
 
 -- Toggle LSP diagnostics visibility
 local isLspDiagnosticsVisible = true
-vim.keymap.set("n", "<leader>lx", function()
-    isLspDiagnosticsVisible = not isLspDiagnosticsVisible
-    vim.diagnostic.config({
-        virtual_text = isLspDiagnosticsVisible,
-        underline = isLspDiagnosticsVisible
-    })
+keymap.set("n", "<leader>lx", function()
+  isLspDiagnosticsVisible = not isLspDiagnosticsVisible
+  vim.diagnostic.config({
+    virtual_text = isLspDiagnosticsVisible,
+    underline = isLspDiagnosticsVisible,
+  })
 end, { desc = "Toggle LSP diagnostics" })
-

@@ -8,6 +8,7 @@ keymap.set("i", "kj", "<ESC>", { desc = "Exit insert mode with kj" })
 
 -- Clear highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Increment/Decrement numbers
 keymap.set("n", "<leader>=", "<C-a>", { desc = "Increment number" })

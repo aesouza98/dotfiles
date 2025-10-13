@@ -1,0 +1,14 @@
+abbr vim=nvim
+abbr gpsh='git push'
+abbr gcm='git commit -m '
+abbr gco='git checkout '
+abbr gst='git status'
+abbr c=z
+abbr lazynvim='NVIM_APPNAME=lazynvim nvim'
+abbr trm=trash
+abbr ssm='aws ssm start-session --region us-west-1 --profile EBANX --target '
+abbr s3cp='aws s3 cp --profile EBANX '
+abbr vsc="aws-secrets view-secret -e file.yaml -n secret/name > 'output_file.json'"
+abbr ssc="aws-secrets set-secret -e file.yaml -n secret/name < 'input_file.json'"
+abbr dsc="aws-secrets deploy -e file.yaml --filter-pattern 'filter/pattern' --confirm"
+
