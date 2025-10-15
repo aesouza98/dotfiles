@@ -1,6 +1,1 @@
-export PATH=~/.local/bin:~/.config/scripts/:$PATH
-export XDG_SCREENSHOTS_DIR=~/Imagens/Screenshots/
-# export QT_QPA_PLATFORM=wayland
-export TERM=xterm-256color
-export GTK_IM_MODULE=xim
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
+export PATH=~/.local/bin:~/.config/scripts/:~/.local/bin/themes/:$PATH

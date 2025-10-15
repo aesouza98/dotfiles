@@ -1,14 +1,8 @@
 function fish_greeting
-    afetch
+    pfetch
 end
 
 if status is-interactive
-    abbr --add vim nvim
-    abbr --add gcm git commit -m
-    abbr --add gst git status
-    abbr --add gcl git clone
-    abbr --add gpsh git push
-    abbr --add gpll git pull
-
-    source ~/.config/shell/aliases
+    # Commands to run in interactive sessions can go here
+    source ~/.aliases
 end
