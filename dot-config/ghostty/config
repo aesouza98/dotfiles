@@ -1,7 +1,7 @@
 # Appearance
 theme = Catppuccin Mocha
 background-blur-radius = 20
-background-opacity = 0.9
+background-opacity = 0.98
 mouse-hide-while-typing = true
 window-decoration = true
 window-padding-x = 5

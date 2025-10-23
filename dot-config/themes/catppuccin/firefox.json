@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/nano/.config/themes/current/backgrounds/space-piano.png",
+    "alpha": "100",
+
+    "special": {
+        "background": "#12131d",
+        "foreground": "#c7c1cd",
+        "cursor": "#c7c1cd"
+    },
+    "colors": {
+        "color0": "#12131d",
+        "color1": "#5E6177",
+        "color2": "#63667C",
+        "color3": "#707289",
+        "color4": "#827E95",
+        "color5": "#7D829A",
+        "color6": "#948DA7",
+        "color7": "#c7c1cd",
+        "color8": "#8b878f",
+        "color9": "#5E6177",
+        "color10": "#63667C",
+        "color11": "#707289",
+        "color12": "#827E95",
+        "color13": "#7D829A",
+        "color14": "#948DA7",
+        "color15": "#c7c1cd"
+    }
+}

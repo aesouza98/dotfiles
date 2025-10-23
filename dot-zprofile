@@ -1,4 +1,4 @@
-export PATH="$PATH:/Users/adriano.elias/.local/bin"
+export PATH="$PATH:/Users/adriano.elias/.local/bin:~/.config/scripts/:~/.config/scripts/themes/:~/.config/scripts/omarchy/"
 export XDG_SCREENSHOTS_DIR=~/Imagens/Screenshots/
 export ANSIBLE_VAULT_PASSWORD_FILE=~/Crmall/Documentos/vault_pass
 #export QT_QPA_PLATFORM=xcb

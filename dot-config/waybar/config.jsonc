@@ -2,7 +2,7 @@
   // Settings
   "position": "top",
   "layer": "top",
-  "spacing": 6,
+  "spacing": 10,
   // Modules
   "modules-left": [
     "custom/menu",
@@ -98,7 +98,7 @@
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
-    "spacing": 1,
+    // "spacing": 5,
     "on-click": "wifi-config"
   },
   "pulseaudio#speaker": {

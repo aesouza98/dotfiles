@@ -1,1 +1,1 @@
-export PATH=~/.local/bin:~/.config/scripts/:~/.local/bin/themes/:$PATH
+export PATH=~/.local/bin:~/.config/scripts/:~/.config/scripts/omarchy/:~/.config/scripts/themes/:$PATH

@@ -46,3 +46,4 @@ else
   pkill -x swaybg
   setsid uwsm app -- swaybg -i "$CURRENT_BACKGROUND_LINK" -m fill >/dev/null 2>&1 &
 fi
+
