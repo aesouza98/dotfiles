@@ -116,7 +116,7 @@ button:hover {
 
 #pulseaudio.microphone.source-muted {
   color: @red;
-  box-shadow: inset 0 -2px @red;
+  /* box-shadow: inset 0 -2px @red; */
 }
 
 /* Tray */
@@ -155,3 +155,6 @@ button:hover {
   animation-direction: alternate;
 }
 
+#custom-power{
+  color: @red
+}
