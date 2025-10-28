@@ -50,7 +50,7 @@
     isNormalUser = true;
     description = "Adriano";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    packages = with pkgs; []; # User Packages only
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
@@ -64,74 +64,6 @@
   }
 ];
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  environment.systemPackages = [
-	  pkgs.neovim
-	  pkgs.ghostty
-	  pkgs.git
-	  pkgs.firefox
-	  pkgs.stow
-    pkgs.zoxide
-    pkgs.starship
-    pkgs.localsend
-    pkgs.blueberry
-    pkgs.brave
-    pkgs.gearlever
-    pkgs.obsidian
-    pkgs.spotify
-    pkgs.stremio
-    pkgs.syncthing
-    pkgs.afetch
-    pkgs.p7zip
-    pkgs.atuin
-    pkgs.brightnessctl
-    pkgs.diffutils
-    pkgs.colordiff
-    pkgs.docker
-    pkgs.docker-compose
-    pkgs.docker-buildx
-    pkgs.egl-wayland
-    pkgs.eza
-    pkgs.ffmpeg_6-full
-    pkgs.flatpak
-    pkgs.gnome-calculator
-    pkgs.imagemagick
-    pkgs.jq
-    pkgs.lazydocker
-    pkgs.lazygit
-    pkgs.rustc
-    pkgs.sof-firmware
-    pkgs.gcc
-    pkgs.unzip
-    pkgs.wine
-    pkgs.winetricks
-    pkgs.wine64
-    pkgs.yarn
-    pkgs.grim
-    pkgs.hyprshot
-    pkgs.mako
-    pkgs.nautilus
-    pkgs.polkit_gnome
-    pkgs.swaybg
-    pkgs.swayosd
-    pkgs.waybar
-    pkgs.walker
-    pkgs.impala
-    pkgs.vimix-cursors
-    pkgs.adwaita-fonts
-    pkgs.adwaita-icon-theme
-    pkgs.yaru-theme
-    pkgs.bat
-    pkgs.fzf
-    pkgs.fd
-    pkgs.ripgrep
-    pkgs.glib
-    pkgs.cargo
-    pkgs.nodejs_22
-  ];
 
   # hyprland + uwsm
   programs.hyprland = {
@@ -186,7 +118,6 @@
       init.defaultBranch = "master";
     };
   };
-
 
   # Garbage Collection
   nix.gc = {
