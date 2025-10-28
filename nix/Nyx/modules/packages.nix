@@ -73,6 +73,7 @@
     protonup
     hydralauncher
     wofi
+    nh
   ];
 
   environment.systemPackages = with pkgs; [
