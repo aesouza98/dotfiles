@@ -19,6 +19,9 @@
     }
   ];
 
+  # Polkit
+  security.polkit.enable = true;
+
   # NVidia
   hardware.graphics = {
     enable = true;
@@ -35,6 +38,7 @@
     nvidiaSettings = true;
   };
 
+  # Remove File Limits
   systemd.user.extraConfig = ''
     DefaultLimitNOFILE=1048576
   '';
