@@ -4,6 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./user.nix
     ];
 
   # Bootloader.
@@ -45,14 +46,7 @@
   # Configure console keymap
   console.keyMap = "us-acentos";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nano = {
-    isNormalUser = true;
-    description = "Adriano";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; []; # User Packages only
-    shell = pkgs.zsh;
-  };
+ 
   programs.zsh.enable = true;
   services.getty.autologinUser = "nano";
 
@@ -79,7 +73,6 @@
   environment.variables.PATH = "/run/current-system/sw/bin:/usr/bin";
 
   environment.sessionVariables = {
-    GTK_THEME = "Adwaita-dark";
     GTK_DEFAULT_COLOR_SCHEME = "prefer-dark";
     WLR_NO_HARDWARE_CURSORS = "1";
     GBM_BACKEND = "nvidia-drm";
@@ -109,15 +102,7 @@
     nvidiaSettings = true;
   };
 
-  # Git Config
-  programs.git = {
-    enable = true;
-    config = {
-      user.name = "Adriano Elias";
-      user.email = "github@nano.slmail.me";
-      init.defaultBranch = "master";
-    };
-  };
+
 
   # Garbage Collection
   nix.gc = {

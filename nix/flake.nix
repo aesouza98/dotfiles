@@ -14,8 +14,15 @@
       system = "x86_64-linux";
       modules = [
         ./configuration.nix
-        ./hardware-configuration.nix
         ./modules/packages.nix
+        nix-flatpak.nixosModules.nix-flatpak
+        # home-manager.nixosModules.home-manager  {
+        #   home-manager.useGlobalPkgs = true;
+        #   home-manager.useUserPackages = true;
+        #   home-manager.users.nano = import ./home-manager.nix;
+        #   home-manager.backupFileExtension = "backup";
+        # }
+
       ];
       specialArgs = { inherit inputs; };
     };
