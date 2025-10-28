@@ -56,7 +56,7 @@
     swaybg
     swayosd
     waybar
-    walker
+    #walker
     vimix-cursors
     adwaita-fonts
     adwaita-icon-theme

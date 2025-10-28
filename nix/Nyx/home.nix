@@ -1,12 +1,11 @@
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
-  programs.walker.enable = true;
-
   home.username = "nano";
   home.homeDirectory = "/home/nano";
   home.stateVersion = "25.05";
   home.packages = [
+    inputs.walker.packages.${pkgs.system}.default
   ];
 
   home.file = {
