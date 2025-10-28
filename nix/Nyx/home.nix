@@ -6,6 +6,7 @@
   home.stateVersion = "25.05";
   home.packages = [
     inputs.walker.packages.${pkgs.system}.default
+    inputs.elephant.packages.${pkgs.system}.default
   ];
 
   home.file = {
