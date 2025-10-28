@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [inputs.walker.homeManagerModules.default];
-  programs.walker.enable = true;
+  # imports = [inputs.walker.homeManagerModules.default];
+  # programs.walker.enable = true;
 
   home.username = "nano";
   home.homeDirectory = "/home/nano";
@@ -13,8 +13,8 @@
   home.file = {
     # ZSH
     ".zshrc".source = ../../dot-zshrc;
-    ".zprofile".source = ../../dot-zshrc;
-    ".zshrc".source = ../../dot-zshrc;
+    ".zprofile".source = ../../dot-zprofile;
+    #".zshenv".source = ../../dot-zshenv;
 
     # Config
     ".config/hypr".source = ../../dot-config/hypr;
