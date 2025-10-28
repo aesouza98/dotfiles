@@ -18,7 +18,7 @@
     };
 
   };
-  outputs = { nixpkgs, nix-flatpak, home-manager, ... }@inputs: {
+  outputs = { nixpkgs, nix-flatpak, home-manager, walker, elephant, ... }@inputs: {
     nixosConfigurations.Nyx = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -28,7 +28,12 @@
         home-manager.nixosModules.home-manager  {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.nano = import ./Nyx/home.nix;
+          home-manager.users.nano = {
+            imports = [
+              ./Nyx/home.nix
+              walker.homeManagerModules.default
+            ];
+          };
           home-manager.backupFileExtension = "backup";
         }
       ];

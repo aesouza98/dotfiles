@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [inputs.walker.homeManagerModules.default];
+  #imports = [inputs.walker.homeManagerModules.default];
   programs.walker.enable = true;
 
   home.username = "nano";
@@ -14,7 +14,7 @@
     # ZSH
     ".zshrc".source = ../../dot-zshrc;
     ".zprofile".source = ../../dot-zprofile;
-    #".zshenv".source = ../../dot-zshenv;
+    ".zshenv".source = ../../dot-zshenv;
 
     # Config
     ".config/hypr".source = ../../dot-config/hypr;
@@ -27,8 +27,8 @@
     ".config/shell".source = ../../dot-config/shell;
     ".config/starship".source = ../../dot-config/starship;
     ".config/swayosd".source = ../../dot-config/swayosd;
-    ".config/themes".source = ../../dot-config/themes;
-    ".config/walker".source = ../../dot-config/walker;
+    # ".config/themes".source = ../../dot-config/themes;
+    # ".config/walker".source = ../../dot-config/walker;
     ".config/waybar".source = ../../dot-config/waybar;
     ".config/brave-flags.conf".source = ../../dot-config/brave-flags.conf;
 
