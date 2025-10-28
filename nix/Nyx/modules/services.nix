@@ -26,4 +26,19 @@
       };
     };
   };
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "intl";
+  };
+
+  # Auto Login
+  services.getty.autologinUser = "nano";
+
+  # Garbage Collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 15d";
+  };
 }

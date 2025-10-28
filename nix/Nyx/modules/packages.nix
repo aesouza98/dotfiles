@@ -1,6 +1,15 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./programs.nix
+    ./services.nix
+    # ./flatpaks.nix
+  ];
+  # User Packages
+  users.users.nano.packages = with pkgs; [
+  ];
+
   environment.systemPackages = with pkgs; [
 	  neovim
 	  ghostty
