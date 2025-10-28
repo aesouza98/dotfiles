@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ python3, config, pkgs, ... }:
 
 {
   imports =
@@ -176,6 +176,17 @@
     open = false;
     nvidiaSettings = true;
   };
+
+  # Git Config
+  programs.git = {
+    enable = true;
+    config = {
+      user.name = "Adriano Elias";
+      user.email = "github@nano.slmail.me";
+      init.defaultBranch = "master";
+    };
+  };
+
 
   # Garbage Collection
   nix.gc = {
