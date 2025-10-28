@@ -1,6 +1,6 @@
 { config,pkgs, ... }:
 {
   services.flatpak.packages = [
-    com.stremio.Stremio
+    "com.stremio.Stremio"
   ];
 }
