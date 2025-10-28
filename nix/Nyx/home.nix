@@ -1,17 +1,42 @@
 { config, pkgs, ... }:
 
 {
+  imports = [inputs.walker.homeManagerModules.default];
+  programs.walker.enable = true;
+
   home.username = "nano";
   home.homeDirectory = "/home/nano";
   home.stateVersion = "25.05";
   home.packages = [
   ];
 
-  # home.file = {
-  #   ".bashrc".source = ./dotfiles/.bashrc;
-  #   ".config/aliases.txt".source = ./dotfiles/aliases.txt;
-  # };
-  
+  home.file = {
+    # ZSH
+    ".zshrc".source = ../../dot-zshrc;
+    ".zprofile".source = ../../dot-zshrc;
+    ".zshrc".source = ../../dot-zshrc;
+
+    # Config
+    ".config/hypr".source = ../../dot-config/hypr;
+    ".config/btop".source = ../../dot-config/btop;
+    ".config/fish".source = ../../dot-config/fish;
+    ".config/ghostty".source = ../../dot-config/ghostty;
+    ".config/mako".source = ../../dot-config/mako;
+    ".config/nvim".source = ../../dot-config/nvim;
+    ".config/scripts".source = ../../dot-config/scripts;
+    ".config/shell".source = ../../dot-config/shell;
+    ".config/starship".source = ../../dot-config/starship;
+    ".config/swayosd".source = ../../dot-config/swayosd;
+    ".config/themes".source = ../../dot-config/themes;
+    ".config/walker".source = ../../dot-config/walker;
+    ".config/waybar".source = ../../dot-config/waybar;
+    ".config/brave-flags.conf".source = ../../dot-config/brave-flags.conf;
+
+    # Local
+    ".local/bin".source = ../../dot-local/bin;
+    ".local/share/fonts".source = ../../dot-local/share/fonts;
+  };
+
   programs.git = {
     enable = true;
     aliases = {
