@@ -69,7 +69,6 @@
     glib
     cargo
     nodejs_22
-    trash
   ];
 
   environment.systemPackages = with pkgs; [
