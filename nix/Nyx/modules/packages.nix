@@ -70,6 +70,8 @@
     cargo
     nodejs_22
     fastfetch
+    bottles
+    protonup
   ];
 
   environment.systemPackages = with pkgs; [

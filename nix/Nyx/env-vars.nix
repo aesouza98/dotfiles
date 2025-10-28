@@ -14,5 +14,6 @@
     XCURSOR_THEME = "Yaru";
     XCURSOR_SIZE = "24";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
 }
