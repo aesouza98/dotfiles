@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  #imports = [inputs.walker.homeManagerModules.default];
   programs.walker.enable = true;
 
   home.username = "nano";
@@ -40,11 +39,11 @@
 
   programs.git = {
     enable = true;
-    aliases = {
-      st = "status";
-      lg = "log --oneline --graph --decorate";
-    };
-    extraConfig = {
+    settings = {
+      alias = {
+        st = "status";
+        lg = "log --oneline --graph --decorate";
+      };
       core.editor = "nvim";
       pull.rebase = true;
       push.autoSetupRemote = true;
