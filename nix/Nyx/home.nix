@@ -12,11 +12,11 @@
   # };
   programs.git = {
     enable = true;
-    settings = {
-      alias = {
-        st = "status";
-        lg = "log --oneline --graph --decorate";
-      };
+    aliases = {
+      st = "status";
+      lg = "log --oneline --graph --decorate";
+    };
+    extraConfig = {
       core.editor = "nvim";
       pull.rebase = true;
       push.autoSetupRemote = true;
