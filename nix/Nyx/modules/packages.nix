@@ -8,9 +8,6 @@
   ];
   # User Packages
   users.users.nano.packages = with pkgs; [
-  ];
-
-  environment.systemPackages = with pkgs; [
 	  neovim
 	  ghostty
 	  git
@@ -74,9 +71,12 @@
     nodejs_22
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
+  environment.systemPackages = with pkgs; [
   ];
+
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "qtwebengine-5.15.19"
+  # ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
