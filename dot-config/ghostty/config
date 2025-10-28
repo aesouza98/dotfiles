@@ -1,5 +1,6 @@
 # Appearance
-theme = Catppuccin Mocha
+#theme = Catppuccin Mocha
+theme = catppuccin-mocha
 background-blur-radius = 20
 background-opacity = 0.98
 mouse-hide-while-typing = true
@@ -11,7 +12,7 @@ window-padding-balance = true
 # Shell
 # command = /opt/homebrew/bin/fish
 # shell-integration = fish
-command = /bin/zsh
+command = zsh
 shell-integration = zsh
 
 # Keybinding

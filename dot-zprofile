@@ -1,8 +1,3 @@
-export PATH="$PATH:/Users/adriano.elias/.local/bin:~/.config/scripts/:~/.config/scripts/themes/:~/.config/scripts/omarchy/"
-export XDG_SCREENSHOTS_DIR=~/Imagens/Screenshots/
-export ANSIBLE_VAULT_PASSWORD_FILE=~/Crmall/Documentos/vault_pass
-#export QT_QPA_PLATFORM=xcb
-export QT_QPA_PLATFORMTHEME=qt6ct
-export EDITOR=nvim
-export TERM=xterm-256color
-export GTK_IM_MODULE=xim
+if uwsm check may-start; then
+    exec uwsm start hyprland-uwsm.desktop
+fi
