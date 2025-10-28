@@ -69,6 +69,7 @@
     glib
     cargo
     nodejs_22
+    fastfetch
   ];
 
   environment.systemPackages = with pkgs; [
