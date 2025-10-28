@@ -72,6 +72,7 @@
     fastfetch
     bottles
     protonup
+    hydralauncher
   ];
 
   environment.systemPackages = with pkgs; [
