@@ -13,13 +13,14 @@
     nixosConfigurations.Nyx = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
-        ./modules/packages.nix
+        ./Nyx/configuration.nix
+        ./Nyx/modules/packages.nix
+        ./Nyx/modules/services.nix
         nix-flatpak.nixosModules.nix-flatpak
         # home-manager.nixosModules.home-manager  {
         #   home-manager.useGlobalPkgs = true;
         #   home-manager.useUserPackages = true;
-        #   home-manager.users.nano = import ./home-manager.nix;
+        #   home-manager.users.nano = import ./home.nix;
         #   home-manager.backupFileExtension = "backup";
         # }
 
