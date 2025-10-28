@@ -4,7 +4,7 @@
   imports = [
     ./programs.nix
     ./services.nix
-    # ./flatpaks.nix
+    ./flatpaks.nix
   ];
   # User Packages
   users.users.nano.packages = with pkgs; [
@@ -21,7 +21,6 @@
     gearlever
     obsidian
     spotify
-    # stremio
     syncthing
     afetch
     p7zip
