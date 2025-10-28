@@ -6,10 +6,12 @@
   home.stateVersion = "25.05";
   home.packages = [
   ];
+
   # home.file = {
   #   ".bashrc".source = ./dotfiles/.bashrc;
   #   ".config/aliases.txt".source = ./dotfiles/aliases.txt;
   # };
+  
   programs.git = {
     enable = true;
     aliases = {
@@ -22,8 +24,16 @@
       push.autoSetupRemote = true;
     };
   };
+
   home.sessionVariables = {
     # EDITOR = "nvim";
   };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      icon-theme = "Yaru-blue";
+    };
+};
   programs.home-manager.enable = true;
 }
