@@ -25,7 +25,7 @@ theme-bg-next
 
 # Restart components to apply new theme
 pkill waybar
-waybar
+waybar &
 omarchy-restart-swayosd
 hyprctl reload
 pkill -SIGUSR2 btop
