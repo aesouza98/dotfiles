@@ -30,6 +30,7 @@
     # ".config/themes".source = ../../dot-config/themes;
     # ".config/walker".source = ../../dot-config/walker;
     ".config/waybar".source = ../../dot-config/waybar;
+    ".config/wofi".source = ../../dot-config/wofi;
     ".config/brave-flags.conf".source = ../../dot-config/brave-flags.conf;
 
     # Local

@@ -72,6 +72,7 @@
     bottles
     protonup
     hydralauncher
+    wofi
   ];
 
   environment.systemPackages = with pkgs; [
