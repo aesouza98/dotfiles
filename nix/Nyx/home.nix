@@ -34,6 +34,9 @@
       color-scheme = "prefer-dark";
       icon-theme = "Yaru-blue";
     };
-};
+  };
+
+  xdg.userDirs.enable = true;
+
   programs.home-manager.enable = true;
 }

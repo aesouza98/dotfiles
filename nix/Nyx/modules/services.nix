@@ -36,6 +36,9 @@
   # Auto Login
   services.getty.autologinUser = "nano";
 
+  # GVfs
+  services.gvfs.enable = true;
+
   # Garbage Collection
   nix.gc = {
     automatic = true;

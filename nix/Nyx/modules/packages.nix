@@ -69,9 +69,14 @@
     glib
     cargo
     nodejs_22
+    trash
   ];
 
   environment.systemPackages = with pkgs; [
+    xdg-user-dirs
+    xdg-user-dirs-gtk
+    gsettings-desktop-schemas
+    gvfs
   ];
 
   # nixpkgs.config.permittedInsecurePackages = [
