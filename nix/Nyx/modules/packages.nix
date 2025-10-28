@@ -75,7 +75,9 @@
     xdg-user-dirs
     xdg-user-dirs-gtk
     gsettings-desktop-schemas
-    gvfs
+    gnome.gvfs
+    localsearch
+    tinysparql
   ];
 
   # nixpkgs.config.permittedInsecurePackages = [

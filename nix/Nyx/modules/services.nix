@@ -36,8 +36,10 @@
   # Auto Login
   services.getty.autologinUser = "nano";
 
-  # GVfs
+  # Nautilus + GNOME
   services.gvfs.enable = true;
+  services.gnome.localsearch.enable = true;
+  services.gnome.tinysparql.enable = true;
 
   # Garbage Collection
   nix.gc = {
