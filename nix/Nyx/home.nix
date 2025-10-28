@@ -11,30 +11,30 @@
 
   home.file = {
     # ZSH
-    ".zshrc".source = ../../dot-zshrc;
-    ".zprofile".source = ../../dot-zprofile;
-    ".zshenv".source = ../../dot-zshenv;
+    # ".zshrc".source = ../../dot-zshrc;
+    # ".zprofile".source = ../../dot-zprofile;
+    # ".zshenv".source = ../../dot-zshenv;
 
     # Config
-    ".config/hypr".source = ../../dot-config/hypr;
-    ".config/btop".source = ../../dot-config/btop;
-    ".config/fish".source = ../../dot-config/fish;
-    ".config/ghostty".source = ../../dot-config/ghostty;
-    ".config/mako".source = ../../dot-config/mako;
-    ".config/nvim".source = ../../dot-config/nvim;
-    ".config/scripts".source = ../../dot-config/scripts;
-    ".config/shell".source = ../../dot-config/shell;
-    ".config/starship".source = ../../dot-config/starship;
-    ".config/swayosd".source = ../../dot-config/swayosd;
+    # ".config/hypr".source = ../../dot-config/hypr;
+    # ".config/btop".source = ../../dot-config/btop;
+    # ".config/fish".source = ../../dot-config/fish;
+    # ".config/ghostty".source = ../../dot-config/ghostty;
+    # ".config/mako".source = ../../dot-config/mako;
+    # ".config/nvim".source = ../../dot-config/nvim;
+    # ".config/scripts".source = ../../dot-config/scripts;
+    # ".config/shell".source = ../../dot-config/shell;
+    # ".config/starship".source = ../../dot-config/starship;
+    # ".config/swayosd".source = ../../dot-config/swayosd;
     # ".config/themes".source = ../../dot-config/themes;
     # ".config/walker".source = ../../dot-config/walker;
-    ".config/waybar".source = ../../dot-config/waybar;
-    ".config/wofi".source = ../../dot-config/wofi;
-    ".config/brave-flags.conf".source = ../../dot-config/brave-flags.conf;
+    # ".config/waybar".source = ../../dot-config/waybar;
+    # ".config/wofi".source = ../../dot-config/wofi;
+    # ".config/brave-flags.conf".source = ../../dot-config/brave-flags.conf;
 
     # Local
-    ".local/bin".source = ../../dot-local/bin;
-    ".local/share/fonts".source = ../../dot-local/share/fonts;
+    # ".local/bin".source = ../../dot-local/bin;
+    # ".local/share/fonts".source = ../../dot-local/share/fonts;
   };
 
   programs.git = {
