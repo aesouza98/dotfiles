@@ -1,6 +1,5 @@
 # Appearance
-#theme = Catppuccin Mocha
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 background-blur-radius = 20
 background-opacity = 0.98
 mouse-hide-while-typing = true
