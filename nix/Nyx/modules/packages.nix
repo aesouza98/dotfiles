@@ -21,7 +21,7 @@
     gearlever
     obsidian
     spotify
-    stremio
+    # stremio
     syncthing
     afetch
     p7zip
