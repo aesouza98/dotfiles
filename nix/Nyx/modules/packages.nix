@@ -75,6 +75,8 @@
     wofi
     nh
     pureref
+    zip
+    file-roller
   ];
 
   environment.systemPackages = with pkgs; [
