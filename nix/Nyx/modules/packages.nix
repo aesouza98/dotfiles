@@ -74,6 +74,7 @@
     hydralauncher
     wofi
     nh
+    pureref
   ];
 
   environment.systemPackages = with pkgs; [
