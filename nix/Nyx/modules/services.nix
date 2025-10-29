@@ -40,6 +40,9 @@
   services.gvfs.enable = true;
   services.gnome.localsearch.enable = true;
   services.gnome.tinysparql.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+  services.udisks2.enable = true;
 
   # Garbage Collection
   nix.gc = {
