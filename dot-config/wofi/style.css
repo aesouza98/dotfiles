@@ -1,4 +1,4 @@
-@import "../../.config/themes/current/waybar.css";
+@import ".config/themes/current/waybar.css";
 
 window {
   font-size: 12px;
