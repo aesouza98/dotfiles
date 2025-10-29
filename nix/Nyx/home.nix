@@ -68,7 +68,7 @@
     "$HOME/.config/scripts"
     "$HOME/.config/scripts/omanano/"
     "$HOME/.config/scripts/themes/"
-  ]
+  ];
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
