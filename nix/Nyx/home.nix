@@ -63,5 +63,7 @@
 
   xdg.userDirs.enable = true;
 
+  wayland.windowManager.hyprland.systemd.enable = true;
+
   programs.home-manager.enable = true;
 }
