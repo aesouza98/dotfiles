@@ -1,3 +1,7 @@
+# NixOS
+The configuration of NixOS is declared inside `nix/`.
+Apply them using `sudo nix-rebuild switch --flake ${FLAKE_PATH}`
+
 # Dotfiles
 Dotfiles managed by **GNU Stow**
 
