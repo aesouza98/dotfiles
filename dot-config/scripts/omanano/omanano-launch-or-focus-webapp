@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if (($# == 0)); then
+  echo "Usage: omanano-launch-or-focus-webapp [window-pattern] [url]"
+  exit 1
+fi
+
+exec omanano-launch-or-focus "$1" "omanano-launch-webapp '$2'"

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+omanano-restart-app swayosd-server

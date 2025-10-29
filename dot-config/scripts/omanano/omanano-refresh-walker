@@ -1,0 +1,4 @@
+#!/bin/bash
+
+omanano-refresh-config walker/config.toml
+omanano-restart-walker

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+omanano-refresh-config hypr/autostart.conf
+omanano-refresh-config hypr/bindings.conf
+omanano-refresh-config hypr/envs.conf
+omanano-refresh-config hypr/input.conf
+omanano-refresh-config hypr/hyprland.conf

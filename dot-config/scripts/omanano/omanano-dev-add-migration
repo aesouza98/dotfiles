@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ~/.local/share/omanano
+migration_file="$HOME/.local/share/omanano/migrations/$(git log -1 --format=%cd --date=unix).sh"
+touch $migration_file
+nvim $migration_file

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+omanano-refresh-config swayosd/config.toml
+omanano-refresh-config swayosd/style.css
+omanano-restart-swayosd

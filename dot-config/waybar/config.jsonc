@@ -68,7 +68,7 @@
     "format": "{:L%A, %d/%b %H:%M}",
     "format-alt": "{:L%d/%b/%Y}",
     "tooltip": false,
-    "on-click-right": "omarchy-cmd-tzupdate"
+    "on-click-right": "omanano-cmd-tzupdate"
   },
   "battery": {
     "format": "{capacity}% {icon}",
@@ -83,7 +83,7 @@
     "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
     "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
     "interval": 5,
-    "on-click": "omarchy-menu power",
+    "on-click": "omanano-menu power",
     "states": {
       "warning": 20,
       "critical": 10
@@ -134,11 +134,11 @@
   },
   "custom/menu": {
     "format": "󰍜 ",
-    "on-click": "omarchy-menu",
+    "on-click": "omanano-menu",
     "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
   },
   "custom/power": {
-    "on-click": "omarchy-menu system",
+    "on-click": "omanano-menu system",
     "format": "⏻ ",
     "tooltip-format": "System Menu\n\nSuper + Escape"
   },

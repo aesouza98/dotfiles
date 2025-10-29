@@ -1,0 +1,5 @@
+#!/bin/bash
+
+omanano-refresh-config waybar/config.jsonc
+omanano-refresh-config waybar/style.css
+omanano-restart-waybar

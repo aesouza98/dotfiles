@@ -66,7 +66,7 @@
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/.config/scripts"
-    "$HOME/.config/scripts/omarchy/"
+    "$HOME/.config/scripts/omanano/"
     "$HOME/.config/scripts/themes/"
   ]
 

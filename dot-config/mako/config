@@ -17,7 +17,7 @@ invisible=false
 default-timeout=0
 
 [summary~="Setup Wi-Fi"]
-on-button-left=exec sh -c 'omarchy-notification-dismiss "Setup Wi-Fi"; omarchy-launch-wifi'
+on-button-left=exec sh -c 'omanano-notification-dismiss "Setup Wi-Fi"; omanano-launch-wifi'
 
 [summary~="Update System"]
-on-button-left=exec sh -c 'omarchy-notification-dismiss "Update System"; omarchy-launch-floating-terminal-with-presentation omarchy-update'
+on-button-left=exec sh -c 'omanano-notification-dismiss "Update System"; omanano-launch-floating-terminal-with-presentation omanano-update'

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo cp -f ~/.local/share/omanano/default/pacman/mirrorlist /etc/pacman.d/mirrorlist

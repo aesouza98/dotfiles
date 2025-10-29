@@ -26,7 +26,7 @@ theme-bg-next
 # Restart components to apply new theme
 pkill waybar
 waybar &
-omarchy-restart-swayosd
+omanano-restart-swayosd
 hyprctl reload
 pkill -SIGUSR2 btop
 makoctl reload
