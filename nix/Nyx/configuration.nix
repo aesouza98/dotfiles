@@ -4,8 +4,8 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./system.nix
-      ./user.nix
+      ./modules/system.nix
+      ./modules/user.nix
     ];
 
   networking.hostName = "Nyx"; # Define your hostname.
