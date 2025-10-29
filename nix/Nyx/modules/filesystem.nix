@@ -7,6 +7,8 @@
     fsType = "ntfs-3g";
     options = [
       "defaults"
+      "nofail"
+      "x-systemd.device-timeout=1s"
     ];
   };
 
@@ -15,6 +17,8 @@
     fsType = "ntfs-3g";
     options = [
       "defaults"
+      "nofail"
+      "x-systemd.device-timeout=1s"
     ];
   };
 }
