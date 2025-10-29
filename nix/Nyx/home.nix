@@ -37,12 +37,17 @@
     # ".local/share/fonts".source = ../../dot-local/share/fonts;
   };
 
+  # Git Configs
   programs.git = {
     enable = true;
     settings = {
       alias = {
         st = "status";
-        lg = "log --oneline --graph --decorate";
+        # lg = "log --oneline --graph --decorate";
+        c = "commit -m";
+        lg = "log --color --graph --branches --all --decorate --oneline";
+        chb = "checkout -b";
+        ch = "checkout";
       };
       core.editor = "nvim";
       pull.rebase = true;
@@ -50,9 +55,20 @@
     };
   };
 
+  # Variables
   home.sessionVariables = {
-    # EDITOR = "nvim";
+    EDITOR = "nvim";
+    XDG_SCREENSHOTS_DIR = "~/Pictures/Screenshots/";
+    TERM = "xterm-256color";
   };
+
+  # User PATH
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/.config/scripts"
+    "$HOME/.config/scripts/omarchy/"
+    "$HOME/.config/scripts/themes/"
+  ]
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {

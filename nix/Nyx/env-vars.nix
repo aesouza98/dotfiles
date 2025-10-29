@@ -6,6 +6,7 @@
     PATH = "/run/current-system/sw/bin:/usr/bin";
   };
 
+  # User Variables -- not really user but I'm lazy and will fix this later
   environment.sessionVariables = {
     GTK_DEFAULT_COLOR_SCHEME = "prefer-dark";
     WLR_NO_HARDWARE_CURSORS = "1";

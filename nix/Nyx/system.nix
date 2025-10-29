@@ -27,9 +27,7 @@
     enable = true;
     enable32Bit = true;
   };
-
   services.xserver.videoDrivers = [ "nvidia" ];
-
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -42,7 +40,6 @@
   systemd.user.extraConfig = ''
     DefaultLimitNOFILE=1048576
   '';
-
   security.pam.loginLimits = [
     { domain = "@users"; type = "soft"; item = "nofile"; value = "1048576"; }
     { domain = "@users"; type = "hard"; item = "nofile"; value = "1048576"; }

@@ -6,6 +6,7 @@
     ./services.nix
     ./flatpaks.nix
   ];
+
   # User Packages
   users.users.nano.packages = with pkgs; [
 	  neovim
@@ -79,6 +80,7 @@
     file-roller
   ];
 
+  # System Packages
   environment.systemPackages = with pkgs; [
     xdg-user-dirs
     xdg-user-dirs-gtk
@@ -86,10 +88,6 @@
     gnome.gvfs
     localsearch
     tinysparql
-  ];
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
   ];
 
   # Allow unfree packages

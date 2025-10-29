@@ -30,12 +30,12 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.backupFileExtension = "backup";
           home-manager.users.nano = {
             imports = [
               ./Nyx/home.nix
             ];
           };
-          home-manager.backupFileExtension = "backup";
         }
       ];
     };
