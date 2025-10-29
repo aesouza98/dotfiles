@@ -2,6 +2,7 @@
 {
   imports = [
     ./env-vars.nix
+    ./filesystem.nix
   ];
 
   # Bootloader
