@@ -20,6 +20,7 @@ alias nnvim='NVIM_APPNAME=custom-nvim nvim'
 alias norg='nvim ~/notes'
 #alias vim='nvim'
 alias c='z'
+alias cd='z'
 #alias emacs='emacs -nw'
 
 #Others
