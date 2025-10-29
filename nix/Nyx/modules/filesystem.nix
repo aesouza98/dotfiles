@@ -3,7 +3,7 @@
 {
   boot.supportedFilesystems = [ "ntfs" ];
   fileSystems."/HDD" = {
-    device = "/dev/disk/by-uuid/b66e8b7d-3802-478f-830b-d65ecf6edef0";
+    device = "/dev/disk/by-uuid/347CF2B57CF270CA";
     fsType = "ntfs-3g";
     options = [
       "defaults"
@@ -13,7 +13,7 @@
   };
 
   fileSystems."/Windows" = {
-    device = "/dev/disk/by-uuid/bafac86a-3f16-4c24-9cfb-557af33ac40a";
+    device = "/dev/disk/by-uuid/9804F58404F565A2";
     fsType = "ntfs-3g";
     options = [
       "defaults"
