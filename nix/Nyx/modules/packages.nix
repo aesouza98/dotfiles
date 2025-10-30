@@ -80,6 +80,7 @@
 	  stow
     starship
     unzip
+    yazi
     zip
     zoxide
   ];
