@@ -31,7 +31,6 @@
         ./Nyx/configuration.nix
         ./Nyx/modules/install_pkgs.nix
         nix-flatpak.nixosModules.nix-flatpak
-        nixvim.nixosModules.nixvim
         home-manager.nixosModules.home-manager  {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -39,6 +38,7 @@
           home-manager.backupFileExtension = "backup";
           home-manager.users.nano = {
             imports = [
+              nixvim.homeModules.nixvim
               ./Nyx/home.nix
             ];
           };

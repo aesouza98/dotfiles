@@ -77,6 +77,7 @@
     };
   };
 
+  programs.nixvim.enable = true;
   programs.nixvim.imports = [ ./modules/nixvim/nixvim.nix ];
 
   xdg.userDirs.enable = true;
