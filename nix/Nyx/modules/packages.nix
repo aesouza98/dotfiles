@@ -1,96 +1,92 @@
-{ config, pkgs, ... }:
+{ pkgs }:
 
 {
-  imports = [
-    ./programs.nix
-    ./services.nix
-    ./flatpaks.nix
-  ];
-
-  # User Packages
-  users.users.nano.packages = with pkgs; [
-	  neovim
-	  ghostty
-	  git
-	  firefox
-	  stow
-    zoxide
-    starship
-    localsend
+  pkgs_hypr = with pkgs; [
     blueberry
-    brave
-    gearlever
-    obsidian
-    spotify
-    syncthing
-    afetch
-    p7zip
-    atuin
-    brightnessctl
-    diffutils
-    colordiff
-    docker
-    docker-compose
-    docker-buildx
-    egl-wayland
-    eza
-    ffmpeg_6-full
-    flatpak
-    gnome-calculator
-    imagemagick
-    jq
-    lazydocker
-    lazygit
-    rustc
-    sof-firmware
-    gcc
-    unzip
-    wine
-    winetricks
-    wine64
-    yarn
     grim
     hyprshot
     mako
-    nautilus
-    polkit_gnome
     swaybg
     swayosd
     waybar
     #walker
-    vimix-cursors
+    wofi
+  ];
+  pkgs_appearance = with pkgs; [
     adwaita-fonts
     adwaita-icon-theme
+    vimix-cursors
     yaru-theme
-    bat
-    fzf
-    fd
-    ripgrep
-    glib
-    cargo
-    nodejs_22
-    fastfetch
-    bottles
-    protonup
-    hydralauncher
-    wofi
-    nh
-    pureref
-    zip
-    file-roller
   ];
-
-  # System Packages
-  environment.systemPackages = with pkgs; [
-    xdg-user-dirs
-    xdg-user-dirs-gtk
+  pkgs_gnome = with pkgs; [
+    file-roller
+    # gnome.gvfs
     gsettings-desktop-schemas
-    gnome.gvfs
     localsearch
+    nautilus
     tinysparql
   ];
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
+  pkgs_dev = with pkgs; [
+    cargo
+    docker
+    docker-compose
+    docker-buildx
+    gcc
+	  git
+    glib
+    lazydocker
+    nodejs_22
+    rustc
+    yarn
+  ];
+  pkgs_gaming = with pkgs; [
+    bottles
+    hydralauncher
+    protonup
+    wine
+    wine64
+    winetricks
+  ];
+  pkgs_system = with pkgs; [
+    egl-wayland
+    ffmpeg_6-full
+    flatpak
+    imagemagick
+    polkit_gnome
+    sof-firmware
+    xdg-user-dirs
+    xdg-user-dirs-gtk
+  ];
+  pkgs_cli = with pkgs; [
+    afetch
+    atuin
+    bat
+    eza
+    fastfetch
+    fd
+    fzf
+	  ghostty
+    jq
+    lazygit
+	  neovim
+    nh
+    p7zip
+    ripgrep
+	  stow
+    starship
+    unzip
+    zip
+    zoxide
+  ];
+  pkgs_desktop = with pkgs; [
+    brave
+	  firefox
+    gearlever
+    gnome-calculator
+    localsend
+    obsidian
+    pureref
+    spotify
+    syncthing
+  ];
 }

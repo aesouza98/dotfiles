@@ -24,7 +24,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./Nyx/configuration.nix
-        ./Nyx/modules/packages.nix
+        ./Nyx/modules/install_pkgs.nix
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager  {
           home-manager.useGlobalPkgs = true;
