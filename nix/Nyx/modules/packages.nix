@@ -73,7 +73,7 @@
 	  ghostty
     jq
     lazygit
-	  neovim
+	  # neovim
     nh
     p7zip
     ripgrep
