@@ -17,8 +17,13 @@
       inputs.elephant.follows = "elephant";
     };
 
+   nixvim = {
+        url = "github:nix-community/nixvim";
+        inputs.nixpkgs.follows = "nixpkgs";
+   };
+
   };
-  outputs = { nixpkgs, nix-flatpak, home-manager, walker, elephant, ... }@inputs: {
+  outputs = { nixpkgs, nix-flatpak, home-manager, walker, elephant, nixvim, ... }@inputs: {
     nixosConfigurations.Nyx = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -26,6 +31,7 @@
         ./Nyx/configuration.nix
         ./Nyx/modules/install_pkgs.nix
         nix-flatpak.nixosModules.nix-flatpak
+        nixvim.nixosModules.nixvim
         home-manager.nixosModules.home-manager  {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
