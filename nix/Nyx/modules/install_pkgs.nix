@@ -17,6 +17,7 @@ in
     ++ groups.pkgs_appearance
     ++ groups.pkgs_gaming
     ++ groups.pkgs_gnome
+    ++ groups.pkgs_neovim
     ++ groups.pkgs_hypr;
 
 

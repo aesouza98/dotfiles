@@ -18,4 +18,11 @@
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
     NH_FLAKE = "\${HOME}/.dotfiles/nix";
   };
+
+  # LD Fixes
+  environment.variables.LD_LIBRARY_PATH = lib.makeLibraryPath [
+    pkgs.glibc
+    pkgs.zlib
+  ];
+
 }

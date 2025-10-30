@@ -32,9 +32,11 @@
     docker-compose
     docker-buildx
     gcc
+    gnumake
 	  git
     glib
     lazydocker
+    libgcc
     nodejs_22
     rustc
     yarn
@@ -51,11 +53,14 @@
     egl-wayland
     ffmpeg_6-full
     flatpak
+    glibc
     imagemagick
     polkit_gnome
     sof-firmware
+    stdenv.cc.cc.lib
     xdg-user-dirs
     xdg-user-dirs-gtk
+    zlib
   ];
   pkgs_cli = with pkgs; [
     afetch
@@ -77,6 +82,22 @@
     unzip
     zip
     zoxide
+  ];
+  pkgs_neovim = with pkgs; [
+    # Language servers
+    nil
+    lua-language-server
+    pyright
+    bash-language-server
+    rust-analyzer
+    typescript-language-server
+    gopls
+
+    # Formatters / linters
+    stylua
+    shfmt
+    black
+    prettier
   ];
   pkgs_desktop = with pkgs; [
     brave
