@@ -14,7 +14,7 @@ in{
     # ZSH
     ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshrc";
     ".zprofile".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zprofile";
-    ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshenv";
+    # ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshenv";
 
     # Config
     ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/hypr";
