@@ -28,7 +28,7 @@ in{
     ".config/starship".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/starship";
     ".config/swayosd".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/swayosd";
     ".config/themes".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/themes";
-    ".config/walker".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/walker";
+    # ".config/walker".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/walker";
     ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/waybar";
     ".config/wofi".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/wofi";
     ".config/brave-flags.conf".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/brave-flags.conf";
