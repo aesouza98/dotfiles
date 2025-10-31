@@ -1,6 +1,7 @@
 { config, inputs, pkgs, ... }:
-
-{
+let
+  dotfiles = "${config.home.homeDirectory}/.dotfiles";
+in{
   home.username = "nano";
   home.homeDirectory = "/home/nano";
   home.stateVersion = "25.05";
@@ -11,31 +12,31 @@
 
   home.file = {
     # ZSH
-    # ".zshrc".source = ../../dot-zshrc;
-    # ".zprofile".source = ../../dot-zprofile;
-    # ".zshenv".source = ../../dot-zshenv;
+    ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshrc";
+    ".zprofile".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zprofile";
+    ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshenv";
 
     # Config
-    # ".config/hypr".source = ../../dot-config/hypr;
-    # ".config/btop".source = ../../dot-config/btop;
-    # ".config/fish".source = ../../dot-config/fish;
-    # ".config/ghostty".source = ../../dot-config/ghostty;
-    # ".config/mako".source = ../../dot-config/mako;
-    # ".config/nvim".source = ../../dot-config/nvim;
-    # ".config/scripts".source = ../../dot-config/scripts;
-    # ".config/shell".source = ../../dot-config/shell;
-    # ".config/starship".source = ../../dot-config/starship;
-    # ".config/swayosd".source = ../../dot-config/swayosd;
-    # ".config/themes".source = ../../dot-config/themes;
-    # ".config/walker".source = ../../dot-config/walker;
-    # ".config/waybar".source = ../../dot-config/waybar;
-    # ".config/wofi".source = ../../dot-config/wofi;
-    # ".config/brave-flags.conf".source = ../../dot-config/brave-flags.conf;
+    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/hypr";
+    ".config/btop".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/btop";
+    ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/fish";
+    ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/ghostty";
+    ".config/mako".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/mako";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/nvim";
+    ".config/scripts".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/scripts";
+    ".config/shell".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/shell";
+    ".config/starship".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/starship";
+    ".config/swayosd".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/swayosd";
+    ".config/themes".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/themes";
+    ".config/walker".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/walker";
+    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/waybar";
+    ".config/wofi".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/wofi";
+    ".config/brave-flags.conf".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/brave-flags.conf";
 
     # Local
-    # ".local/bin".source = ../../dot-local/bin;
-    # ".local/share/fonts".source = ../../dot-local/share/fonts;
-  };
+    ".local/bin".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-local/bin";
+    ".local/share/fonts".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-local/share/fonts";
+      };
 
   # Variables
   home.sessionVariables = {
