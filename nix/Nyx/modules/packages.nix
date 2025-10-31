@@ -73,7 +73,6 @@
 	  ghostty
     jq
     lazygit
-	  # neovim
     nh
     p7zip
     ripgrep
@@ -86,6 +85,7 @@
     zoxide
   ];
   pkgs_neovim = with pkgs; [
+	  neovim
     # Language servers
     nil
     lua-language-server

@@ -17,13 +17,13 @@
       inputs.elephant.follows = "elephant";
     };
 
-   nixvim = {
-        url = "github:nix-community/nixvim";
-        inputs.nixpkgs.follows = "nixpkgs";
-   };
+   # nixvim = {
+   #      url = "github:nix-community/nixvim";
+   #      inputs.nixpkgs.follows = "nixpkgs";
+   # };
 
   };
-  outputs = { nixpkgs, nix-flatpak, home-manager, walker, elephant, nixvim, ... }@inputs: {
+  outputs = { nixpkgs, nix-flatpak, home-manager, walker, elephant, /*nixvim,*/ ... }@inputs: {
     nixosConfigurations.Nyx = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -38,7 +38,7 @@
           home-manager.backupFileExtension = "backup";
           home-manager.users.nano = {
             imports = [
-              nixvim.homeModules.nixvim
+              # nixvim.homeModules.nixvim
               ./Nyx/home.nix
             ];
           };
