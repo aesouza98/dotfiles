@@ -39,6 +39,7 @@
           home-manager.users.nano = {
             imports = [
               # nixvim.homeModules.nixvim
+              inputs.walker.homeManagerModules.default
               ./Nyx/home.nix
             ];
           };

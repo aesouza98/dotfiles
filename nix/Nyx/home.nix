@@ -5,10 +5,10 @@ in{
   home.username = "nano";
   home.homeDirectory = "/home/nano";
   home.stateVersion = "25.05";
-  home.packages = [
-    inputs.walker.packages.${pkgs.system}.default
-    inputs.elephant.packages.${pkgs.system}.elephant-with-providers
-  ];
+  # home.packages = [
+  #   inputs.walker.packages.${pkgs.system}.default
+  #   inputs.elephant.packages.${pkgs.system}.default
+  # ];
 
   home.file = {
     # ZSH
@@ -82,10 +82,16 @@ in{
   # programs.nixvim.imports = [ ./modules/nixvim/nixvim.nix ];
   # programs.nixvim.defaultEditor = true;
   # programs.nixvim.vimdiffAlias = true;
+  
+  # Walker
+  programs.walker.enable = true;
 
+  # Setup Default UserDirs
   xdg.userDirs.enable = true;
 
+  # Hyprland with systemd
   wayland.windowManager.hyprland.systemd.enable = true;
 
+  # Enable Home-manager
   programs.home-manager.enable = true;
 }
