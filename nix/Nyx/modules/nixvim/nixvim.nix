@@ -4,6 +4,8 @@
 {
   imports = [
     ./colorschemes.nix
+    ./options.nix
+    ./keymaps.nix
   ];
 
   plugins = {

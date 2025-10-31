@@ -79,6 +79,8 @@
 
   programs.nixvim.enable = true;
   programs.nixvim.imports = [ ./modules/nixvim/nixvim.nix ];
+  programs.nixvim.defaultEditor = true;
+  programs.nixvim.vimdiffAlias = true;
 
   xdg.userDirs.enable = true;
 

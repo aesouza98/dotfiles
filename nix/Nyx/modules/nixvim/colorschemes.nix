@@ -1,5 +1,4 @@
 { lib, ... }:
-# { lib, helper, config, options, ... }:
 
 {
   # Colorschemes
