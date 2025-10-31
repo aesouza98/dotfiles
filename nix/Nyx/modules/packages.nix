@@ -5,6 +5,7 @@
     blueberry
     grim
     hyprshot
+    libnotify
     mako
     swaybg
     swayosd
