@@ -10,6 +10,7 @@
 
   plugins = {
     lualine.enable = true;
+    neo-tree.enable = true;
   };
 }
 
