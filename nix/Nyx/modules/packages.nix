@@ -76,12 +76,15 @@
 	  ghostty
     jq
     lazygit
+    libvirt
     nh
     p7zip
+    qemu
     ripgrep
 	  stow
     starship
     unzip
+    virt-manager
     wl-clipboard
     yazi
     zip
