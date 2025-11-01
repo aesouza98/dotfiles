@@ -65,6 +65,8 @@
   ];
   pkgs_cli = with pkgs; [
     afetch
+    ansible
+    ansible-lint
     atuin
     bat
     eza
