@@ -90,8 +90,9 @@ in{
   # Walker
   programs.walker.enable = true;
 
-  # Setup Default UserDirs
+  # XDG
   xdg.userDirs.enable = true;
+  xdg.configFile."mimeapps.list".force = true
 
   # Hyprland with systemd
   wayland.windowManager.hyprland.systemd.enable = true;
