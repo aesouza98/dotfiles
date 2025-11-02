@@ -6,8 +6,8 @@ global_argument_delimiter = "#"                                             # qu
 exact_search_prefix = "'"                                                   # disable fuzzy searching
 theme = "current"                                                   # theme to use
 disable_mouse = false                                                       # disable mouse (on input and list only)
-additional_theme_location = "~/.config/themes/current/"
-# additional_theme_location = "~/.config/walker/themes/"
+# additional_theme_location = "~/.config/themes/current/"
+additional_theme_location = "~/.config/walker/themes/"
 
 [shell]
 anchor_top = true
