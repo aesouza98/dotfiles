@@ -5,7 +5,7 @@
   users.users.nano = {
     isNormalUser = true;
     description = "Adriano";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.zsh;
   };
 
@@ -18,4 +18,6 @@
       init.defaultBranch = "master";
     };
   };
+
+  users.groups.libvirtd.members = ["nano"];
 }

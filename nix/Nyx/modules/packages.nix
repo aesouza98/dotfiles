@@ -84,7 +84,9 @@
 	  stow
     starship
     unzip
+    vi
     virt-manager
+    wget
     wl-clipboard
     yazi
     zip

@@ -20,4 +20,8 @@
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
 
+  # VirtManager
+  programs.virt-manager.enable = true;
+  virtualisation.libvirtd.enable = true;
+
 }

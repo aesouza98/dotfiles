@@ -58,6 +58,10 @@ in{
       color-scheme = "prefer-dark";
       icon-theme = "Yaru-blue";
     };
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
   };
 
   # Git Configs
