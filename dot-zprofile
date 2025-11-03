@@ -1,4 +1,4 @@
-[ -f ~/.profile ] && source ~/.profile
+[ -f ~/.config/shell/profile ] && source ~/.config/shell/profile
 
 # BEGIN ANSIBLE MANAGED BLOCK
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
