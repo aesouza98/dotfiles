@@ -92,7 +92,6 @@ in{
 
   # XDG
   xdg.userDirs.enable = true;
-  xdg.configFile."mimeapps.list".force = true
 
   # Hyprland with systemd
   wayland.windowManager.hyprland.systemd.enable = true;
