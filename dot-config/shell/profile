@@ -1,0 +1,5 @@
+# Managed by Ansible
+      export PATH="/home/nano/.local/bin:$PATH"
+      export PATH="/home/nano/.config/scripts:$PATH"
+      export PATH="/home/nano/.config/scripts/omanano:$PATH"
+      export PATH="/home/nano/.config/scripts/themes:$PATH"
