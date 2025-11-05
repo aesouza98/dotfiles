@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+nixChannel="25.05"
+
+find_browser() {
+    # Ordem de prioridade
+    browsers=("brave")
+
+    # Captura janelas via Niri
+    windows=$(niri msg --json windows | jq -r '.[] | "\(.app_id) \(.id)"')
+
+    for b in "${browsers[@]}"; do
+        id=$(echo "$windows" | awk -v app="$b" '$1==app {print $2}' | head -n1)
+        if [[ -n "$id" ]]; then
+            echo "$id"
+            return
+        fi
+    done
+}
+
+open_url() {
+    local url="$1"
+    browser_id=$(find_browser)
+
+    # Foca navegador se houver
+    [[ -n "$browser_id" ]] && niri msg action focus-window --id="$browser_id" &
+
+    # Abre URL
+    xdg-open "$url" >/dev/null 2>&1 &
+}
+
+run_search() {
+    fuzzelInput="$(fuzzel --lines 0 --prompt 'search: ' --dmenu | sed 's/[[:space:]]*$//')"
+
+    [[ -z "$fuzzelInput" ]] && exit 0
+
+    if [[ "$fuzzelInput" == "!d" ]]; then
+        url="https://draw.oleina.xyz"
+
+    elif [[ "$fuzzelInput" == "!nix "* ]]; then
+        query="${fuzzelInput#* }"
+        url="https://search.nixos.org/packages?channel=${nixChannel}&from=0&size=50&sort=relevance&type=packages&query=${query}"
+
+    elif [[ "$fuzzelInput" == "!home "* ]]; then
+        query="${fuzzelInput#* }"
+        url="https://home-manager-options.extranix.com/?query=${query}&release=release-${nixChannel}"
+
+    elif [[ "$fuzzelInput" == "!gh "* ]]; then
+        query="${fuzzelInput#* }"
+
+        # Suporte a e:<ext>
+        ext=$(echo "$query" | grep -o "e:[A-Za-z0-9]*" | sed 's/e://')
+        clean_query=$(echo "$query" | sed 's/e:[A-Za-z0-9]*//')
+
+        if [[ -n "$ext" ]]; then
+            url="https://github.com/search?q=%22${clean_query}%22+path%3A*.${ext}&type=code"
+        else
+            url="https://github.com/search?q=%22${clean_query}%22&type=code"
+        fi
+
+    else
+        url="https://www.google.com/search?q=${fuzzelInput}"
+    fi
+
+    open_url "$url"
+}
+
+case "$1" in
+    search|"") run_search ;;
+    *) echo "Unknown command" ;;
+esac
+
