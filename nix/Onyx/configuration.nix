@@ -8,7 +8,7 @@
       ./modules/user.nix
     ];
 
-  networking.hostName = "Nyx"; # Define your hostname.
+  networking.hostName = "Onyx"; # Define your hostname.
 
   # Networking
   networking.networkmanager.enable = true;

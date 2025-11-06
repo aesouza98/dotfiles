@@ -24,12 +24,12 @@
 
   };
   outputs = { nixpkgs, nix-flatpak, home-manager, walker, elephant, /*nixvim,*/ ... }@inputs: {
-    nixosConfigurations.Nyx = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.Onyx = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
-        ./Nyx/configuration.nix
-        ./Nyx/modules/install_pkgs.nix
+        ./Onyx/configuration.nix
+        ./Onyx/modules/install_pkgs.nix
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager  {
           home-manager.useGlobalPkgs = true;
@@ -40,7 +40,7 @@
             imports = [
               # nixvim.homeModules.nixvim
               inputs.walker.homeManagerModules.default
-              ./Nyx/home.nix
+              ./Onyx/home.nix
             ];
           };
         }
