@@ -41,6 +41,10 @@ run_search() {
         query="${fuzzelInput#* }"
         url="https://search.nixos.org/packages?channel=${nixChannel}&from=0&size=50&sort=relevance&type=packages&query=${query}"
 
+    elif [[ "$fuzzelInput" == "!mynix "* ]]; then
+        query="${fuzzelInput#* }"
+        url="https://mynixos.com/search?q=${query}"
+
     elif [[ "$fuzzelInput" == "!home "* ]]; then
         query="${fuzzelInput#* }"
         url="https://home-manager-options.extranix.com/?query=${query}&release=release-${nixChannel}"
@@ -59,7 +63,7 @@ run_search() {
         fi
 
     else
-        url="https://www.google.com/search?q=${fuzzelInput}"
+        url="https://search.brave.com/search?q=${fuzzelInput}"
     fi
 
     open_url "$url"
