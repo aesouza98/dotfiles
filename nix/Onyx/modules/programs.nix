@@ -49,6 +49,7 @@
       libxcb
       freetype
       fontconfig
+      icu
     ];
   };
 

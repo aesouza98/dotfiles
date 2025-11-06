@@ -91,6 +91,7 @@
     fish
     fzf
 	  ghostty
+    gum
     impala
     jq
     lazygit
