@@ -23,6 +23,7 @@
     wl-clip-persist
     wl-clipboard
     wofi
+    xwayland-sattellite
   ];
   pkgs_appearance = with pkgs; [
     adwaita-fonts
