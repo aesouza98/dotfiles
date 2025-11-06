@@ -23,7 +23,15 @@
    # };
 
   };
-  outputs = { nixpkgs, nix-flatpak, home-manager, walker, elephant, /*nixvim,*/ ... }@inputs: {
+  outputs = {
+    nixpkgs,
+    nix-flatpak,
+    home-manager,
+    walker,
+    elephant,
+    /*nixvim,*/
+    ...
+  }@inputs: {
     nixosConfigurations.Onyx = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };

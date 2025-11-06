@@ -6,8 +6,6 @@ in{
   home.homeDirectory = "/home/nano";
   home.stateVersion = "25.05";
   # home.packages = [
-  #   inputs.walker.packages.${pkgs.system}.default
-  #   inputs.elephant.packages.${pkgs.system}.default
   # ];
 
   home.file = {
@@ -82,11 +80,6 @@ in{
       push.autoSetupRemote = true;
     };
   };
-
-  # programs.nixvim.enable = true;
-  # programs.nixvim.imports = [ ./modules/nixvim/nixvim.nix ];
-  # programs.nixvim.defaultEditor = true;
-  # programs.nixvim.vimdiffAlias = true;
   
   # Walker
   programs.walker.enable = true;
