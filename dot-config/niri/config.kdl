@@ -32,6 +32,8 @@ layout {
 
   center-focused-column "never"
 
+  background-color "transparent"
+
   preset-column-widths {
       // proportion 0.33333
       proportion 0.5
@@ -76,10 +78,7 @@ layout {
   }
 }
 
-spawn-at-startup "waybar"
 spawn-at-startup "fcitx5"
-spawn-at-startup "mako"
-spawn-at-startup "swaybg -i ~/.config/themes/current/wallpaper -m fill"
 spawn-at-startup "swayosd-server"
 spawn-at-startup "elephant"
 spawn-at-startup "walker --gapplication-service"
@@ -95,15 +94,8 @@ prefer-no-csd
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-// Animation settings.
-// The wiki explains how to configure individual animations:
-// https://yalter.github.io/niri/Configuration:-Animations
 animations {
-    // Uncomment to turn off all animations.
-    // off
 
-    // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
 }
 
 // https://variety4me.github.io/niri_docs/Configuration-Window-Rules/
@@ -122,6 +114,21 @@ window-rule {
 window-rule {
   match title="org.gnome.Nautilus"
   open-floating true
+}
+
+// Make the wallpaper stationary, rather than moving with workspaces.
+layer-rule {
+    // This is for swaybg; change for other wallpaper tools.
+    // Find the right namespace by running niri msg layers.
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+// Optionally, disable the workspace shadows in the overview.
+overview {
+    workspace-shadow {
+        off
+    }
 }
 
 /-window-rule {
@@ -144,27 +151,46 @@ binds {
 
   Mod+Shift+Slash { show-hotkey-overlay; }
 
+  // Launchers
   Mod+RETURN hotkey-overlay-title="Terminal" { spawn "ghostty"; }
   Mod+D hotkey-overlay-title="Application Launcher" { spawn "fuzzel"; }
-  Mod+S hotkey-overlay-title="Application Launcher" { spawn "fuzzel-search"; }
-  Mod+ESCAPE hotkey-overlay-title="Energy Menu" { spawn-sh "omanano-menu system"; }
+  Mod+S hotkey-overlay-title="Search..." { spawn "fuzzel-search"; }
+
+  // Applications
   Mod+B hotkey-overlay-title="Open Browser" { spawn "brave"; }
-  Mod+E hotkey-overlay-title="Open File Browser" { spawn "nautilus"; }
+  Mod+E { spawn "nautilus"; }
+  Mod+O { spawn "obsidian"; }
+  Mod+M { spawn "spotify"; }
+
+  // System
   Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+  Mod+ESCAPE hotkey-overlay-title="Energy Menu" { spawn-sh "omanano-menu system"; }
 
-  Mod+Shift+G hotkey-overlay-title="Launch WhatsApp" { spawn-sh "omanano-launch-webapp 'https://web.whatsapp.com/'";}
-  Mod+Shift+A hotkey-overlay-title="Launch ChatGPT" { spawn-sh "omanano-launch-webapp 'https://chatgpt.com/'";}
+  // Web Apps
+  Mod+Shift+G { spawn-sh "omanano-launch-webapp 'https://web.whatsapp.com/'";}
+  Mod+Shift+A { spawn-sh "omanano-launch-webapp 'https://chatgpt.com/'";}
 
-  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-  XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-  XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+  // Media Keys
+  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +2"; }
+  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume -2"; }
+  XF86AudioMute        allow-when-locked=true { spawn-sh "swayosd-client --output-volume mute-toggle"; }
+  XF86AudioMicMute     allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
+  Mod+F1               allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
 
+
+  XF86AudioNext        allow-when-locked=true { spawn-sh "swayosd-client --playerctl next"; }
+  XF86AudioPause       allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
+  XF86AudioPlay        allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
+  XF86AudioPrev        allow-when-locked=true { spawn-sh "swayosd-client --playerctl previous"; }
+
+  // Brightness
   XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
   XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
-  Mod+O repeat=false { toggle-overview; }
+  // Overview
+  Ctrl+Up repeat=false { toggle-overview; }
 
+  // Window Management
   Mod+W repeat=false { close-window; }
 
   Mod+Left  { focus-column-left; }
