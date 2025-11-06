@@ -6,5 +6,5 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
     zoxide init fish | source
     source ~/.config/shell/aliases
-    source (/usr/bin/starship init fish --print-full-init | psub)
+    source (starship init fish --print-full-init | psub)
 end

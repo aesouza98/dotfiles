@@ -114,6 +114,16 @@ window-rule {
   open-focused false
 }
 
+window-rule {
+  match title="LocalSend"
+  open-floating true
+}
+
+window-rule {
+  match title="org.gnome.Nautilus"
+  open-floating true
+}
+
 /-window-rule {
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     block-out-from "screen-capture"
@@ -137,7 +147,9 @@ binds {
   Mod+RETURN hotkey-overlay-title="Terminal" { spawn "ghostty"; }
   Mod+D hotkey-overlay-title="Application Launcher" { spawn "fuzzel"; }
   Mod+S hotkey-overlay-title="Application Launcher" { spawn "fuzzel-search"; }
+  Mod+ESCAPE hotkey-overlay-title="Energy Menu" { spawn-sh "omanano-menu system"; }
   Mod+B hotkey-overlay-title="Open Browser" { spawn "brave"; }
+  Mod+E hotkey-overlay-title="Open File Browser" { spawn "nautilus"; }
   Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
   Mod+Shift+G hotkey-overlay-title="Launch WhatsApp" { spawn-sh "omanano-launch-webapp 'https://web.whatsapp.com/'";}
@@ -318,7 +330,7 @@ binds {
   //
   // The allow-inhibiting=false property can be applied to other binds as well,
   // which ensures niri always processes them, even when an inhibitor is active.
-  Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+  Mod+Shift+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
   // The quit action will show a confirmation dialog to avoid accidental exits.
   Mod+Shift+E { quit; }

@@ -14,7 +14,7 @@ in{
     # ZSH
     ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshrc";
     ".zprofile".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zprofile";
-    # ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshenv";
+    ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshenv";
 
     # Config
     ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/hypr";
@@ -22,6 +22,7 @@ in{
     ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/fish";
     ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/ghostty";
     ".config/mako".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/mako";
+    ".config/niri".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/niri";
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/nvim";
     ".config/scripts".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/scripts";
     ".config/shell".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/shell";

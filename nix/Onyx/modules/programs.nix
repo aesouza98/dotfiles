@@ -32,6 +32,11 @@
     enable = true;
   };
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # UWSM
   programs.uwsm.enable = true;
 

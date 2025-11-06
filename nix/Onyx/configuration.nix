@@ -12,7 +12,6 @@
 
   # Networking
   networking.networkmanager.enable = true;
-  networking.wireless.iwd.enable = true;
 
   # Timezone
   time.timeZone = "America/Sao_Paulo";

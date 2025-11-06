@@ -6,8 +6,8 @@
   // Modules
   "modules-left": [
     "custom/menu",
-    "hyprland/workspaces",
-    "custom/spotify"
+    "hyprland/workspaces"
+    //"custom/spotify"
   ],
   "modules-center": [
     "clock"
