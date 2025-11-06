@@ -3,14 +3,25 @@
 {
   pkgs_hypr = with pkgs; [
     blueberry
+    cliphist
     grim
+    fcitx5
+    fcitx5-gtk
+    fuzzel
+    kdePackages.fcitx5-qt
+    hyprlock
     hyprshot
     libnotify
     mako
+    pavucontrol
+    pamixer
     swaybg
     swayosd
     waybar
     #walker
+    wiremix
+    wl-clip-persist
+    wl-clipboard
     wofi
   ];
   pkgs_appearance = with pkgs; [
@@ -22,6 +33,8 @@
   pkgs_gnome = with pkgs; [
     file-roller
     # gnome.gvfs
+    gnome-calculator
+    gnome-keyring
     gsettings-desktop-schemas
     localsearch
     nautilus
@@ -68,17 +81,21 @@
     ansible
     ansible-lint
     atuin
+    bash-completion
     bat
     eza
     fastfetch
     fd
+    fish
     fzf
 	  ghostty
+    impala
     jq
     lazygit
     libvirt
     nh
     p7zip
+    parted
     qemu
     ripgrep
 	  stow
@@ -86,7 +103,6 @@
     unzip
     virt-manager
     wget
-    wl-clipboard
     yazi
     zip
     zoxide
@@ -109,6 +125,7 @@
     prettier
   ];
   pkgs_desktop = with pkgs; [
+    bitwarden-desktop
     brave
 	  firefox
     gearlever

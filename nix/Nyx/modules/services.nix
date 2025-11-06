@@ -36,6 +36,14 @@
   # Auto Login
   services.getty.autologinUser = "nano";
 
+  # SDDM
+  services.displayManager = {
+    sddm.enable = true;
+    sddm.wayland.enable = true;
+    # theme = "${pkgs.sddm-chili-theme}/share/sddm/themes/chili";
+    theme = "${pkgs.sddm-sugar-dark}/share/sddm/themes/sugar-dark";
+  };
+
   # Nautilus + GNOME
   services.gvfs.enable = true;
   services.gnome.localsearch.enable = true;

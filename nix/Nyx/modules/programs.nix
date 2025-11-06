@@ -12,12 +12,35 @@
 	  xwayland.enable = true;
   };
 
+  programs.niri = {
+    enable = true;
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+
+  programs.fish = {
+      enable = true;
+      generateCompletions = true;
+    };
+
+  programs.evince = {
+    enable = true;
+  };
+
   # UWSM
   programs.uwsm.enable = true;
 
   # Steam
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+
   programs.gamemode.enable = true;
 
   # VirtManager
