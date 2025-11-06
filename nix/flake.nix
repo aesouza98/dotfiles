@@ -29,7 +29,6 @@
     home-manager,
     walker,
     elephant,
-    /*nixvim,*/
     ...
   }@inputs: {
     nixosConfigurations.Onyx = nixpkgs.lib.nixosSystem {
