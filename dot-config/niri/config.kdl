@@ -53,7 +53,7 @@ layout {
   border {
       off
 
-      width 4
+      width 2
 
       active-color "#ffc87f"
       inactive-color "#505050"
@@ -176,7 +176,6 @@ binds {
   XF86AudioMute        allow-when-locked=true { spawn-sh "swayosd-client --output-volume mute-toggle"; }
   XF86AudioMicMute     allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
   Mod+F1               allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
-
 
   XF86AudioNext        allow-when-locked=true { spawn-sh "swayosd-client --playerctl next"; }
   XF86AudioPause       allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }

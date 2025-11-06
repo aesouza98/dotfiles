@@ -37,6 +37,21 @@
     openFirewall = true;
   };
 
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib
+      glibc
+      zlib
+      libice
+      libsm
+      libx11
+      libxcb
+      freetype
+      fontconfig
+    ];
+  };
+
   # UWSM
   programs.uwsm.enable = true;
 

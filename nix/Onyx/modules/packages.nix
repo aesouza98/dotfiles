@@ -15,6 +15,7 @@
     mako
     pavucontrol
     pamixer
+    playerctl
     swaybg
     swayosd
     waybar
@@ -23,7 +24,7 @@
     wl-clip-persist
     wl-clipboard
     wofi
-    xwayland-sattellite
+    xwayland-satellite
   ];
   pkgs_appearance = with pkgs; [
     adwaita-fonts
