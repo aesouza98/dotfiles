@@ -40,26 +40,28 @@ in {
   # ];
 
   # ZSH
-  xdg.configFile =
-    (builtins.mapAttrs (name: subpath: {
-        source = create_symlink "${dotfiles}/";
-        recursive = false;
-      })
-      zsh)
-    //
-    # Config
-    (builtins.mapAttrs (name: subpath: {
-        source = create_symlink "${dotfiles}/dot-config/${subpath}";
-        recursive = true;
-      })
-      dot-config)
+  home.file =
+    {
+      ".zshrc".source = create_symlink "${dotfiles}/dot-zshrc";
+      ".zshenv".source = create_symlink "${dotfiles}/dot-zshenv";
+      ".zprofile".source = create_symlink "${dotfiles}/dot-zprofile";
+    }
     //
     # Local
     (builtins.mapAttrs (name: subpath: {
+        target = ".local/${subpath}";
         source = create_symlink "${dotfiles}/dot-local/${subpath}";
         recursive = true;
       })
       dot-local);
+
+  xdg.configFile =
+    # Config
+    builtins.mapAttrs (name: subpath: {
+      source = create_symlink "${dotfiles}/dot-config/${subpath}";
+      recursive = true;
+    })
+    dot-config;
 
   # Variables
   home.sessionVariables = {
