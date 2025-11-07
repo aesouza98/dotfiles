@@ -1,4 +1,4 @@
-[ -f ~/.config/shell/profile ] && source ~/.config/shell/profile
+#[ -f ~/.config/shell/profile ] && source ~/.config/shell/profile
 
 # BEGIN ANSIBLE_UWSM_AUTOSTART
 # Start Hyprland on TTY1 only

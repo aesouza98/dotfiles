@@ -4,7 +4,7 @@ input {
   keyboard {
     xkb {
           layout "us"
-          variant "intl"
+          variant "alt-intl"
     }
   }
 
@@ -167,8 +167,8 @@ binds {
   Mod+ESCAPE hotkey-overlay-title="Energy Menu" { spawn-sh "omanano-menu system"; }
 
   // Web Apps
-  Mod+Shift+G { spawn-sh "omanano-launch-webapp 'https://web.whatsapp.com/'";}
-  Mod+Shift+A { spawn-sh "omanano-launch-webapp 'https://chatgpt.com/'";}
+  Mod+Shift+A { spawn-sh "~/.local/share/applications/chatgpt.desktop"; }
+  Mod+Shift+G { spawn-sh "~/.local/share/applications/whatsapp.desktop"; }
 
   // Media Keys
   XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +2"; }
