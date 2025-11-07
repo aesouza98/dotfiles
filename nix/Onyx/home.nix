@@ -16,7 +16,7 @@
     niri = "niri";
     hypr = "hypr";
     btop = "btop";
-    ghotty = "ghostty";
+    ghostty = "ghostty";
     mako = "mako";
     fish = "fish";
     shell = "shell";
