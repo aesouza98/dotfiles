@@ -102,21 +102,35 @@
     zoxide
   ];
   pkgs_neovim = with pkgs; [
-	  neovim
-    # Language servers
-    nil
-    lua-language-server
-    pyright
+    neovim
+  
+    # LSPs
     bash-language-server
-    rust-analyzer
-    typescript-language-server
-    gopls
+    pyright
+    lua-language-server
+    yaml-language-server
+    vscode-json-languageserver
+    nil
+    dockerfile-language-server-nodejs
+    sqls
+    marksman
 
-    # Formatters / linters
+    # Formatters
     stylua
-    shfmt
     black
+    shfmt
     prettier
+    alejandra
+    sqlfluff
+
+    # Linters
+    shellcheck
+    ruff
+    yamllint
+    tflint
+    ansible-lint
+    hadolint
+    markdownlint-cli
   ];
   pkgs_desktop = with pkgs; [
     bitwarden-desktop
