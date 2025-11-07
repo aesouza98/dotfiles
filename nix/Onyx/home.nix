@@ -1,41 +1,64 @@
-{ config, inputs, pkgs, ... }:
-let
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}: let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
-in{
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  zsh = {
+    zshrc = ".zshrc";
+    zshenv = ".zshenv";
+    zprofile = ".zprofile";
+  };
+  dot-config = {
+    nvim = "nvim";
+    niri = "niri";
+    hypr = "hypr";
+    btop = "btop";
+    ghotty = "ghostty";
+    mako = "mako";
+    fish = "fish";
+    scripts = "scripts";
+    starship = "starship";
+    swayosd = "swayosd";
+    themes = "themes";
+    waybar = "waybar";
+    wofi = "wofi";
+  };
+  dot-local = {
+    bin = "bin";
+    fonts = "share/fonts";
+    applications = "share/applications";
+  };
+in {
   home.username = "nano";
   home.homeDirectory = "/home/nano";
   home.stateVersion = "25.05";
   # home.packages = [
   # ];
 
-  home.file = {
-    # ZSH
-    ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshrc";
-    ".zprofile".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zprofile";
-    ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-zshenv";
-
+  # ZSH
+  xdg.configFile =
+    (builtins.mapAttrs (name: subpath: {
+        source = create_symlink "${dotfiles}/";
+        recursive = false;
+      })
+      zsh)
+    //
     # Config
-    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/hypr";
-    ".config/btop".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/btop";
-    ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/fish";
-    ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/ghostty";
-    ".config/mako".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/mako";
-    ".config/niri".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/niri";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/nvim";
-    ".config/scripts".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/scripts";
-    ".config/shell".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/shell";
-    ".config/starship".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/starship";
-    ".config/swayosd".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/swayosd";
-    ".config/themes".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/themes";
-    # ".config/walker".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/walker";
-    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/waybar";
-    ".config/wofi".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/wofi";
-    ".config/brave-flags.conf".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-config/brave-flags.conf";
-
+    (builtins.mapAttrs (name: subpath: {
+        source = create_symlink "${dotfiles}/dot-config/${subpath}";
+        recursive = true;
+      })
+      dot-config)
+    //
     # Local
-    ".local/bin".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-local/bin";
-    ".local/share/fonts".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/dot-local/share/fonts";
-      };
+    (builtins.mapAttrs (name: subpath: {
+        source = create_symlink "${dotfiles}/dot-local/${subpath}";
+        recursive = true;
+      })
+      dot-local);
 
   # Variables
   home.sessionVariables = {
@@ -80,7 +103,7 @@ in{
       push.autoSetupRemote = true;
     };
   };
-  
+
   # Walker
   programs.walker.enable = true;
 

@@ -111,7 +111,7 @@
     yaml-language-server
     vscode-json-languageserver
     nil
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     sqls
     marksman
 
