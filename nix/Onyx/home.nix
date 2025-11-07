@@ -6,11 +6,7 @@
 }: let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-  zsh = {
-    zshrc = ".zshrc";
-    zshenv = ".zshenv";
-    zprofile = ".zprofile";
-  };
+
   dot-config = {
     nvim = "nvim";
     niri = "niri";
