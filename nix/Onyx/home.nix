@@ -19,6 +19,7 @@
     ghotty = "ghostty";
     mako = "mako";
     fish = "fish";
+    shell = "shell";
     scripts = "scripts";
     starship = "starship";
     swayosd = "swayosd";
