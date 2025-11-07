@@ -6,7 +6,7 @@
     isNormalUser = true;
     description = "Adriano";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
-    shell = pkgs.zsh;
+    shell = config.lib.mkDefault pkgs.zsh;
   };
 
   # Git Config

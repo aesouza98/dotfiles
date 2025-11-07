@@ -34,7 +34,7 @@
   };
 
   # Auto Login
-  services.getty.autologinUser = "nano";
+  services.getty.autologinUser = config.lib.mkDefault "nano";
 
   # SDDM
   services.displayManager = {

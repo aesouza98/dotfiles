@@ -35,8 +35,8 @@
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
-        ./Onyx/configuration.nix
-        ./Onyx/modules/install_pkgs.nix
+        ./hosts/Onyx/configuration.nix
+        ./modules/install_pkgs.nix
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager  {
           home-manager.useGlobalPkgs = true;
@@ -47,7 +47,7 @@
             imports = [
               # nixvim.homeModules.nixvim
               inputs.walker.homeManagerModules.default
-              ./Onyx/home.nix
+              ./hosts/Onyx/home.nix
             ];
           };
         }
