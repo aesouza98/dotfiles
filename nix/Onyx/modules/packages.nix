@@ -5,15 +5,11 @@
     blueberry
     cliphist
     grim
-    fcitx5
-    fcitx5-gtk
     fuzzel
-    kdePackages.fcitx5-qt
     hyprlock
     hyprshot
     libnotify
     mako
-    pavucontrol
     pamixer
     playerctl
     sddm-sugar-dark
@@ -24,7 +20,7 @@
     wiremix
     wl-clip-persist
     wl-clipboard
-    wofi
+    # wofi
     xwayland-satellite
   ];
   pkgs_appearance = with pkgs; [
@@ -35,25 +31,23 @@
   ];
   pkgs_gnome = with pkgs; [
     file-roller
-    # gnome.gvfs
-    gnome-calculator
     gnome-keyring
     gsettings-desktop-schemas
-    localsearch
+    # localsearch
     nautilus
-    tinysparql
+    # tinysparql
   ];
   pkgs_dev = with pkgs; [
     cargo
     docker
     docker-compose
     docker-buildx
-    gcc
-    gnumake
+    # gcc
+    # gnumake
 	  git
-    glib
+    # glib
     lazydocker
-    libgcc
+    # libgcc
     nodejs_22
     rustc
     yarn
@@ -62,7 +56,6 @@
     bottles
     hydralauncher
     protonup
-    wine
     wine64
     winetricks
   ];
@@ -70,19 +63,18 @@
     egl-wayland
     ffmpeg_6-full
     flatpak
-    glibc
-    imagemagick
+    # glibc
+    # imagemagick
     polkit_gnome
     sof-firmware
-    stdenv.cc.cc.lib
+    # stdenv.cc.cc.lib
     xdg-user-dirs
     xdg-user-dirs-gtk
-    zlib
+    # zlib
   ];
   pkgs_cli = with pkgs; [
-    afetch
-    ansible
-    ansible-lint
+    # ansible
+    # ansible-lint
     atuin
     bash-completion
     bat
@@ -93,22 +85,20 @@
     fzf
 	  ghostty
     gum
-    impala
     jq
     lazygit
     libvirt
     nh
-    p7zip
     parted
     qemu
     ripgrep
 	  stow
     starship
+    unrar
     unzip
     virt-manager
     wget
     yazi
-    zip
     zoxide
   ];
   pkgs_neovim = with pkgs; [
