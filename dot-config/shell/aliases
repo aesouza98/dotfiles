@@ -20,7 +20,8 @@ alias vim='nvim'
 alias cd='z'
 
 #NixOS
-alias nx=" nvim ~/.dotfiles/nix/"
+alias nx="nvim ~/.dotfiles/nix/"
+alias lg="lazygit"
 
 #Others
 alias ping='ping -i 0.2'
