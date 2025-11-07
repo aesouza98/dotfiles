@@ -1,13 +1,13 @@
 # Managed by Ansible
 
 export EDITOR="nvim"
-export GTK_DEFAULT_COLOR_SCHEME="prefer-dark"
-export WLR_NO_HARDWARE_CURSORS="1"
-export XCURSOR_THEME="Yaru"
-export XCURSOR_SIZE="24"
+#export GTK_DEFAULT_COLOR_SCHEME="prefer-dark"
+#export WLR_NO_HARDWARE_CURSORS="1"
+#export XCURSOR_THEME="Yaru"
+#export XCURSOR_SIZE="24"
 # BEGIN ANSIBLE MANAGED: NVIDIA ENV VARS
 # NVIDIA environment overrides
-export GBM_BACKEND="nvidia-drm"
-export LIBVA_DRIVER_NAME="nvidia"
-export __GLX_VENDOR_LIBRARY_NAME="nvidia"
+#export GBM_BACKEND="nvidia-drm"
+#export LIBVA_DRIVER_NAME="nvidia"
+#export __GLX_VENDOR_LIBRARY_NAME="nvidia"
 # END ANSIBLE MANAGED: NVIDIA ENV VARS
