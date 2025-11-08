@@ -6,60 +6,57 @@
 }: let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  dot-config = {
+    nvim = "nvim";
+    niri = "niri";
+    hypr = "hypr";
+    btop = "btop";
+    ghostty = "ghostty";
+    mako = "mako";
+    fish = "fish";
+    shell = "shell";
+    scripts = "scripts";
+    starship = "starship";
+    swayosd = "swayosd";
+    themes = "themes";
+    waybar = "waybar";
+    wofi = "wofi";
+  };
+  dot-local = {
+    bin = "bin";
+    fonts = "share/fonts";
+    applications = "share/applications";
+  };
 in {
-  let
-    dot-config = {
-      nvim = "nvim";
-      niri = "niri";
-      hypr = "hypr";
-      btop = "btop";
-      ghostty = "ghostty";
-      mako = "mako";
-      fish = "fish";
-      shell = "shell";
-      scripts = "scripts";
-      starship = "starship";
-      swayosd = "swayosd";
-      themes = "themes";
-      waybar = "waybar";
-      wofi = "wofi";
-    };
-    dot-local = {
-      bin = "bin";
-      fonts = "share/fonts";
-      applications = "share/applications";
-    };
-  in {
-    home.username = config.lib.mkDefault "nano";
-    home.homeDirectory = config.lib.mkDefault "/home/nano";
-    home.stateVersion = "25.05";
-    # home.packages = [
-    # ];
+  home.username = "nano";
+  home.homeDirectory = "/home/nano";
+  home.stateVersion = "25.05";
+  # home.packages = [
+  # ];
 
-    # ZSH
-    home.file =
-      {
-        ".zshrc".source = create_symlink "${dotfiles}/dot-zshrc";
-        ".zshenv".source = create_symlink "${dotfiles}/dot-zshenv";
-        ".zprofile".source = create_symlink "${dotfiles}/dot-zprofile";
-      }
-      //
-      # Local
-      (builtins.mapAttrs (name: subpath: {
-          target = ".local/${subpath}";
-          source = create_symlink "${dotfiles}/dot-local/${subpath}";
-          recursive = true;
-        })
-        dot-local);
-
-    xdg.configFile =
-      # Config
-      builtins.mapAttrs (name: subpath: {
-        source = create_symlink "${dotfiles}/dot-config/${subpath}";
+  # ZSH
+  home.file =
+    {
+      ".zshrc".source = create_symlink "${dotfiles}/dot-zshrc";
+      ".zshenv".source = create_symlink "${dotfiles}/dot-zshenv";
+      ".zprofile".source = create_symlink "${dotfiles}/dot-zprofile";
+    }
+    //
+    # Local
+    (builtins.mapAttrs (name: subpath: {
+        target = ".local/${subpath}";
+        source = create_symlink "${dotfiles}/dot-local/${subpath}";
         recursive = true;
       })
-      dot-config;
-  };
+      dot-local);
+
+  xdg.configFile =
+    # Config
+    builtins.mapAttrs (name: subpath: {
+      source = create_symlink "${dotfiles}/dot-config/${subpath}";
+      recursive = true;
+    })
+    dot-config;
 
   # Variables
   home.sessionVariables = {

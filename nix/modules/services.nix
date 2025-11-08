@@ -34,7 +34,7 @@
   };
 
   # Auto Login
-  services.getty.autologinUser = config.lib.mkDefault "nano";
+  services.getty.autologinUser = "nano";
 
   # SDDM
   services.displayManager = {
@@ -55,6 +55,6 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 15d";
+    options = "--delete-older-than 7d";
   };
 }

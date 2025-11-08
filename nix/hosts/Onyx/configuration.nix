@@ -8,13 +8,13 @@
       ../../modules/user.nix
     ];
 
-  networking.hostName = config.lib.mkDefault "Onyx"; # Define your hostname.
+  networking.hostName = "Onyx"; # Define your hostname.
 
   # Networking
   networking.networkmanager.enable = true;
 
   # Timezone
-  time.timeZone = config.lib.mkDefault "America/Sao_Paulo";
+  time.timeZone = "America/Sao_Paulo";
 
   # Locales
   i18n.defaultLocale = "en_US.UTF-8";
