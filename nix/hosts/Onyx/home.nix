@@ -65,7 +65,7 @@ in {
     GTK_DEFAULT_COLOR_SCHEME = "prefer-dark";
     XCURSOR_THEME = "Yaru";
     XCURSOR_SIZE = "24";
-    # WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
     # Nvidia
     GBM_BACKEND = "nvidia-drm";
     LIBVA_DRIVER_NAME = "nvidia";
