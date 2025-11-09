@@ -29,15 +29,16 @@ in {
   home.username = "nano";
   home.homeDirectory = "/home/nano";
   home.stateVersion = "25.05";
+  programs.zsh.enable = true;
   # home.packages = [
   # ];
 
   # ZSH
   home.file =
     {
-      ".zshrc".source = create_symlink "${dotfiles}/dot-zshrc";
-      ".zshenv".source = create_symlink "${dotfiles}/dot-zshenv";
-      ".zprofile".source = create_symlink "${dotfiles}/dot-zprofile";
+      # ".zshrc".source = create_symlink "${dotfiles}/dot-zshrc";
+      # ".zshenv".source = create_symlink "${dotfiles}/dot-zshenv";
+      # ".zprofile".source = create_symlink "${dotfiles}/dot-zprofile";
     }
     //
     # Local
@@ -65,7 +66,7 @@ in {
     GTK_DEFAULT_COLOR_SCHEME = "prefer-dark";
     XCURSOR_THEME = "Yaru";
     XCURSOR_SIZE = "24";
-    WLR_NO_HARDWARE_CURSORS = "1";
+    # WLR_NO_HARDWARE_CURSORS = "1";
     # Nvidia
     GBM_BACKEND = "nvidia-drm";
     LIBVA_DRIVER_NAME = "nvidia";

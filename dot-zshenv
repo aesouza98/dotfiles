@@ -1,4 +1,4 @@
-[ -f ~/.config/shell/envs ] && source ~/.config/shell/envs
+#[ -f ~/.config/shell/envs ] && source ~/.config/shell/envs
 #
 #export XDG_SCREENSHOTS_DIR=~/Imagens/Screenshots/
 #export EDITOR=nvim
