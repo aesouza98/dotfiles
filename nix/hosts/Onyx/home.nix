@@ -60,6 +60,7 @@ in {
   # Variables
   home.sessionVariables = {
     EDITOR = "nvim";
+    TERMINAL = "ghostty";
     XDG_SCREENSHOTS_DIR = "~/Pictures/Screenshots/";
     TERM = "xterm-256color";
     # Appearance
