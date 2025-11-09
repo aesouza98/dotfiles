@@ -43,6 +43,7 @@
     theme = "${pkgs.sddm-sugar-dark}/share/sddm/themes/sugar-dark";
     # theme = "${pkgs.sddm-chili-theme}/share/sddm/themes/chili";
   };
+  security.pam.services.sddm.enableGnomeKeyring = true;
 
   # Nautilus + GNOME
   services.gvfs.enable = true;
