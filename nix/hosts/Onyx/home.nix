@@ -1,7 +1,5 @@
 {
   config,
-  inputs,
-  pkgs,
   ...
 }: let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
@@ -25,7 +23,7 @@
   dot-local = {
     bin = "bin";
     fonts = "share/fonts";
-    applications = "share/applications";
+    hidden = "share/applications/hidden";
   };
 in {
   home.username = "nano";

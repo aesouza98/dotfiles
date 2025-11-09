@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
   # Flatpaks
   services.flatpak.packages = [

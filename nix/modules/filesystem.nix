@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
   boot.supportedFilesystems = [ "ntfs" ];
   fileSystems."/HDD" = {
