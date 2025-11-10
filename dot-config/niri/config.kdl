@@ -155,7 +155,7 @@ binds {
 
   // System
   Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-  Mod+ESCAPE hotkey-overlay-title="Energy Menu" { spawn-sh "omanano-menu system"; }
+  Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn "fuzzel-powermenu"; }
 
   // Web Apps
   Mod+Shift+A { spawn-sh "~/.local/share/applications/chatgpt.desktop"; }
@@ -178,7 +178,7 @@ binds {
   XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
   // Overview
-  Ctrl+Up repeat=false { toggle-overview; }
+  Mod+A repeat=false { toggle-overview; }
 
   // Window Management
   Mod+W repeat=false { close-window; }

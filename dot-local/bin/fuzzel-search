@@ -49,6 +49,10 @@ run_search() {
         query="${fuzzelInput#* }"
         url="https://home-manager-options.extranix.com/?query=${query}&release=release-${nixChannel}"
 
+    elif [[ "$fuzzelInput" == "!yt "* ]]; then
+        query="${fuzzelInput#* }"
+        url="https://youtube.com/results?search_query=${query}"
+
     elif [[ "$fuzzelInput" == "!gh "* ]]; then
         query="${fuzzelInput#* }"
 
