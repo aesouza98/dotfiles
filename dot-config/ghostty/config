@@ -1,5 +1,5 @@
 # Appearance
-theme = Catppuccin Mocha
+theme = TokyoNight Night
 background-blur-radius = 20
 background-opacity = 0.98
 mouse-hide-while-typing = true
