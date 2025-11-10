@@ -117,11 +117,14 @@
 
     # Formatters
     stylua
-    black
+    # black
     shfmt
     prettier
-    alejandra
+    # alejandra
     sqlfluff
+    nixfmt
+    biome
+    python313Packages.flake8
 
     # Linters
     shellcheck

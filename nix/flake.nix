@@ -17,42 +17,44 @@
       inputs.elephant.follows = "elephant";
     };
 
-   # nixvim = {
-   #      url = "github:nix-community/nixvim";
-   #      inputs.nixpkgs.follows = "nixpkgs";
-   # };
+    # nixvim = {
+    #      url = "github:nix-community/nixvim";
+    #      inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
   };
-  outputs = {
-    nixpkgs,
-    nix-flatpak,
-    home-manager,
-    walker,
-    elephant,
-    ...
-  }@inputs: {
-    nixosConfigurations.Onyx = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./hosts/Onyx/configuration.nix
-        ./modules/install_pkgs.nix
-        nix-flatpak.nixosModules.nix-flatpak
-        home-manager.nixosModules.home-manager  {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.backupFileExtension = "backup";
-          home-manager.users.nano = {
-            imports = [
-              # nixvim.homeModules.nixvim
-              inputs.walker.homeManagerModules.default
-              ./hosts/Onyx/home.nix
-            ];
-          };
-        }
-      ];
+  outputs =
+    {
+      nixpkgs,
+      nix-flatpak,
+      home-manager,
+      walker,
+      elephant,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.Onyx = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/Onyx/configuration.nix
+          ./modules/install_pkgs.nix
+          nix-flatpak.nixosModules.nix-flatpak
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.backupFileExtension = "backup";
+            home-manager.users.nano = {
+              imports = [
+                # nixvim.homeModules.nixvim
+                inputs.walker.homeManagerModules.default
+                ./hosts/Onyx/home.nix
+              ];
+            };
+          }
+        ];
+      };
     };
-  };
 }
-
