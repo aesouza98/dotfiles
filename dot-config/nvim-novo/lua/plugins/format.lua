@@ -26,8 +26,6 @@ return {
 			},
 			formatters_by_ft = {
 				python = { "flake8" },
-				javascript = { "eslint" },
-				typescript = { "eslint" },
 				sh = { "shellcheck" },
 				css = { "biome-check" },
 				html = { "biome-check" },
@@ -40,9 +38,9 @@ return {
 				-- ["markdown.mdx"] = { "prettier", "markdownlint", "markdown-toc" },
 			},
 			format_on_save = {
-			     lsp_fallback = true,
-			     async = false,
-			     timeout_ms = 1000,
+				lsp_fallback = true,
+				async = false,
+				timeout_ms = 1000,
 			},
 		})
 
