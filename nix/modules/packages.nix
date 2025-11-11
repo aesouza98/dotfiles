@@ -42,12 +42,12 @@
     docker
     docker-compose
     docker-buildx
-    # gcc
-    # gnumake
+    gcc
+    gnumake
 	  git
     # glib
     lazydocker
-    # libgcc
+    libgcc
     nodejs_22
     rustc
     yarn
@@ -142,9 +142,11 @@
     gearlever
     gnome-calculator
     localsend
+    mpv
     obsidian
     pureref
     spotify
     syncthing
+    vlc
   ];
 }
