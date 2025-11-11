@@ -31,46 +31,6 @@ return {
 				speed = 500,
 			})
 
-			-- Clue system for hints and tips
-			require("mini.clue").setup({
-				clues = {
-					-- Built-in operators
-					{ mode = "n", keys = "d", desc = "Delete" },
-					{ mode = "n", keys = "y", desc = "Yank" },
-					{ mode = "n", keys = "c", desc = "Change" },
-
-					-- Visual mode variants
-					{ mode = "v", keys = "d", desc = "Delete" },
-					{ mode = "v", keys = "y", desc = "Yank" },
-					{ mode = "v", keys = "c", desc = "Change" },
-
-					-- Other groups (like g, z, leader) if needed
-					require("mini.clue").gen_clues.builtin_completion(),
-					require("mini.clue").gen_clues.g(),
-					require("mini.clue").gen_clues.marks(),
-					require("mini.clue").gen_clues.registers(),
-					require("mini.clue").gen_clues.windows(),
-					require("mini.clue").gen_clues.z(),
-				},
-				triggers = {
-					-- Add which key prefixes you want hints for
-					{ mode = "n", keys = "d" },
-					{ mode = "n", keys = "y" },
-					{ mode = "n", keys = "c" },
-					{ mode = "v", keys = "d" },
-					{ mode = "v", keys = "y" },
-					{ mode = "v", keys = "c" },
-
-					-- Common groups
-					{ mode = "n", keys = "<Leader>" },
-					{ mode = "n", keys = "g" },
-					{ mode = "n", keys = "z" },
-					{ mode = "n", keys = '"' },
-					{ mode = "n", keys = "'" },
-					{ mode = "n", keys = "<C-w>" },
-				},
-			})
-
 			require("mini.operators").setup({})
 
 			-- Bracket Navigation
