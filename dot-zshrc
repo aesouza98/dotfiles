@@ -31,6 +31,7 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light olets/zsh-abbr
+zinit light Aloxaf/fzf-tab
 
 # Define Aliases
 source ~/.config/shell/aliases

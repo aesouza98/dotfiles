@@ -16,19 +16,10 @@ alias grep='rg'
 alias ggrep='rg --no-ignore-vcs'
 alias cat='bat -pp'
 alias bat='bat --style=auto'
-alias nnvim='NVIM_APPNAME=custom-nvim nvim'
-alias norg='nvim ~/notes'
-#alias vim='nvim'
-alias c='z'
+alias vim='nvim'
+alias lvim='NVIM_APPNAME=lazynvim nvim'
 alias cd='z'
-#alias emacs='emacs -nw'
 
 #Others
 alias ping='ping -i 0.2'
-
-#Programs
-#alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-# Docker
-alias rmc="docker container ls -a | grep -v CONTAINER | awk '{print \$1}' | xargs docker container rm"
-alias rmi="docker image ls -a | grep -v REPOSITORY | awk '{print \$3}' | xargs docker image rm"
+alias lg='lazygit'
