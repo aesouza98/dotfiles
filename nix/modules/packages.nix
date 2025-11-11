@@ -30,11 +30,13 @@
     yaru-theme
   ];
   pkgs_gnome = with pkgs; [
+    eog
     file-roller
     gnome-keyring
     gsettings-desktop-schemas
     # localsearch
     nautilus
+    sushi
     # tinysparql
   ];
   pkgs_dev = with pkgs; [
@@ -44,7 +46,8 @@
     docker-buildx
     gcc
     gnumake
-	  git
+    go
+    git
     # glib
     lazydocker
     libgcc
@@ -52,13 +55,7 @@
     rustc
     yarn
   ];
-  pkgs_gaming = with pkgs; [
-    bottles
-    hydralauncher
-    protonup
-    wine64
-    winetricks
-  ];
+  pkgs_gaming = with pkgs; [ bottles hydralauncher protonup wine64 winetricks ];
   pkgs_system = with pkgs; [
     egl-wayland
     ffmpeg_6-full
@@ -83,7 +80,7 @@
     fd
     fish
     fzf
-	  ghostty
+    ghostty
     gum
     jq
     lazygit
@@ -92,7 +89,7 @@
     parted
     qemu
     ripgrep
-	  stow
+    stow
     starship
     unrar
     unzip
@@ -103,7 +100,7 @@
   ];
   pkgs_neovim = with pkgs; [
     neovim
-  
+
     # LSPs
     bash-language-server
     pyright
@@ -138,7 +135,7 @@
   pkgs_desktop = with pkgs; [
     bitwarden-desktop
     brave
-	  firefox
+    firefox
     gearlever
     gnome-calculator
     localsend
