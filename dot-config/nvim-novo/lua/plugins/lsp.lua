@@ -1,51 +1,28 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = {
-			"mason-org/mason.nvim",
-			"mason-org/mason-lspconfig.nvim",
-			"hrsh7th/cmp-nvim-lsp", -- for completion capabilities
-		},
+		dependencies = { "hrsh7th/cmp-nvim-lsp" },
 		config = function()
 			local lspconfig = require("lspconfig")
-			local mason = require("mason")
-			local mason_lspconfig = require("mason-lspconfig")
 
-			mason.setup()
-			mason_lspconfig.setup({
-				ensure_installed = {
-					"bashls",
-					"pyright",
-					"lua_ls",
-					"yamlls",
-					"jsonls",
-					"terraformls",
-					"nil_ls",
-					"dockerls",
-					"ansiblels",
-					"sqls",
-					"marksman",
-				},
-			})
-
-			-- Diagnostic appearance
+			-- Diagnostics appearance
 			vim.diagnostic.config({
 				float = { border = "rounded" },
 				virtual_text = { prefix = "●" },
 				severity_sort = true,
 			})
 
-			-- Borders around LSP popups
-			local _border = "rounded"
+			-- Borders for LSP popups
+			local border = "rounded"
 			local handlers = {
-				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = _border }),
-				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = _border }),
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
 			}
 
-			-- Capabilities (for nvim-cmp)
+			-- Capabilities (for completion)
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			-- Common on_attach (keymaps, etc.)
+			-- Common keymaps for all LSPs
 			local on_attach = function(_, bufnr)
 				local opts = { buffer = bufnr, silent = true }
 				local map = vim.keymap.set
@@ -55,13 +32,15 @@ return {
 				map("n", "gi", vim.lsp.buf.implementation, opts)
 				map("n", "<leader>rn", vim.lsp.buf.rename, opts)
 				map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-				map("n", "<leader>f", function()
+				map("n", "<leader>cf", function()
 					vim.lsp.buf.format({ async = true })
 				end, opts)
 			end
 
-			-- Server-specific configs
+			-- Define your servers and any custom settings
 			local servers = {
+				bashls = {},
+				pyright = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -72,22 +51,25 @@ return {
 				},
 				yamlls = {
 					settings = {
-						yaml = {
-							keyOrdering = false,
-						},
+						yaml = { keyOrdering = false },
 					},
 				},
+				jsonls = {},
+				terraformls = {},
+				nil_ls = {},
+				dockerls = {},
+				ansiblels = {},
+				sqls = {},
+				marksman = {},
 			}
 
-			-- mason_lspconfig.setup_handlers({
-			-- 	function(server_name)
-			-- 		local config = servers[server_name] or {}
-			-- 		config.capabilities = capabilities
-			-- 		config.on_attach = on_attach
-			-- 		config.handlers = handlers
-			-- 		lspconfig[server_name].setup(config)
-			-- 	end,
-			-- })
+			-- Setup each LSP manually
+			for name, config in pairs(servers) do
+				config.capabilities = capabilities
+				config.on_attach = on_attach
+				config.handlers = handlers
+				lspconfig[name].setup(config)
+			end
 		end,
 	},
 }
