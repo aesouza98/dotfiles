@@ -42,6 +42,7 @@ return {
 					},
 				},
 			}
+			-- TODO: Add Lazynvim Keymaps
 			-- Keymaps:
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy Find Files" })
 			vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Fuzzy Find Git Files" })
