@@ -6,8 +6,8 @@
   # hyprland + uwsm
   programs.hyprland = {
     enable = true;
-	  withUWSM = true;
-	  xwayland.enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
   };
 
   programs.niri = {
@@ -22,9 +22,9 @@
   };
 
   programs.fish = {
-      enable = true;
-      generateCompletions = true;
-    };
+    enable = true;
+    generateCompletions = true;
+  };
 
   programs.evince = {
     enable = true;
@@ -49,5 +49,6 @@
   # VirtManager
   programs.virt-manager.enable = true;
   virtualisation.libvirtd.enable = true;
+  virtualisation.waydroid.enable = true;
 
 }

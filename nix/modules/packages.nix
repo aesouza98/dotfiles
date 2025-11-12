@@ -155,5 +155,6 @@
     syncthing
     vlc
     waydroid
+    waydroid-helper
   ];
 }
