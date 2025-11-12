@@ -16,8 +16,8 @@ alias grep='rg'
 alias ggrep='rg --no-ignore-vcs'
 alias cat='bat -pp'
 alias bat='bat --style=auto'
-alias vim='NVIM_APPNAME=nvim-novo nvim'
-alias lvim='nvim'
+alias vim='nvim'
+alias lvim='NVIM_APPNAME=lazynvim nvim'
 alias cd='z'
 
 #NixOS
