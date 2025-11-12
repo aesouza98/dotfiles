@@ -51,7 +51,9 @@
     # glib
     lazydocker
     libgcc
+    luarocks
     nodejs_22
+    python313Packages.pip
     rustc
     yarn
   ];
