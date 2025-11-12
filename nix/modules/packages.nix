@@ -53,11 +53,18 @@
     libgcc
     luarocks
     nodejs_22
-    python313Packages.pip
+    python313
+    ruby
     rustc
     yarn
   ];
-  pkgs_gaming = with pkgs; [ bottles hydralauncher protonup wine64 winetricks ];
+  pkgs_gaming = with pkgs; [
+    bottles
+    hydralauncher
+    protonup
+    wine64
+    winetricks
+  ];
   pkgs_system = with pkgs; [
     egl-wayland
     ffmpeg_6-full
