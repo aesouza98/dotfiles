@@ -6,7 +6,7 @@
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   dot-config = {
     nvim = "nvim";
-    nvim-novo = "nvim-novo";
+    lazynvim = "lazynvim";
     niri = "niri";
     hypr = "hypr";
     btop = "btop";

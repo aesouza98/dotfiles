@@ -154,5 +154,6 @@
     spotify
     syncthing
     vlc
+    waydroid
   ];
 }
