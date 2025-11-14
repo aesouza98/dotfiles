@@ -12,11 +12,28 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernelModules = [
+    "ip_tables"
+    "iptable_filter"
+    "iptable_nat"
+    "x_tables"
+    "nf_nat"
+    "xt_conntrack"
+    "xt_MASQUERADE"
+  ];
+
+  # networking.firewall.enable = false;
+
   # Sudo NOPASSWD
   security.sudo.extraRules = [
     {
       groups = [ "wheel" ];
-      commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
     }
   ];
 
@@ -42,7 +59,17 @@
     DefaultLimitNOFILE=1048576
   '';
   security.pam.loginLimits = [
-    { domain = "@users"; type = "soft"; item = "nofile"; value = "1048576"; }
-    { domain = "@users"; type = "hard"; item = "nofile"; value = "1048576"; }
+    {
+      domain = "@users";
+      type = "soft";
+      item = "nofile";
+      value = "1048576";
+    }
+    {
+      domain = "@users";
+      type = "hard";
+      item = "nofile";
+      value = "1048576";
+    }
   ];
 }
