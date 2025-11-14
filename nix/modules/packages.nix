@@ -66,17 +66,18 @@
     winetricks
   ];
   pkgs_system = with pkgs; [
+    # glibc
+    # imagemagick
+    # stdenv.cc.cc.lib
+    # zlib
     egl-wayland
     ffmpeg_6-full
     flatpak
-    # glibc
-    # imagemagick
+    iptables
     polkit_gnome
     sof-firmware
-    # stdenv.cc.cc.lib
     xdg-user-dirs
     xdg-user-dirs-gtk
-    # zlib
   ];
   pkgs_cli = with pkgs; [
     # ansible
@@ -98,8 +99,8 @@
     parted
     qemu
     ripgrep
-    stow
     starship
+    stow
     unrar
     unzip
     virt-manager
