@@ -16,7 +16,10 @@
 
   # Networking
   networking.networkmanager.enable = true;
-  networking.nftables.enable = true;
+  # networking.nftables.enable = true;
+
+  networking.nftables.enable = false;
+  networking.firewall.package = pkgs.iptables-legacy;
 
   # Timezone
   time.timeZone = "America/Sao_Paulo";

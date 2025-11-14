@@ -12,18 +12,6 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.kernelModules = [
-    "ip_tables"
-    "iptable_filter"
-    "iptable_nat"
-    "x_tables"
-    "nf_nat"
-    "xt_conntrack"
-    "xt_MASQUERADE"
-  ];
-
-  # networking.firewall.enable = false;
-
   # Sudo NOPASSWD
   security.sudo.extraRules = [
     {
