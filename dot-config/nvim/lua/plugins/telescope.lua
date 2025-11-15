@@ -44,19 +44,19 @@ return {
 			}
 			-- TODO: Add Lazynvim Keymaps
 			-- Keymaps:
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy Find Files" })
-			vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Fuzzy Find Git Files" })
-			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep files" })
-			vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Grep files" })
-			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Navigate through buffers" })
-			vim.keymap.set("n", "<leader>fB", builtin.git_branches, { desc = "Branches of current Repo" })
-			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help commands" })
-			vim.keymap.set("n", "<leader>fd", function()
-				builtin.find_files({
-					find_command = { "fd", "--type", "d", "--hidden", "--no-ignore" },
-					prompt_title = " Find Directories",
-				})
-			end, { desc = "Find Directories" })
+			-- 	vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy Find Files" })
+			-- 	vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Fuzzy Find Git Files" })
+			-- 	vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep files" })
+			-- 	vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Grep files" })
+			-- 	vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Navigate through buffers" })
+			-- 	vim.keymap.set("n", "<leader>fB", builtin.git_branches, { desc = "Branches of current Repo" })
+			-- 	vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help commands" })
+			-- 	vim.keymap.set("n", "<leader>fd", function()
+			-- 		builtin.find_files({
+			-- 			find_command = { "fd", "--type", "d", "--hidden", "--no-ignore" },
+			-- 			prompt_title = " Find Directories",
+			-- 		})
+			-- 	end, { desc = "Find Directories" })
 		end,
 		vim.keymap.set("n", "<leader>Ut", "<cmd>Telescope themes<cr>", { desc = "Change Theme" }),
 	},
