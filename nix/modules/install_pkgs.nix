@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 let
   groups = import ./packages.nix { inherit pkgs; };
@@ -9,9 +9,11 @@ in
     ./programs.nix
     ./services.nix
     ./flatpaks.nix
+    ./gnome.nix
+    ./plasma.nix
   ];
 
- # User Packages
+  # User Packages
   users.users.nano.packages =
     groups.pkgs_desktop
     ++ groups.pkgs_appearance
@@ -20,12 +22,8 @@ in
     ++ groups.pkgs_neovim
     ++ groups.pkgs_hypr;
 
-
   # System Packages
-  environment.systemPackages =
-    groups.pkgs_cli
-    ++ groups.pkgs_dev
-    ++ groups.pkgs_system;
+  environment.systemPackages = groups.pkgs_cli ++ groups.pkgs_dev ++ groups.pkgs_system;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
