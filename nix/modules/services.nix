@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Syncthing
@@ -11,17 +11,27 @@
     overrideFolders = true;
     settings = {
       devices = {
-        "Android" = { id = "2N7HH65-PAXR4UT-GKHUXK7-OL7XX3F-PMYJUDF-SHCAKEI-FBWROBP-QMUDKAU"; };
-        "Macbook" = { id = "YRARYBI-XXO5B7A-HHICYVF-ZCYOTQM-GOVYHZN-ZOGMRKL-3P46ICL-EMRLIQV"; }; 
+        "Android" = {
+          id = "2N7HH65-PAXR4UT-GKHUXK7-OL7XX3F-PMYJUDF-SHCAKEI-FBWROBP-QMUDKAU";
+        };
+        "Macbook" = {
+          id = "YRARYBI-XXO5B7A-HHICYVF-ZCYOTQM-GOVYHZN-ZOGMRKL-3P46ICL-EMRLIQV";
+        };
       };
       folders = {
         "vrdlp-sapw7" = {
           path = "~/Documents/Obsidian/VaultPessoal";
-          devices = [ "Android" "Macbook" ];
+          devices = [
+            "Android"
+            "Macbook"
+          ];
         };
         "zi4ss-myz7c" = {
           path = "~/Documents/Obsidian/EbanxVault/";
-          devices = [ "Android" "Macbook" ];
+          devices = [
+            "Android"
+            "Macbook"
+          ];
         };
       };
     };
@@ -38,11 +48,12 @@
 
   # SDDM
   services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
+    enable = lib.mkDefault true;
+    wayland.enable = lib.mkDefault true;
     theme = "${pkgs.sddm-sugar-dark}/share/sddm/themes/sugar-dark";
     # theme = "${pkgs.sddm-chili-theme}/share/sddm/themes/chili";
   };
+
   security.pam.services.sddm.enableGnomeKeyring = true;
 
   # Nautilus + GNOME

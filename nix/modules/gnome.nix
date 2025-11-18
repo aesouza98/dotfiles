@@ -1,9 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   specialisation = {
     gnome.configuration = {
-      services.displayManager.gdm.enable = true;
+      services.displayManager.sddm.enable = lib.mkForce false;
+      services.displayManager.gdm.enable = lib.mkForce true;
       services.desktopManager.gnome.enable = true;
       services.gnome.games.enable = false;
 
