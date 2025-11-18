@@ -45,6 +45,7 @@
 
   # Auto Login
   services.getty.autologinUser = "nano";
+  services.displayManager.autoLogin.user = "nano";
 
   # SDDM
   services.displayManager.sddm = {
