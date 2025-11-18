@@ -5,6 +5,7 @@
     gnome.configuration = {
       services.displayManager.sddm.enable = lib.mkForce false;
       services.displayManager.gdm.enable = lib.mkForce true;
+      services.displayManager.defaultSession = lib.mkForce "gnome";
       services.desktopManager.gnome.enable = true;
       services.gnome.games.enable = false;
 
