@@ -45,7 +45,6 @@
 
   # Auto Login
   services.getty.autologinUser = "nano";
-  services.displayManager.autoLogin.user = "nano";
   services.displayManager.defaultSession = lib.mkDefault "niri";
 
   # SDDM
