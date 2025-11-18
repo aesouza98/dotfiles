@@ -18,6 +18,8 @@
         gnomeExtensions.just-perfection
         gnomeExtensions.user-themes
         gnomeExtensions.appindicator
+        gnome-tweaks
+        gnome-extension-manager
       ];
     };
   };
