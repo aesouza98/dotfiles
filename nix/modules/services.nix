@@ -51,6 +51,9 @@
   services.displayManager.sddm = {
     enable = lib.mkDefault true;
     wayland.enable = lib.mkDefault true;
+    extraPackages = with pkgs; [
+      sddm-sugar-dark
+    ];
     theme = "${pkgs.sddm-sugar-dark}/share/sddm/themes/sugar-dark";
     # theme = "${pkgs.sddm-chili-theme}/share/sddm/themes/chili";
   };
