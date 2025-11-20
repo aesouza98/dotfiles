@@ -12,7 +12,6 @@
     mako
     pamixer
     playerctl
-    sddm-sugar-dark
     swaybg
     swayosd
     waybar
