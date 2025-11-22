@@ -59,6 +59,7 @@
   ];
   pkgs_gaming = with pkgs; [
     bottles
+    discord
     hydralauncher
     protonup
     wine64
