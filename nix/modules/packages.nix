@@ -61,7 +61,7 @@
     bottles
     discord
     hydralauncher
-    protonup
+    protonup-ng
     wine64
     winetricks
   ];
