@@ -62,6 +62,7 @@
     discord
     hydralauncher
     protonup-ng
+    wine
     wine64
     winetricks
   ];
@@ -73,7 +74,7 @@
     egl-wayland
     ffmpeg_6-full
     flatpak
-    iptables
+    gammastep
     polkit_gnome
     sof-firmware
     xdg-user-dirs
