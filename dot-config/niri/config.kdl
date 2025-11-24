@@ -71,6 +71,7 @@ layout {
 
 spawn-at-startup "fcitx5"
 spawn-at-startup "swayosd-server"
+spawn-at-startup "gammastep-indicator"
 spawn-at-startup "elephant"
 spawn-at-startup "walker --gapplication-service"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
