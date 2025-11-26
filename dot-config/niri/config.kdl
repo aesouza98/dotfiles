@@ -3,7 +3,7 @@ input {
   keyboard {
     xkb {
           layout "us"
-          variant "alt-intl"
+          variant "intl"
     }
     repeat-delay 600
     repeat-rate 40
@@ -71,7 +71,6 @@ layout {
 
 spawn-at-startup "fcitx5"
 spawn-at-startup "swayosd-server"
-spawn-at-startup "gammastep-indicator"
 spawn-at-startup "elephant"
 spawn-at-startup "walker --gapplication-service"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
@@ -102,9 +101,14 @@ window-rule {
   match title="LocalSend"
   open-floating true
 }
+window-rule {
+  // match app-id=r#"^org\.gnome\.Nautilus$"#
+  match title="Open File"
+  open-floating true
+}
 
 window-rule {
-  match title="org.gnome.Nautilus"
+  match app-id=r#"^org\.gnome\.NautilusPreviewer$"#
   open-floating true
 }
 
