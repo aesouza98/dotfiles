@@ -153,6 +153,7 @@
     mpv
     obsidian
     pureref
+    qbittorrent
     spotify
     syncthing
     vlc
