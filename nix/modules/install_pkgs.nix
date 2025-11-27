@@ -9,8 +9,8 @@ in
     ./programs.nix
     ./services.nix
     ./flatpaks.nix
-    ./gnome.nix
-    ./plasma.nix
+    # ./gnome.nix
+    # ./plasma.nix
   ];
 
   # User Packages

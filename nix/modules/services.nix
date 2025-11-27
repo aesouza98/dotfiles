@@ -45,7 +45,7 @@
 
   # Auto Login
   services.getty.autologinUser = "nano";
-  services.displayManager.defaultSession = lib.mkDefault "niri";
+  # services.displayManager.defaultSession = lib.mkDefault "niri";
 
   # SDDM
   services.displayManager.sddm = {
@@ -57,6 +57,12 @@
     theme = "${pkgs.catppuccin-sddm}/share/sddm/themes/catppuccin-mocha-mauve";
   };
 
+  # Plasma Install
+  services.displayManager.defaultSession = lib.mkForce "plasma";
+  services.desktopManager.plasma6.enable = true;
+  environment.systemPackages = with pkgs; [
+    kdePackages.kate
+  ];
   security.pam.services.sddm.enableGnomeKeyring = true;
 
   # Nautilus + GNOME

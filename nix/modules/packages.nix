@@ -2,6 +2,7 @@
 
 {
   pkgs_hypr = with pkgs; [
+    alacritty
     blueberry
     cliphist
     grim
