@@ -51,4 +51,6 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.waydroid.enable = true;
 
+  # Nix-LD
+  programs.nix-ld.enable = true;
 }
