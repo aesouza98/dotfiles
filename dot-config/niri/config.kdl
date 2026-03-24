@@ -9,7 +9,7 @@ input {
     repeat-rate 40
   }
   mouse {
-    accel-speed 0
+    accel-speed 0.5
     accel-profile "flat"
     scroll-method "no-scroll"
   }
@@ -69,10 +69,12 @@ layout {
   }
 }
 
+spawn-at-startup "qs" "-c" "noctalia-shell"
 spawn-at-startup "fcitx5"
 spawn-at-startup "swayosd-server"
-spawn-at-startup "elephant"
-spawn-at-startup "walker --gapplication-service"
+// spawn-at-startup "elephant"
+// spawn-at-startup "walker --gapplication-service"
+spawn-at-startup "/usr/lib/pam_kwallet_init"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "/usr/lib/xdg-desktop-portal-gtk"
 spawn-at-startup "wl-clip-persist --clipboard regular --all-mime-type-regex '^(?!x-kde-passwordManagerHint).+'"
@@ -83,7 +85,7 @@ hotkey-overlay {
 
 prefer-no-csd
 
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Imagens/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 animations {
 
@@ -95,6 +97,19 @@ window-rule {
   open-floating true
   default-floating-position x=16 y=16 relative-to="bottom-right"
   open-focused false
+}
+
+window-rule {
+  // Rounded corners for a modern look.
+  geometry-corner-radius 20
+
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry true
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
 }
 
 window-rule {
@@ -113,12 +128,11 @@ window-rule {
 }
 
 // Make the wallpaper stationary, rather than moving with workspaces.
-// layer-rule {
-//     // This is for swaybg; change for other wallpaper tools.
-//     // Find the right namespace by running niri msg layers.
-//     match namespace="^wallpaper$"
-//     place-within-backdrop true
-// }
+layer-rule {
+    //match namespace="^wallpaper$"
+    match namespace="^noctalia-overview*"
+    place-within-backdrop true
+}
 
 // Optionally, disable the workspace shadows in the overview.
 overview {
@@ -141,6 +155,11 @@ overview {
     clip-to-geometry true
 }
 
+environment {
+  //QT_QPA_PLATFORMTHEME "qt6ct"
+  QT_QPA_PLATFORMTHEME "hyprqt6engine"
+}
+
 binds {
   // Most actions that you can bind here can also be invoked programmatically with
   // `niri msg action do-something`.
@@ -153,34 +172,54 @@ binds {
   Mod+S hotkey-overlay-title="Search..." { spawn "fuzzel-search"; }
 
   // Applications
-  Mod+B hotkey-overlay-title="Open Browser" { spawn "brave"; }
-  Mod+E { spawn "nautilus"; }
+  //Mod+B hotkey-overlay-title="Open Browser" { spawn "brave"; }
+  Mod+B hotkey-overlay-title="Open Browser" { spawn "zen-browser"; }
+  Mod+E { spawn "dolphin"; }
   Mod+O { spawn "obsidian"; }
   Mod+M { spawn "spotify"; }
 
   // System
   Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-  Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn "fuzzel-powermenu"; }
+  // Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn "fuzzel-powermenu"; }
 
-  // Web Apps
-  Mod+Shift+A { spawn-sh "~/.local/share/applications/chatgpt.desktop"; }
-  Mod+Shift+G { spawn-sh "~/.local/share/applications/whatsapp.desktop"; }
+  //
+  // Noctalia Shell Only Section
+  //
+  Mod+Space { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+  Mod+Shift+A { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+  Mod+Shift+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
 
-  // Media Keys
-  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +2"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume -2"; }
-  XF86AudioMute        allow-when-locked=true { spawn-sh "swayosd-client --output-volume mute-toggle"; }
-  XF86AudioMicMute     allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
-  Mod+F1               allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
+  Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle" ; }
 
-  XF86AudioNext        allow-when-locked=true { spawn-sh "swayosd-client --playerctl next"; }
-  XF86AudioPause       allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
-  XF86AudioPlay        allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
-  XF86AudioPrev        allow-when-locked=true { spawn-sh "swayosd-client --playerctl previous"; }
+  // Audio & Brightness
+  XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
+  XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+  XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+  XF86MonBrightnessUp { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+  XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+
+  XF86AudioNext        allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "media" "next"; }
+  XF86AudioPause       allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "media" "playPause"; }
+  XF86AudioPlay        allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "media" "playPause"; }
+  XF86AudioPrev        allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "media" "previous"; }
+
+  //
+  // Media Keys - Disable on Noctalia
+  //
+  //XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +2"; }
+  //XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume -2"; }
+  //XF86AudioMute        allow-when-locked=true { spawn-sh "swayosd-client --output-volume mute-toggle"; }
+  //XF86AudioMicMute     allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
+  //Mod+F1               allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
+
+  // XF86AudioNext        allow-when-locked=true { spawn-sh "swayosd-client --playerctl next"; }
+  // XF86AudioPause       allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
+  // XF86AudioPlay        allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
+  // XF86AudioPrev        allow-when-locked=true { spawn-sh "swayosd-client --playerctl previous"; }
 
   // Brightness
-  XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+  // XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+  // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
   // Overview
   Mod+A repeat=false { toggle-overview; }
@@ -361,3 +400,5 @@ binds {
   // moving the mouse or pressing any other key.
   Mod+Shift+P { power-off-monitors; }
 }
+
+include "./noctalia.kdl"

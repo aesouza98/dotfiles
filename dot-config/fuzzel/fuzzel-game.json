@@ -1,0 +1,43 @@
+{
+    "steam": {
+        "enable": true
+    },
+    "heroic": {
+        "enable": true,
+        "path": "~/Games/Heroic"
+    },
+    "switch": {
+        "enable": false,
+        "path": "/mnt/server2/Games/NSP",
+        "command": [
+            "yuzu",
+            "-f",
+            "-g"
+        ]
+    },
+    "rpcs3": {
+        "enable": false,
+        "path": "/mnt/server2/Games/PS3"
+    },
+    "pcsx2": {
+        "enable": false,
+        "path": "/mnt/server2/Games/PS2"
+    },
+    "retroarch": {
+        "enable": true,
+        "cores": {
+            "wii": "/usr/lib/libretro/dolphin_libretro.so",
+            "gcn": "/usr/lib/libretro/dolphin_libretro.so",
+            "snes": "/usr/lib/libretro/snes9x_libretro.so"
+        },
+        "path": "~/Games/ROMs"
+    },
+    "custom": {
+        "enable": true,
+        "games": {
+            "Albion Online Linux": [
+                "/home/nano/albiononline/Albion-Online"
+            ]
+        }
+    }
+}

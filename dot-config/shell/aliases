@@ -26,3 +26,4 @@ alias lg="lazygit"
 
 #Others
 alias ping='ping -i 0.2'
+alias zed='zeditor'
