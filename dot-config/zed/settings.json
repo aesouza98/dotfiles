@@ -1,0 +1,64 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "tab_size": 2,
+  "edit_predictions": {
+    "mode": "subtle",
+    "provider": "copilot",
+  },
+  "agent": {
+    "default_profile": "write",
+    "default_model": {
+      "enable_thinking": true,
+      "provider": "google",
+      "model": "gemini-3.1-pro-preview",
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "restore_on_startup": "launchpad",
+  "redact_private_values": false,
+  "base_keymap": "VSCode",
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Flexoki Dark",
+  },
+  "lsp": {
+    "beancount": {
+      "binary": {
+        "path": "~/.cargo/bin/beancount-language-server",
+        "arguments": ["--stdio"],
+      },
+      "initialization_options": {
+        "journal_file": "~/Documentos/beancount/main.bean",
+        "formatting": {
+          "prefix_width": 30,
+          "currency_column": 60,
+          "number_currency_spacing": 1,
+        },
+      },
+    },
+  },
+  "languages": {
+    "Beancount": {
+      "language_servers": ["beancount"],
+    },
+  },
+  "terminal": {
+    "shell": {
+      "program": "/usr/bin/fish",
+    },
+  },
+}
