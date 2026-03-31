@@ -1,5 +1,6 @@
 # Appearance
-theme = Flexoki Dark
+theme = noctalia
+# theme = Flexoki Dark
 background-blur-radius = 20
 background-opacity = 0.98
 mouse-hide-while-typing = true

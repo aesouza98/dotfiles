@@ -1,0 +1,53 @@
+theme = "catppuccin_mocha"
+# theme = "noctalia"
+
+[editor]
+line-number = "relative"
+auto-pairs = true
+mouse = true
+scrolloff = 5
+cursorline = true
+auto-completion = true
+path-completion = true
+auto-info = true
+bufferline = "multiple"
+clipboard-provider = "wayland"
+end-of-line-diagnostics = "hint"
+
+[editor.statusline]
+left = ["mode", "spinner", "read-only-indicator", "file-modification-indicator"]
+center = ["file-base-name"]
+right = ["diagnostics", "selections", "position", "total-line-numbers", "file-encoding", "file-line-ending", "file-type"]
+separator = "|"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+diagnostics = ["warning", "error"]
+workspace-diagnostics = ["warning", "error"]
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+enable = true
+display-messages = true
+display-inlay-hints = true
+goto-reference-include-declaration = true
+
+[editor.search]
+smart-case = true
+wrap-around = true
+
+[editor.indent-guides]
+render = true
+character = "╎"
+skip-levels = 1
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+

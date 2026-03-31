@@ -1,0 +1,3 @@
+[[language]]
+name = "kdl"
+indent = { tab-width = 2, unit = "  " }

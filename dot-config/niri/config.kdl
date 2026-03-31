@@ -2,14 +2,14 @@
 input {
   keyboard {
     xkb {
-          layout "us"
-          variant "intl"
+    	layout "us"
+      variant "intl"
     }
-    repeat-delay 600
-    repeat-rate 40
-  }
+    repeat-delay 250
+    repeat-rate 60
+	}
   mouse {
-    accel-speed 0.5
+    accel-speed 1
     accel-profile "flat"
     scroll-method "no-scroll"
   }
@@ -17,8 +17,6 @@ focus-follows-mouse max-scroll-amount="0%"
 }
 
 output "DP-1" {
-  // niri msg outputs
-
   mode "2560x1440@155.000"
   scale 1
   transform "normal"
@@ -69,11 +67,8 @@ layout {
   }
 }
 
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia-shell"
 spawn-at-startup "fcitx5"
-spawn-at-startup "swayosd-server"
-// spawn-at-startup "elephant"
-// spawn-at-startup "walker --gapplication-service"
 spawn-at-startup "/usr/lib/pam_kwallet_init"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "/usr/lib/xdg-desktop-portal-gtk"
@@ -91,7 +86,6 @@ animations {
 
 }
 
-// https://variety4me.github.io/niri_docs/Configuration-Window-Rules/
 window-rule {
   match title="Picture.{0,1}in.{0,1}[Pp]icture"
   open-floating true
@@ -100,15 +94,11 @@ window-rule {
 }
 
 window-rule {
-  // Rounded corners for a modern look.
   geometry-corner-radius 20
-
-  // Clips window contents to the rounded corner boundaries.
   clip-to-geometry true
 }
 
 debug {
-  // Allows notification actions and window activation from Noctalia.
   honor-xdg-activation-with-invalid-serial
 }
 
@@ -120,6 +110,7 @@ window-rule {
   // match app-id=r#"^org\.gnome\.Nautilus$"#
   match title="Open File"
   open-floating true
+  default-floating-position x=0 y=0
 }
 
 window-rule {
@@ -127,14 +118,11 @@ window-rule {
   open-floating true
 }
 
-// Make the wallpaper stationary, rather than moving with workspaces.
 layer-rule {
-    //match namespace="^wallpaper$"
     match namespace="^noctalia-overview*"
     place-within-backdrop true
 }
 
-// Optionally, disable the workspace shadows in the overview.
 overview {
     workspace-shadow {
         // off
@@ -149,21 +137,7 @@ overview {
     // block-out-from "screencast"
 }
 
-// Example: enable rounded corners for all windows.
-/-window-rule {
-    geometry-corner-radius 12
-    clip-to-geometry true
-}
-
-environment {
-  //QT_QPA_PLATFORMTHEME "qt6ct"
-  QT_QPA_PLATFORMTHEME "hyprqt6engine"
-}
-
 binds {
-  // Most actions that you can bind here can also be invoked programmatically with
-  // `niri msg action do-something`.
-
   Mod+Shift+Slash { show-hotkey-overlay; }
 
   // Launchers
@@ -172,9 +146,9 @@ binds {
   Mod+S hotkey-overlay-title="Search..." { spawn "fuzzel-search"; }
 
   // Applications
-  //Mod+B hotkey-overlay-title="Open Browser" { spawn "brave"; }
-  Mod+B hotkey-overlay-title="Open Browser" { spawn "zen-browser"; }
-  Mod+E { spawn "dolphin"; }
+  Mod+B hotkey-overlay-title="Open Browser" { spawn "brave"; }
+  // Mod+B hotkey-overlay-title="Open Browser" { spawn "zen-browser"; }
+  Mod+E { spawn-sh "nautilus -n"; }
   Mod+O { spawn "obsidian"; }
   Mod+M { spawn "spotify"; }
 
@@ -185,41 +159,23 @@ binds {
   //
   // Noctalia Shell Only Section
   //
-  Mod+Space { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
-  Mod+Shift+A { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
-  Mod+Shift+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
+  Mod+Space { spawn-sh "noctalia-shell ipc call launcher toggle"; }
+  Mod+Shift+A { spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
+  Mod+Shift+Comma { spawn-sh "noctalia-shell ipc call settings toggle"; }
 
-  Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle" ; }
+  Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn-sh "noctalia-shell ipc call sessionMenu toggle" ; }
 
   // Audio & Brightness
-  XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
-  XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-  XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-  XF86MonBrightnessUp { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-  XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+  XF86AudioRaiseVolume { spawn-sh "noctalia-shell ipc call volume increase"; }
+  XF86AudioLowerVolume { spawn-sh "noctalia-shell ipc call volume decrease"; }
+  XF86AudioMute { spawn-sh "noctalia-shell ipc call volume muteOutput"; }
+  XF86MonBrightnessUp { spawn-sh "noctalia-shell ipc call brightness increase"; }
+  XF86MonBrightnessDown { spawn-sh "noctalia-shell ipc call brightness decrease"; }
 
-  XF86AudioNext        allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "media" "next"; }
-  XF86AudioPause       allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "media" "playPause"; }
-  XF86AudioPlay        allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "media" "playPause"; }
-  XF86AudioPrev        allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "media" "previous"; }
-
-  //
-  // Media Keys - Disable on Noctalia
-  //
-  //XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +2"; }
-  //XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume -2"; }
-  //XF86AudioMute        allow-when-locked=true { spawn-sh "swayosd-client --output-volume mute-toggle"; }
-  //XF86AudioMicMute     allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
-  //Mod+F1               allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
-
-  // XF86AudioNext        allow-when-locked=true { spawn-sh "swayosd-client --playerctl next"; }
-  // XF86AudioPause       allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
-  // XF86AudioPlay        allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
-  // XF86AudioPrev        allow-when-locked=true { spawn-sh "swayosd-client --playerctl previous"; }
-
-  // Brightness
-  // XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-  // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+  XF86AudioNext        allow-when-locked=true { spawn-sh "noctalia-shell ipc call media next"; }
+  XF86AudioPause       allow-when-locked=true { spawn-sh "noctalia-shell ipc call media playPause"; }
+  XF86AudioPlay        allow-when-locked=true { spawn-sh "noctalia-shell ipc call media playPause"; }
+  XF86AudioPrev        allow-when-locked=true { spawn-sh "noctalia-shell ipc call media previous"; }
 
   // Overview
   Mod+A repeat=false { toggle-overview; }
@@ -276,10 +232,6 @@ binds {
   Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
   Mod+Ctrl+U         { move-column-to-workspace-down; }
   Mod+Ctrl+I         { move-column-to-workspace-up; }
-
-  // Alternatively, there are commands to move just a single window:
-  // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-  // ...
 
   Mod+Shift+Page_Down { move-workspace-down; }
   Mod+Shift+Page_Up   { move-workspace-up; }
@@ -342,17 +294,8 @@ binds {
 
   Mod+C { center-column; }
 
-  // Center all fully visible columns on screen.
   Mod+Ctrl+C { center-visible-columns; }
 
-  // Finer width adjustments.
-  // This command can also:
-  // * set width in pixels: "1000"
-  // * adjust width in pixels: "-5" or "+5"
-  // * set width as a percentage of screen width: "25%"
-  // * adjust width as a percentage of screen width: "-10%" or "+10%"
-  // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
-  // set-column-width "100" will make the column occupy 200 physical screen pixels.
   Mod+Minus { set-column-width "-10%"; }
   Mod+Equal { set-column-width "+10%"; }
 
@@ -364,40 +307,18 @@ binds {
   Mod+V       { toggle-window-floating; }
   Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
-  // Toggle tabbed column display mode.
-  // Windows in this column will appear as vertical tabs,
-  // rather than stacked on top of each other.
   Mod+Q { toggle-column-tabbed-display; }
-
-  // Actions to switch layouts.
-  // Note: if you uncomment these, make sure you do NOT have
-  // a matching layout switch hotkey configured in xkb options above.
-  // Having both at once on the same hotkey will break the switching,
-  // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-  // Mod+Space       { switch-layout "next"; }
-  // Mod+Shift+Space { switch-layout "prev"; }
 
   Print { screenshot; }
   Super+Shift+S { screenshot; }
   Ctrl+Print { screenshot-screen; }
   Alt+Print { screenshot-window; }
 
-  // Applications such as remote-desktop clients and software KVM switches may
-  // request that niri stops processing the keyboard shortcuts defined here
-  // so they may, for example, forward the key presses as-is to a remote machine.
-  // It's a good idea to bind an escape hatch to toggle the inhibitor,
-  // so a buggy application can't hold your session hostage.
-  //
-  // The allow-inhibiting=false property can be applied to other binds as well,
-  // which ensures niri always processes them, even when an inhibitor is active.
   Mod+Shift+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-  // The quit action will show a confirmation dialog to avoid accidental exits.
   Mod+Shift+E { quit; }
   Ctrl+Alt+Delete { quit; }
 
-  // Powers off the monitors. To turn them back on, do any input like
-  // moving the mouse or pressing any other key.
   Mod+Shift+P { power-off-monitors; }
 }
 
