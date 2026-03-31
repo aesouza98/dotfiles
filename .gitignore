@@ -2,3 +2,5 @@ wallpaper
 .uuid
 dot-config/themes/catppuccin/wallpaper
 dot-config/walker/config.toml
+dot-config/fcitx5/conf/cached_layouts
+dot-config/fcitx5/conf/notifications.conf
