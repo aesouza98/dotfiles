@@ -1,3 +1,21 @@
 [[language]]
 name = "kdl"
 indent = { tab-width = 2, unit = "  " }
+
+[language-server.beancount-language-server]
+command = "beancount-language-server"
+args = ["--stdio"]
+
+# Configuration is optional
+[language-server.beancount-language-server.config]
+journal_file = "~/Documents/Beancount/main.bean"
+
+# Optional: formatting configuration
+[language-server.beancount-language-server.config.formatting]
+prefix_width = 30
+currency_column = 60
+number_currency_spacing = 1
+
+[[language]]
+name = "beancount"
+language-servers = [{ name = "beancount-language-server" }]
