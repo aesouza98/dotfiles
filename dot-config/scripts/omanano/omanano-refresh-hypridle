@@ -1,4 +1,0 @@
-#!/bin/bash
-
-omanano-refresh-config hypr/hypridle.conf
-omanano-restart-hypridle

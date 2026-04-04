@@ -1,8 +1,0 @@
-#!/bin/bash
-
-set -e
-
-omanano-update-available-reset
-omanano-update-system-pkgs
-omanano-migrate
-omanano-update-restart

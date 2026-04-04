@@ -1,4 +1,0 @@
-#!/bin/bash
-
-omanano-refresh-config hypr/hyprsunset.conf
-omanano-restart-hyprsunset

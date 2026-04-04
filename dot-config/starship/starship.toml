@@ -1,21 +1,21 @@
 # Inserts a blank line between shell prompts
-add_newline = false
+add_newline = true
 
 # Change the default prompt format
-#format = """$directory $git_branch $character"""
+# format = """$directory $git_branch $character"""
 format = """
 $directory\
 $git_branch\
-$git_state\
 $git_status\
+$line_break\
 $character"""
 
 # Set theme
 command_timeout = 1000
 
 [character]
-success_symbol = '[➜](bold green)'
-error_symbol = '[➜](red)'
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](red)"
 vimcmd_symbol = "[❮](green)"
 
 # Modules
@@ -24,4 +24,7 @@ truncation_length = 0
 truncate_to_repo = true
 
 [git_branch]
-format =  '[$symbol$branch(:$remote_branch)]($style) '
+format = " [$symbol$branch(:$remote_branch)]($style) "
+
+[package]
+disabled = true

@@ -1,3 +1,0 @@
-#!/bin/bash
-
-omanano-refresh-config hypr/hyprlock.conf
