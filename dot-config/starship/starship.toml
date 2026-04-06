@@ -4,6 +4,7 @@ add_newline = true
 # Change the default prompt format
 # format = """$directory $git_branch $character"""
 format = """
+$os\
 $directory\
 $git_branch\
 $git_status\
@@ -28,3 +29,7 @@ format = " [$symbol$branch(:$remote_branch)]($style) "
 
 [package]
 disabled = true
+
+[os]
+disabled = false
+format = "[$symbol]($style)"

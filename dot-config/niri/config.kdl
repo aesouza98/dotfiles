@@ -30,7 +30,7 @@ cursor {
 }
 
 layout {
-  gaps 8
+  gaps 5
   center-focused-column "never"
   background-color "transparent"
   preset-column-widths {
