@@ -2,6 +2,10 @@ function fish_greeting
     pfetch
 end
 
+function make_newline_before_prompt --on-event fish_prompt
+    echo
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 

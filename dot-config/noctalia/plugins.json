@@ -10,14 +10,6 @@
         "screen-recorder": {
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
-        },
-        "sys-info-widget": {
-            "enabled": false,
-            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
-        },
-        "todo": {
-            "enabled": false,
-            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         }
     },
     "version": 2
