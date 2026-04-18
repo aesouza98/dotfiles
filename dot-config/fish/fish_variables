@@ -7,6 +7,8 @@ SETUVAR Z_DATA:/home/nano/\x2elocal/share/z/data
 SETUVAR Z_DATA_DIR:/home/nano/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/home/nano\x24
 SETUVAR __fish_initialized:3800
+SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_user_paths:/home/nano/\x2ecargo/bin\x1e/home/nano/\x2elocal/bin\x1e/home/nano/\x2econfig/scripts/omanano\x1e/home/nano/\x2econfig/scripts/themes\x1e/home/nano/\x2econfig/scripts\x1e/home/nano/\x2elocal/share/omanano/bin
