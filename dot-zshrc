@@ -1,15 +1,4 @@
-ZSH_THEME=""
-
-# Set OhMyZsh home
-#export ZSH="$HOME/.oh-my-zsh"
-
-## Init OhMyZsh
-#source $ZSH/oh-my-zsh.sh
-
-# Oh-My-ZSH Plugins
-plugins=(git)
-
-# ZSH Plugins
+# Bootstrap zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
@@ -17,25 +6,43 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 
+# Pure Shell
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit light sindresorhus/pure
+
+# OhMyZSH Plugins
+zinit snippet OMZ::lib/git.zsh
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+
 # Zinit plugins
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
-zinit light olets/zsh-abbr
-zinit light Aloxaf/fzf-tab
 
 # Define Aliases
-source ~/.config/shell/aliases
-# source ~/.config/shell/abbreviations # Run only in first setuP
+[[ -f ~/.config/shell/aliases ]] && source ~/.config/shell/aliases
 
-# Zoxide
+# Completions
+autoload -Uz compinit && compinit
+zinit cdreplay -q
+
+# Zoxide + Atuin
 eval "$(zoxide init zsh)"
-
-# Starship Prompt
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-eval "$(starship init zsh)"
-
-
-. "$HOME/.atuin/bin/env"
-
 eval "$(atuin init zsh)"
+
+# Configs de Completion
+source <(carapace _carapace zsh)
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+zstyle ':completion::complete:cd:*:*' tag-order 'local-directories directory-stack path-directories'
+
+# Configs Ctrl+W
+WORDCHARS='~!#$%^&*(){}[]<>?.+;-_/\|=@`'
+autoload -U select-word-style
+select-word-style bash

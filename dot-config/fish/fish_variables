@@ -6,11 +6,10 @@ SETUVAR Z_CMD:z
 SETUVAR Z_DATA:/home/nano/\x2elocal/share/z/data
 SETUVAR Z_DATA_DIR:/home/nano/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/home/nano\x24
-SETUVAR __fish_initialized:3800
+SETUVAR __fish_initialized:4300
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher
 SETUVAR _fisher_upgraded_to_4_4:\x1d
-SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_user_paths:/home/nano/\x2ecargo/bin\x1e/home/nano/\x2elocal/bin\x1e/home/nano/\x2econfig/scripts/omanano\x1e/home/nano/\x2econfig/scripts/themes\x1e/home/nano/\x2econfig/scripts\x1e/home/nano/\x2elocal/share/omanano/bin
 SETUVAR pure_begin_prompt_with_current_directory:true
 SETUVAR pure_check_for_new_release:false
@@ -81,6 +80,7 @@ SETUVAR pure_symbol_reverse_prompt:\u276e
 SETUVAR pure_symbol_ssh_prefix:
 SETUVAR pure_symbol_title_bar_separator:\x2d
 SETUVAR pure_symbol_virtualenv_prefix:
+SETUVAR pure_system_time_format:\x2b\x25T
 SETUVAR pure_threshold_command_duration:5
 SETUVAR pure_truncate_prompt_current_directory_keeps:\x2d1
 SETUVAR pure_truncate_window_title_current_directory_keeps:\x2d1

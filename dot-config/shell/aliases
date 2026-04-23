@@ -1,4 +1,3 @@
-#Aliases
 ### É difícil digitar clear
 alias clera='clear'
 alias claer='clear'
@@ -9,21 +8,26 @@ alias clrae='clear'
 alias clrea='clear'
 alias clare='clear'
 
-#Addons
+### Addons
 alias ls='eza --icons -s type'
 alias find='fd'
 alias grep='rg'
 alias ggrep='rg --no-ignore-vcs'
 alias cat='bat -pp'
 alias bat='bat --style=auto'
-alias vim='nvim'
-alias lvim='NVIM_APPNAME=lazynvim nvim'
 alias cd='z'
-
-#NixOS
-alias nx="nvim ~/.dotfiles/nix/"
 alias lg="lazygit"
 
-#Others
-alias ping='ping -i 0.2'
+### Editor
+alias hx='helix'
+alias lvim='NVIM_APPNAME=lazynvim nvim'
+alias vim='helix'
+# alias vim='nvim'
 alias zed='zeditor'
+
+### NixOS
+# alias nx="nvim ~/.dotfiles/nix/"
+
+### Others
+alias ping='ping -i 0.2'
+alias realias='source ~/.config/shell/aliases'

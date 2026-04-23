@@ -1,7 +1,5 @@
-#[ -f ~/.config/shell/envs ] && source ~/.config/shell/envs
-#
-#export XDG_SCREENSHOTS_DIR=~/Imagens/Screenshots/
-#export EDITOR=nvim
+export XDG_SCREENSHOTS_DIR=~/Imagens/Screenshots/
+export EDITOR=hx
 #export TERM=xterm-256color
 #export GTK_IM_MODULE=xim
 # export QT_QPA_PLATFORMTHEME=qt6ct
