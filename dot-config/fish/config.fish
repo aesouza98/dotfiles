@@ -11,5 +11,5 @@ if status is-interactive
     zoxide init fish | source
     source ~/.config/shell/aliases
 
-    source (starship init fish --print-full-init | psub)
+    # source (starship init fish --print-full-init | psub)
 end
