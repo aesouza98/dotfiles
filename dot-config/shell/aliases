@@ -31,3 +31,4 @@ alias zed='zeditor'
 ### Others
 alias ping='ping -i 0.2'
 alias realias='source ~/.config/shell/aliases'
+alias rezsh='source ~/.zshrc'
