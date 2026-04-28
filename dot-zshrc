@@ -6,6 +6,11 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 
+# Configs Ctrl+W
+WORDCHARS='~!#$%^&*(){}[]<>?.+;-_/\|=@`'
+autoload -U select-word-style
+select-word-style bash
+
 # Pure Shell
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
@@ -41,8 +46,3 @@ export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 zstyle ':completion::complete:cd:*:*' tag-order 'local-directories directory-stack path-directories'
-
-# Configs Ctrl+W
-WORDCHARS='~!#$%^&*(){}[]<>?.+;-_/\|=@`'
-autoload -U select-word-style
-select-word-style bash
