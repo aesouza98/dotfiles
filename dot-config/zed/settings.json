@@ -7,6 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "icon_theme": "Material Icon Theme",
+  "project_panel": {
+    "dock": "left",
+  },
   "tab_size": 2,
   "edit_predictions": {
     "mode": "subtle",
@@ -32,17 +36,17 @@
   "buffer_font_size": 15,
   "theme": {
     "mode": "system",
-    "light": "One Light",
+    "light": "Flexoki Light",
     "dark": "Flexoki Dark",
   },
   "lsp": {
     "beancount": {
       "binary": {
-        "path": "~/.cargo/bin/beancount-language-server",
+        "path": "/usr/bin/beancount-language-server",
         "arguments": ["--stdio"],
       },
       "initialization_options": {
-        "journal_file": "~/Documentos/beancount/main.bean",
+        "journal_file": "~/Documentos/Beancount/main.bean",
         "formatting": {
           "prefix_width": 30,
           "currency_column": 60,
@@ -58,7 +62,7 @@
   },
   "terminal": {
     "shell": {
-      "program": "/usr/bin/fish",
+      "program": "/usr/bin/zsh",
     },
   },
 }

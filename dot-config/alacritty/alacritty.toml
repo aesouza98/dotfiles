@@ -1,4 +1,4 @@
-general.import = [ "~/.config/alacritty/onedark.toml" ]
+general.import = ["~/.config/alacritty/onedark.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -12,13 +12,11 @@ size = 12
 [window]
 padding.x = 5
 padding.y = 5
-decorations = "Transparent"
+decorations = "transparent"
 
 [keyboard]
-bindings = [
-{ key = "F11", action = "ToggleFullscreen" }
-]
+bindings = [{ key = "F11", action = "ToggleFullscreen" }]
 
 [terminal]
-# shell = { program = "/bin/zsh"}
-shell = { program = "/usr/bin/zellij"}
+# shell = { program = "/bin/zsh", args = ["-l", "-c", "zellij"] }
+shell = { program = "/bin/zsh" }
