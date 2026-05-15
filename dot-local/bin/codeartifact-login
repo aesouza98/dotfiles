@@ -1,0 +1,8 @@
+#! /bin/bash
+
+if TOKEN=$(aws codeartifact get-authorization-token --duration-seconds 43200 --domain ebx-cloudops-domain --domain-owner 838648578997 --region us-east-1 --profile root-838648578997 --output text --query 'authorizationToken'); then
+    INDEX_URL=https://aws:${TOKEN}@ebx-cloudops-domain-838648578997.d.codeartifact.us-east-1.amazonaws.com/pypi/ebx-cloudops-repo/simple/
+    pip config set global.extra-index-url "$INDEX_URL"
+    echo "Successfully configured pip to use AWS CodeArtifact repository https://ebx-cloudops-domain-838648578997.d.codeartifact.us-east-1.amazonaws.com/pypi/ebx-cloudops-repo/"
+    echo "Login expires in 12 hours at $(date -v+12H)"
+fi

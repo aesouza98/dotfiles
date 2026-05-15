@@ -1,0 +1,53 @@
+{
+  "base_keymap": "SublimeText",
+  "edit_predictions": {
+    "mode": "subtle",
+    "provider": "copilot",
+  },
+  "agent": {
+    "profiles": {
+      "code": {
+        "default_model": {
+          "provider": "google",
+          "model": "gemini-3.1-pro-preview",
+          "enable_thinking": true
+        },
+        "name": "Code",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    },
+    "default_profile": "write",
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-3.1-pro-preview",
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "ui_font_size": 16,
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_size": 15,
+  "terminal": {
+    "font_family": "JetBrainsMono Nerd Font Mono",
+    "shell": {
+      "program": "/opt/homebrew/bin/fish",
+    },
+  },
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha",
+  },
+  "vim_mode": true,
+  "relative_line_numbers": "enabled",
+}
