@@ -42,9 +42,9 @@ zinit light sindresorhus/pure
 # Define Aliases
 [[ -f ~/.config/shell/aliases ]] && source ~/.config/shell/aliases
 
-# Zoxide + Atuin (Tools that define widgets/aliases)
-eval "$(zoxide init zsh)"
-eval "$(atuin init zsh)"
+# # Zoxide + Atuin (Tools that define widgets/aliases)
+# eval "$(zoxide init zsh)"
+# eval "$(atuin init zsh)"
 
 # Edit Mode
 export EDITOR="hx"
