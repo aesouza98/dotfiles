@@ -42,8 +42,8 @@ zinit light sindresorhus/pure
 # Define Aliases
 [[ -f ~/.config/shell/aliases ]] && source ~/.config/shell/aliases
 
-# # Zoxide + Atuin (Tools that define widgets/aliases)
-# eval "$(zoxide init zsh)"
+# Zoxide + Atuin (Tools that define widgets/aliases)
+eval "$(zoxide init zsh)"
 # eval "$(atuin init zsh)"
 
 # Edit Mode
@@ -57,3 +57,6 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 [[ -f "$HOME/.safe-chain/scripts/init-posix.sh" ]] && source "$HOME/.safe-chain/scripts/init-posix.sh"
+
+# Bitwarden ZSH Agent
+export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
