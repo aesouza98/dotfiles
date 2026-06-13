@@ -1,60 +1,59 @@
-# ── macOS ──────────────────────────────────────────────────────────────────────
+# macOS
 .DS_Store
 **/.DS_Store
 
-# ── Auth tokens / credentials (NEVER commit) ───────────────────────────────────
-dot-config/gh/hosts.yml
-dot-config/github-copilot/
+# Auth tokens / credentials (NEVER commit)
+home/dot-config/gh/hosts.yml
+home/dot-config/github-copilot/
 # pip.conf contains work-specific AWS CodeArtifact URL with embedded credentials.
 # Regenerate with the codeartifact-login script when needed.
-dot-config/pip/
+home/dot-config/pip/
 
-# ── Work / macOS-specific apps with logs and databases ─────────────────────────
-dot-config/AWSVPNClient/
+# Work / macOS-specific apps with logs and databases
+home/dot-config/AWSVPNClient/
 
-# ── Auto-generated runtime state and caches ────────────────────────────────────
-dot-config/atuin/history.db
-dot-config/cagent/
-dot-config/configstore/
-dot-config/containers/
-dot-config/uv/
+# Auto-generated runtime state and caches
+home/dot-config/atuin/history.db
+home/dot-config/cagent/
+home/dot-config/configstore/
+home/dot-config/containers/
+home/dot-config/uv/
 
-# ── Editor runtime data (keep settings.json and themes, not runtime data) ──────
-dot-config/zed/conversations/
-dot-config/zed/prompts/
+# Editor runtime data (keep settings.json and themes, not runtime data)
+home/dot-config/zed/conversations/
+home/dot-config/zed/prompts/
 
-# ── Secrets (configure manually on each machine) ───────────────────────────────
-dot-config/fish/conf.d/secrets.fish
+# Secrets (configure manually on each machine)
+home/dot-config/fish/conf.d/secrets.fish
 
-# ── Backup / scratch files ──────────────────────────────────────────────────────
-dot-config/zellij/config.kdl.bak
-dot-config/zellij/config.kdl.bak.1
-dot-config/ghostty/config.bkp
-dot-config/fish/conf.d/fish_frozen_key_bindings.fish
-dot-config/fish/conf.d/fish_frozen_theme.fish
-dot-config/fish/conf.d/fish_frozen_theme.fish.bak
+# Backup / scratch files
+home/dot-config/zellij/config.kdl.bak
+home/dot-config/zellij/config.kdl.bak.1
+home/dot-config/ghostty/config.bkp
+home/dot-config/fish/conf.d/fish_frozen_key_bindings.fish
+home/dot-config/fish/conf.d/fish_frozen_theme.fish
+home/dot-config/fish/conf.d/fish_frozen_theme.fish.bak
 
-# ── ~/.local/bin: machine-specific symlinks and large binaries ──────────────────
-dot-local/bin/aws-secrets
-dot-local/bin/aws-secrets_beta
-dot-local/bin/claude
-dot-local/bin/terraform
-dot-local/bin/uv
-dot-local/bin/uvx
+# ~/.local/bin: machine-specific symlinks and large binaries
+home/dot-local/bin/aws-secrets
+home/dot-local/bin/aws-secrets_beta
+home/dot-local/bin/claude
+home/dot-local/bin/terraform
+home/dot-local/bin/uv
+home/dot-local/bin/uvx
 
-# ── ~/.local/pipx: Python virtual envs (reinstall with pipx reinstall-all) ─────
-dot-local/pipx/
+# ~/.local/pipx: Python virtual envs (reinstall with pipx reinstall-all)
+home/dot-local/pipx/
 
-# ── ~/.local/share: runtime app data (not source-controlled) ───────────────────
-dot-local/share/atuin/
-dot-local/share/claude/
-dot-local/share/containers/
-dot-local/share/fish/
-dot-local/share/man/
-dot-local/share/nvim/
-dot-local/share/uv/
-dot-local/share/zinit/
-dot-local/share/.DS_Store
+# ~/.local/share: runtime app data (not source-controlled)
+home/dot-local/share/atuin/
+home/dot-local/share/claude/
+home/dot-local/share/containers/
+home/dot-local/share/fish/
+home/dot-local/share/man/
+home/dot-local/share/nvim/
+home/dot-local/share/uv/
+home/dot-local/share/zinit/
 
-# ── ~/.local/state: all runtime state ─────────────────────────────────────────
-dot-local/state/
+# ~/.local/state: all runtime state
+home/dot-local/state/
