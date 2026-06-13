@@ -1,5 +1,5 @@
 # Inserts a blank line between shell prompts
-add_newline = false
+add_newline = true
 
 # Change the default prompt format
 #format = """$directory $git_branch $character"""
@@ -8,6 +8,8 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
+$python\
+$line_break\
 $character"""
 
 # Set theme
@@ -55,3 +57,9 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
+
+[package]
+disabled = true
+
+[python]
+format = 'on [${pyenv_prefix}(\($virtualenv\) )]($style)'

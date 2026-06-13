@@ -3,34 +3,24 @@
 
 # Define the default greeting from fish
 function fish_greeting
-  # pokemon-colorscripts -r1 --no-title
-  # pfetch
+    # pfetch
 end
 
+# User paths (idempotent — fish_add_path deduplicates)
+fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.fzf/bin
+
 if status is-interactive
-  abbr --add ssm aws ssm start-session \
-            --region us-west-1 \
-            --profile EBANX \
-            --target
+    source ~/.config/shell/aliases
+    abbr --add ssm aws ssm start-session \
+        --region us-west-1 \
+        --profile EBANX \
+        --target
 
-  abbr --add s3cp aws s3 cp \
-            --profile EBANX
+    atuin init fish | source
+    zoxide init fish | source
 
-  abbr --add vsc aws-secrets view-secret \
-              -e file.yaml \
-              -n secret/name \> "output_file.json"
+    #fzf_configure_bindings --directory=\cf --git_log=\cg --git_status=\cs --processes=\cp --history=\cr
 
-  abbr --add ssc aws-secrets set-secret \
-              -e file.yaml \
-              -n secret/name \<  "input_file.json"
-
-  abbr --add dsc aws-secrets deploy \
-              -e file.yaml \
-              --filter-pattern "filter/pattern" \
-              --confirm
-  zoxide init fish | source
-  fzf_configure_bindings --directory=\cf --git_log=\cg --git_status=\cs --processes=\cp --history=\cr
-  # atuin init fish | source
-  source ~/.config/shell/aliases
-  source (/opt/homebrew/bin/starship init fish --print-full-init | psub)
+    source (/opt/homebrew/bin/starship init fish --print-full-init | psub)
 end

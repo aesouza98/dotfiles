@@ -16,10 +16,12 @@ alias grep='rg'
 alias ggrep='rg --no-ignore-vcs'
 alias cat='bat -pp'
 alias bat='bat --style=auto'
-alias vim='nvim'
+alias vim='hx'
+# alias vim='nvim'
 alias lvim='NVIM_APPNAME=lazynvim nvim'
 alias cd='z'
 
 #Others
 alias ping='ping -i 0.2'
 alias lg='lazygit'
+alias notes="nvim ~/Documents/Notes/"

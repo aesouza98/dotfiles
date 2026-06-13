@@ -1,8 +1,10 @@
-export PATH="$PATH:/Users/adriano.elias/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Setting PATH for Python 3.12
-# The original version is saved in .zprofile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:${PATH}"
-export PATH
+# Python.org system install (not homebrew — may not exist on all machines)
+[[ -d "/Library/Frameworks/Python.framework/Versions/3.12/bin" ]] && \
+    PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:${PATH}"
+
+# safe-chain (work tool)
+export PATH="$HOME/.safe-chain/shims:$HOME/.safe-chain/bin:$PATH"

@@ -23,6 +23,9 @@ dot-config/uv/
 dot-config/zed/conversations/
 dot-config/zed/prompts/
 
+# ── Secrets (configure manually on each machine) ───────────────────────────────
+dot-config/fish/conf.d/secrets.fish
+
 # ── Backup / scratch files ──────────────────────────────────────────────────────
 dot-config/zellij/config.kdl.bak
 dot-config/zellij/config.kdl.bak.1

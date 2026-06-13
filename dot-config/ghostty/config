@@ -1,7 +1,8 @@
 # Appearance
 theme = Catppuccin Mocha
+# theme = Flexoki Dark
 background-blur-radius = 20
-background-opacity = 1
+background-opacity = 0.95
 mouse-hide-while-typing = true
 window-decoration = true
 window-padding-x = 5
@@ -9,10 +10,11 @@ window-padding-y = 5
 window-padding-balance = true
 
 # Shell
-command = /opt/homebrew/bin/fish
-shell-integration = fish
-# command = /bin/zsh
-# shell-integration = zsh
+# command = /opt/homebrew/bin/fish
+# shell-integration = fish
+# command = /bin/zsh -l -c "exec zellij"
+command = /bin/zsh
+shell-integration = zsh
 
 # Keybinding
 # keybind = global:cmd+/=toggle_quick_terminal
@@ -25,3 +27,4 @@ font-feature = -calt, -liga, -dlig
 # Misc
 copy-on-select = clipboard
 mouse-scroll-multiplier = 2
+scrollback-limit = 100000000

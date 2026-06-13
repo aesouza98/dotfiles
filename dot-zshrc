@@ -13,7 +13,10 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - zsh)"
 
 # Set PATH
-export PATH="$PATH:/Users/adriano.elias/.local/bin:/opt/homebrew/bin:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/:/Applications/Visual Studio Code.app/Contents/Resources/app/bin/"
+export PATH="$PATH:$HOME/.local/bin:/opt/homebrew/bin"
+# App-specific CLI paths (only if installed)
+[[ -d "/Applications/Sublime Text.app" ]] && export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
+[[ -d "/Applications/Visual Studio Code.app" ]] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Oh-My-ZSH Plugins
 plugins=(git)
@@ -31,7 +34,7 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light olets/zsh-abbr
-zinit light Aloxaf/fzf-tab
+# zinit light Aloxaf/fzf-tab
 
 # Define Aliases
 source ~/.config/shell/aliases
