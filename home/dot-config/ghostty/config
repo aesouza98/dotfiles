@@ -1,6 +1,6 @@
 # Appearance
-theme = Catppuccin Mocha
-# theme = Flexoki Dark
+# theme = Catppuccin Mocha
+theme = Flexoki Dark
 background-blur-radius = 20
 background-opacity = 0.95
 mouse-hide-while-typing = true

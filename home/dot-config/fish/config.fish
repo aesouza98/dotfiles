@@ -3,10 +3,9 @@
 
 # Define the default greeting from fish
 function fish_greeting
-    # pfetch
+    pfetch
 end
 
-# User paths (idempotent — fish_add_path deduplicates)
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.fzf/bin
 
