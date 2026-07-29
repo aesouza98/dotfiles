@@ -1,14 +1,8 @@
 local opt = vim.opt
-local keymap = vim.keymap
 
 -- Disable netrw
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrw = 1
-
--- Tabs config
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.tabstop = 2
 
 -- Setting termcolors
 opt.termguicolors = true
@@ -34,7 +28,7 @@ opt.wrap = false
 -- Undo and Backup
 opt.swapfile = false
 opt.backup = false
-opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+opt.undodir = vim.fn.stdpath("data") .. "/undodir"
 opt.undofile = true
 opt.updatetime = 50
 

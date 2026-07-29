@@ -10,15 +10,15 @@ window-padding-y = 5
 window-padding-balance = true
 
 # Shell
-# command = /opt/homebrew/bin/fish
-# shell-integration = fish
+command = /opt/homebrew/bin/fish
+shell-integration = fish
 # command = /bin/zsh -l -c "exec zellij"
-command = /bin/zsh
-shell-integration = zsh
+# command = /bin/zsh
+# shell-integration = zsh
 
 # Keybinding
 # keybind = global:cmd+/=toggle_quick_terminal
-macos-option-as-alt = true
+macos-option-as-alt = left
 
 # Font
 font-size = 15
@@ -26,5 +26,6 @@ font-feature = -calt, -liga, -dlig
 
 # Misc
 copy-on-select = clipboard
-mouse-scroll-multiplier = 2
+# mouse-scroll-multiplier = 0
+mouse-scroll-multiplier = precision:0.5,discrete:10
 scrollback-limit = 100000000

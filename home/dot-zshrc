@@ -59,4 +59,8 @@ export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 [[ -f "$HOME/.safe-chain/scripts/init-posix.sh" ]] && source "$HOME/.safe-chain/scripts/init-posix.sh"
 
 # Bitwarden ZSH Agent
-export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
+# export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
+
+# Added by Devin
+export PATH="/Users/adriano.elias/.codeium/windsurf/bin:$PATH"
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"

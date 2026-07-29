@@ -221,7 +221,9 @@ return {
 			-- config nvim cmp to work with snippet engine
 			snippet = {
 				expand = function(args)
-					luasnip.lsp_expand(args.body)
+					if has_luasnip then
+						luasnip.lsp_expand(args.body)
+					end
 				end,
 			},
 			-- autocompletion sources

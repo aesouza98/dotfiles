@@ -13,6 +13,15 @@ auto-info = true
 bufferline = "multiple"
 clipboard-provider = "pasteboard"
 end-of-line-diagnostics = "hint"
+idle-timeout = 50
+completion-trigger-len = 1
+completion-replace = true
+middle-click-paste = false
+color-modes = true
+popup-border = "all"
+gutters = ["diagnostics", "diff", "line-numbers", "spacer"]
+jump-label-alphabet = "asdfghjklqwertyuiopzxcvbnm"
+trim-trailing-whitespace = true
 
 [editor.statusline]
 left = ["mode", "spinner", "read-only-indicator", "file-modification-indicator"]
@@ -51,9 +60,26 @@ skip-levels = 1
 [editor.inline-diagnostics]
 cursor-line = "warning"
 
+[editor.whitespace.characters]
+space = "·"
+tab = "→"
+newline = "⏎"
+tabpad = "·"
+
+[editor.smart-tab]
+enable = true
+supersede-menu = false
+
 [keys.normal]
 ret = "goto_word"
 "C-/" = "toggle_comments"
+"C-s" = ":write"
+"C-g" = [
+  ':sh printf "\x1b[?1049l" > /dev/tty',
+  ':insert-output lazygit',
+  ':sh printf "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':redraw',
+]
 C-y = [
   ':sh rm -f /tmp/unique-file',
   ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file',
@@ -62,9 +88,12 @@ C-y = [
   ':redraw',
 ]
 
+[keys.insert]
+"C-s" = ["normal_mode", ":write"]
+
 [keys.normal.space]
 b = [":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name}"]
 B = "buffer_picker"
 w = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}"
-# "/" = "toggle_comments"
-
+n = "goto_next_diag"
+p = "goto_prev_diag"

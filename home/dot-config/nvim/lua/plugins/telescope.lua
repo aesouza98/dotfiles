@@ -6,12 +6,22 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"andrew-george/telescope-themes",
 		},
+		keys = {
+			{ "<leader>Ut", "<cmd>Telescope themes<cr>", desc = "Change Theme" },
+		},
 		config = function()
 			local telescope = require("telescope")
-			local actions = require("telescope.actions")
-			local builtin = require("telescope.builtin")
 
 			telescope.setup({
+				defaults = {
+					path_display = { "smart" },
+					mappings = {
+						i = {
+							["<C-k>"] = require("telescope.actions").move_selection_previous,
+							["<C-j>"] = require("telescope.actions").move_selection_next,
+						},
+					},
+				},
 				extensions = {
 					fzf = {
 						fuzzy = true,
@@ -32,35 +42,8 @@ return {
 
 			telescope.load_extension("fzf")
 			telescope.load_extension("themes")
-
-			defaults = {
-				path_display = { "smart" },
-				mappings = {
-					i = {
-						["<C-k>"] = actions.move_selection_previous,
-						["<C-j>"] = actions.move_selection_next,
-					},
-				},
-			}
-			-- TODO: Add Lazynvim Keymaps
-			-- Keymaps:
-			-- 	vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy Find Files" })
-			-- 	vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Fuzzy Find Git Files" })
-			-- 	vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep files" })
-			-- 	vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Grep files" })
-			-- 	vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Navigate through buffers" })
-			-- 	vim.keymap.set("n", "<leader>fB", builtin.git_branches, { desc = "Branches of current Repo" })
-			-- 	vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help commands" })
-			-- 	vim.keymap.set("n", "<leader>fd", function()
-			-- 		builtin.find_files({
-			-- 			find_command = { "fd", "--type", "d", "--hidden", "--no-ignore" },
-			-- 			prompt_title = " Find Directories",
-			-- 		})
-			-- 	end, { desc = "Find Directories" })
 		end,
-		vim.keymap.set("n", "<leader>Ut", "<cmd>Telescope themes<cr>", { desc = "Change Theme" }),
 	},
-	-- TODO: ver e talvez arrumar o ui-select
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		config = function()

@@ -11,16 +11,22 @@ fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.fzf/bin
 
 if status is-interactive
+    # Aliases
     source ~/.config/shell/aliases
-    abbr --add ssm aws ssm start-session \
-        --region us-west-1 \
-        --profile EBANX \
-        --target
+    abbr --add ssm aws ssm start-session --region us-west-1 --profile EBANX --target
 
-    atuin init fish | source
+    # Vars
+    set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship.toml"
+    set -gx EDITOR hx
+    set -gx VISUAL hx
+
+    # Utils
     zoxide init fish | source
 
-    #fzf_configure_bindings --directory=\cf --git_log=\cg --git_status=\cs --processes=\cp --history=\cr
+    # Keybindings
+    fzf_configure_bindings --directory=\cf --git_log=\cg --git_status=\cs --processes=\cp --history=\cr
+    bind \cv edit_command_buffer
 
+    # Prompt
     source (/opt/homebrew/bin/starship init fish --print-full-init | psub)
 end

@@ -62,4 +62,7 @@ crust = "#11111b"
 disabled = true
 
 [python]
-format = 'on [${pyenv_prefix}(\($virtualenv\) )]($style)'
+format = ' [${pyenv_prefix}(\($virtualenv\) )]($style)'
+
+[gcloud]
+disabled = true

@@ -38,7 +38,7 @@ return {
 				-- ["markdown.mdx"] = { "prettier", "markdownlint", "markdown-toc" },
 			},
 			format_on_save = {
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 1000,
 			},
@@ -59,7 +59,7 @@ return {
 
 		vim.keymap.set({ "n", "v" }, "<leader>cf", function()
 			conform.format({
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 1000,
 			})
