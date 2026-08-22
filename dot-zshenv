@@ -1,6 +1,7 @@
 export XDG_SCREENSHOTS_DIR=~/Imagens/Screenshots/
 export EDITOR=helix
-export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
+export SSH_AUTH_SOCK="/run/user/1000/ssh-agent.socket"
 #export TERM=xterm-256color
-#export GTK_IM_MODULE=xim
-# export QT_QPA_PLATFORMTHEME=qt6ct
+export GTK_IM_MODULE=cedilla
+export QT_IM_MODULE=cedilla
+export LC_CTYPE=pt_BR.UTF-8

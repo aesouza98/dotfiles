@@ -13,6 +13,7 @@ size = 12
 padding.x = 5
 padding.y = 5
 decorations = "transparent"
+opacity = 0.95
 
 [keyboard]
 bindings = [{ key = "F11", action = "ToggleFullscreen" }]

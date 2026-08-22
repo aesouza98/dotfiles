@@ -2,7 +2,7 @@
 # theme = noctalia
 theme = noctalia
 background-blur-radius = 20
-background-opacity = 0.75
+background-opacity = 0.95
 mouse-hide-while-typing = true
 # window-decoration = false
 window-padding-x = 5
@@ -25,3 +25,4 @@ font-feature = -calt, -liga, -dlig
 # Misc
 copy-on-select = clipboard
 mouse-scroll-multiplier = 2
+env = GTK_IM_MODULE=simple

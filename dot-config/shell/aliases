@@ -32,3 +32,8 @@ alias zed='zeditor'
 alias ping='ping -i 0.2'
 alias realias='source ~/.config/shell/aliases'
 alias rezsh='source ~/.zshrc'
+
+### Home Lab
+alias server-mode='~/scripts/power-modes/set-server-mode.sh'
+alias pc-mode='~/scripts/power-modes/set-pc-mode.sh'
+

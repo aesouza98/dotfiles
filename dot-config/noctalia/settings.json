@@ -79,28 +79,14 @@
         "widgets": {
             "center": [
                 {
-                    "defaultSettings": {
-                        "audioCodec": "opus",
-                        "audioSource": "default_output",
-                        "colorRange": "limited",
-                        "copyToClipboard": false,
-                        "customReplayDuration": "30",
-                        "directory": "",
-                        "filenamePattern": "recording_yyyyMMdd_HHmmss",
-                        "frameRate": "60",
-                        "hideInactive": false,
-                        "iconColor": "none",
-                        "quality": "very_high",
-                        "replayDuration": "30",
-                        "replayEnabled": false,
-                        "replayStorage": "ram",
-                        "resolution": "original",
-                        "restorePortalSession": false,
-                        "showCursor": true,
-                        "videoCodec": "h264",
-                        "videoSource": "portal"
-                    },
-                    "id": "plugin:screen-recorder"
+                    "colorizeDistroLogo": false,
+                    "colorizeSystemIcon": "none",
+                    "colorizeSystemText": "none",
+                    "customIconPath": "",
+                    "enableColorization": false,
+                    "icon": "noctalia",
+                    "id": "ControlCenter",
+                    "useDistroLogo": true
                 },
                 {
                     "clockColor": "none",
@@ -112,18 +98,15 @@
                     "useCustomFont": false
                 },
                 {
-                    "colorizeDistroLogo": false,
-                    "colorizeSystemIcon": "none",
-                    "customIconPath": "",
-                    "enableColorization": false,
-                    "icon": "noctalia",
-                    "id": "ControlCenter",
-                    "useDistroLogo": true
+                    "iconColor": "none",
+                    "id": "KeepAwake",
+                    "textColor": "none"
                 }
             ],
             "left": [
                 {
                     "colorizeSystemIcon": "none",
+                    "colorizeSystemText": "none",
                     "customIconPath": "",
                     "enableColorization": false,
                     "icon": "rocket",
@@ -159,6 +142,7 @@
                     "maxWidth": 300,
                     "scrollingMode": "hover",
                     "showIcon": true,
+                    "showText": true,
                     "textColor": "none",
                     "useFixedWidth": false
                 }
@@ -175,7 +159,7 @@
                     "showAlbumArt": true,
                     "showArtistFirst": true,
                     "showProgressRing": true,
-                    "showVisualizer": false,
+                    "showVisualizer": true,
                     "textColor": "none",
                     "useFixedWidth": false,
                     "visualizerType": "linear"
@@ -259,7 +243,8 @@
         "monitorForColors": "",
         "predefinedScheme": "Vesper",
         "schedulingMode": "off",
-        "useWallpaperColors": false
+        "syncGsettings": true,
+        "useWallpaperColors": true
     },
     "controlCenter": {
         "cards": [
@@ -514,6 +499,7 @@
         "showHibernateOnLockScreen": false,
         "showScreenCorners": false,
         "showSessionButtonsOnLockScreen": true,
+        "smoothScrollEnabled": true,
         "telemetryEnabled": true
     },
     "hooks": {
@@ -540,10 +526,11 @@
         "screenOffCommand": "",
         "screenOffTimeout": 600,
         "suspendCommand": "",
-        "suspendTimeout": 1800
+        "suspendTimeout": 0
     },
     "location": {
         "analogClockInCalendar": false,
+        "autoLocate": false,
         "firstDayOfWeek": 0,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
@@ -554,16 +541,16 @@
         "use12hourFormat": false,
         "useFahrenheit": false,
         "weatherEnabled": true,
-        "weatherShowEffects": true
+        "weatherShowEffects": true,
+        "weatherTaliaMascotAlways": false
     },
     "network": {
-        "airplaneModeEnabled": false,
         "bluetoothAutoConnect": true,
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 60000,
         "bluetoothRssiPollingEnabled": false,
-        "disableDiscoverability": false,
+        "disableDiscoverability": true,
         "networkPanelView": "wifi",
         "wifiDetailsViewMode": "list"
     },
@@ -763,6 +750,7 @@
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
+        "linkLightAndDarkWallpapers": true,
         "monitorDirectories": [
         ],
         "overviewBlur": 0.4,

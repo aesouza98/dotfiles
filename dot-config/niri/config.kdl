@@ -1,4 +1,10 @@
 
+environment {
+    GTK_IM_MODULE "cedilla"
+    QT_IM_MODULE "cedilla"
+    LC_CTYPE "pt_BR.UTF-8"
+}
+
 input {
   keyboard {
     xkb {
@@ -9,7 +15,7 @@ input {
     repeat-rate 60
 	}
   mouse {
-    accel-speed 1
+    accel-speed -0.3
     accel-profile "flat"
     scroll-method "no-scroll"
   }
@@ -34,7 +40,9 @@ layout {
   center-focused-column "never"
   background-color "transparent"
   preset-column-widths {
+      proportion 0.3
       proportion 0.5
+      proportion 0.7
   }
   default-column-width { proportion 0.5; }
   focus-ring {
@@ -67,7 +75,8 @@ layout {
   }
 }
 
-spawn-at-startup "noctalia-shell"
+// spawn-at-startup "noctalia-shell"
+spawn-at-startup "qs" "-c" "noctalia-shell"
 spawn-at-startup "fcitx5"
 spawn-at-startup "/usr/lib/pam_kwallet_init"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
@@ -84,6 +93,11 @@ screenshot-path "~/Imagens/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 animations {
 
+}
+
+window-rule {
+  match app-id=r#"zen$"# title="^Extensions:*$" 
+  open-floating true
 }
 
 window-rule {
@@ -116,6 +130,25 @@ window-rule {
 window-rule {
   match app-id=r#"^org\.gnome\.NautilusPreviewer$"#
   open-floating true
+}
+
+window-rule {
+  match app-id=r#"(?i)steam"# title=r#"^notificationtoasts_"#
+  open-floating true
+  default-floating-position x=16 y=16 relative-to="bottom-right"
+  open-focused false
+}
+
+window-rule {
+  match app-id=r#"brave-nngceckbapebfimnlniiiahkandclblb-Default"#
+  open-floating true
+}
+
+window-rule {
+  match app-id=r#"zen$"# title="^Picture-in-Picture$" 
+  open-floating true
+  default-floating-position x=16 y=16 relative-to="bottom-right"
+  open-focused false
 }
 
 layer-rule {
@@ -159,24 +192,24 @@ binds {
   //
   // Noctalia Shell Only Section
   //
-  Mod+Space { spawn-sh "noctalia-shell ipc call launcher toggle"; }
-  Mod+Shift+A { spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
-  Mod+Shift+Comma { spawn-sh "noctalia-shell ipc call settings toggle"; }
+  Mod+Space { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+  Mod+Shift+A { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+  Mod+Shift+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
 
-  Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn-sh "noctalia-shell ipc call sessionMenu toggle" ; }
+  Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle" ; }
 
   // Audio & Brightness
-  XF86AudioRaiseVolume { spawn-sh "noctalia-shell ipc call volume increase"; }
-  XF86AudioLowerVolume { spawn-sh "noctalia-shell ipc call volume decrease"; }
-  XF86AudioMute { spawn-sh "noctalia-shell ipc call volume muteOutput"; }
-  Mod+F1 { spawn-sh "noctalia-shell ipc call volume muteInput"; }
-  XF86MonBrightnessUp { spawn-sh "noctalia-shell ipc call brightness increase"; }
-  XF86MonBrightnessDown { spawn-sh "noctalia-shell ipc call brightness decrease"; }
+  XF86AudioRaiseVolume { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
+  XF86AudioLowerVolume { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
+  XF86AudioMute { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
+  Mod+F1 { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
+  XF86MonBrightnessUp { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
+  XF86MonBrightnessDown { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
 
-  XF86AudioNext        allow-when-locked=true { spawn-sh "noctalia-shell ipc call media next"; }
-  XF86AudioPause       allow-when-locked=true { spawn-sh "noctalia-shell ipc call media playPause"; }
-  XF86AudioPlay        allow-when-locked=true { spawn-sh "noctalia-shell ipc call media playPause"; }
-  XF86AudioPrev        allow-when-locked=true { spawn-sh "noctalia-shell ipc call media previous"; }
+  XF86AudioNext        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media next"; }
+  XF86AudioPause       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
+  XF86AudioPlay        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
+  XF86AudioPrev        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
 
   // Overview
   Mod+A repeat=false { toggle-overview; }
