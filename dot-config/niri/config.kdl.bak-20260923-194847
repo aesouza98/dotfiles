@@ -77,18 +77,17 @@ layout {
   }
 }
 
-// DMS sobe via systemd user service (dms.service, WantedBy=graphical-session.target).
-// Controlar com: systemctl --user {start,stop,restart} dms.service   ou   dms restart
+spawn-at-startup "noctalia"
 // spawn-at-startup "/usr/lib/pam_kwallet_init"  // não existe no Fedora; senhas ficam no gnome-keyring (destravado pelo GDM)
-// Polkit: agente embutido do DMS (Quickshell.Services.Polkit)
+// Polkit: agente embutido do Noctalia (shell.polkit_agent = true em ~/.config/noctalia/config.toml)
 spawn-at-startup "/usr/libexec/xdg-desktop-portal-gtk"
 // GTK/Flatpak leem o cursor do gsettings, não do XCURSOR_THEME; manter igual ao bloco cursor {}
 spawn-sh-at-startup "gsettings set org.gnome.desktop.interface cursor-theme Vimix-white-cursors && gsettings set org.gnome.desktop.interface cursor-size 24"
 
-// Alt+Tab usa o switcher nativo do niri (recent-windows), estilizado pelo DMS em
-// dms/colors.kdl. A doc do niri avisa que um bind normal em Alt+Tab tem precedencia
-// e anula o switcher -- por isso o antigo bind Alt+Tab do Noctalia foi removido.
-// Bind padrao do switcher: Alt+Tab { next-window; }
+// Alt+Tab fica com o window switcher do Noctalia
+recent-windows {
+    off
+}
 
 hotkey-overlay {
     skip-at-startup
@@ -183,13 +182,16 @@ window-rule {
 }
 
 window-rule {
-  match app-id="org.quickshell"
+  match app-id="dev.noctalia.Noctalia"
   open-floating true
   default-column-width { fixed 1080; }
   default-window-height { fixed 920; }
 }
 
-// Blur do wallpaper: ver include "dms/wpblur.kdl" no fim do arquivo
+layer-rule {
+    match namespace="^noctalia-wallpaper"
+    place-within-backdrop true
+}
 
 overview {
     workspace-shadow {
@@ -210,7 +212,7 @@ binds {
 
   // Launchers
   Mod+RETURN hotkey-overlay-title="Terminal" { spawn "ghostty"; }
-  Mod+D hotkey-overlay-title="Application Launcher" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+  Mod+D hotkey-overlay-title="Application Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
   Mod+S hotkey-overlay-title="Search..." { spawn "fuzzel-search"; }
 
   // Applications
@@ -234,39 +236,30 @@ binds {
   }
 
   // System
-  Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "dms" "ipc" "call" "lock" "lock"; }
+  Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "noctalia" "msg" "session" "lock"; }
+  Alt+Tab hotkey-overlay-title="Window Switcher" { spawn "noctalia" "msg" "window-switcher"; }
 
   //
-  // DMS (DankMaterialShell) Section
+  // Noctalia Shell Only Section
   //
-  Mod+Space hotkey-overlay-title="DMS: Launcher" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-  Mod+Shift+A hotkey-overlay-title="DMS: Control Center" { spawn "dms" "ipc" "call" "control-center" "toggle"; }
-  Mod+Shift+Comma hotkey-overlay-title="DMS: Settings" { spawn "dms" "ipc" "call" "settings" "focusOrToggle"; }
+  Mod+Space hotkey-overlay-title="Noctalia: Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+  Mod+Shift+A hotkey-overlay-title="Noctalia: Control Center" { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
+  Mod+Shift+Comma hotkey-overlay-title="Noctalia: Settings" { spawn "noctalia" "msg" "settings-toggle"; }
 
-  Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
-
-  // Novos paineis do DMS (teclas livres na sua config)
-  Mod+Shift+C hotkey-overlay-title="DMS: Clipboard"       { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
-  Mod+N       hotkey-overlay-title="DMS: Notificações"    { spawn "dms" "ipc" "call" "notifications" "toggle"; }
-  Mod+Shift+N hotkey-overlay-title="DMS: Notepad"         { spawn "dms" "ipc" "call" "notepad" "toggle"; }
-  Mod+Y       hotkey-overlay-title="DMS: Wallpapers"      { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
-  Mod+Shift+W hotkey-overlay-title="DMS: Window Rules"    { spawn "dms" "ipc" "call" "window-rules" "toggle"; }
-  Mod+Shift+M hotkey-overlay-title="DMS: Process List"    { spawn "dms" "ipc" "call" "processlist" "focusOrToggle"; }
-  Mod+Shift+B hotkey-overlay-title="DMS: Barra (toggle)"  { spawn "dms" "ipc" "call" "bar" "toggle"; }
-  Mod+Shift+Y hotkey-overlay-title="DMS: Night Mode"      { spawn "dms" "ipc" "call" "night" "toggle"; }
+  Mod+ESCAPE hotkey-overlay-title="Power Menu" { spawn "noctalia" "msg" "panel-toggle" "session"; }
 
   // Audio & Brightness
-  XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "3"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "3"; }
-  XF86AudioMute        allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
-  Mod+F1 { spawn "dms" "ipc" "call" "audio" "micmute"; }
-  XF86MonBrightnessUp   allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5"; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5"; }
+  XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-up"; }
+  XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-down"; }
+  XF86AudioMute        allow-when-locked=true { spawn "noctalia" "msg" "volume-mute"; }
+  Mod+F1 { spawn "noctalia" "msg" "mic-mute"; }
+  XF86MonBrightnessUp   allow-when-locked=true { spawn "noctalia" "msg" "brightness-up"; }
+  XF86MonBrightnessDown allow-when-locked=true { spawn "noctalia" "msg" "brightness-down"; }
 
-  XF86AudioNext        allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "next"; }
-  XF86AudioPause       allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "playPause"; }
-  XF86AudioPlay        allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "playPause"; }
-  XF86AudioPrev        allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "previous"; }
+  XF86AudioNext        allow-when-locked=true { spawn "noctalia" "msg" "media" "next"; }
+  XF86AudioPause       allow-when-locked=true { spawn "noctalia" "msg" "media" "toggle"; }
+  XF86AudioPlay        allow-when-locked=true { spawn "noctalia" "msg" "media" "toggle"; }
+  XF86AudioPrev        allow-when-locked=true { spawn "noctalia" "msg" "media" "previous"; }
 
   // Overview
   Mod+A repeat=false { toggle-overview; }
@@ -400,21 +393,19 @@ binds {
 
   Mod+Q { toggle-column-tabbed-display; }
 
-  Print { spawn "dms" "ipc" "call" "niri" "screenshot"; }
-  Super+Shift+S { spawn "dms" "ipc" "call" "niri" "screenshot"; }
-  Ctrl+Print { spawn "dms" "ipc" "call" "niri" "screenshotScreen"; }
-  // O DMS tem captura de janela propria (ao contrario do Noctalia)
-  Alt+Print { spawn "dms" "ipc" "call" "niri" "screenshotWindow"; }
+  Print { spawn "noctalia" "msg" "screenshot-region"; }
+  Super+Shift+S { spawn "noctalia" "msg" "screenshot-region"; }
+  Ctrl+Print { spawn "noctalia" "msg" "screenshot-fullscreen"; }
+  // O Noctalia não tem captura de janela; fica a do Niri
+  Alt+Print { screenshot-window; }
 
   Mod+Shift+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-  Mod+Shift+E { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
-  // Saída de emergência do Niri, funciona mesmo se o DMS travar
+  Mod+Shift+E { spawn "noctalia" "msg" "panel-toggle" "session"; }
+  // Saída de emergência do Niri, funciona mesmo se o Noctalia travar
   Ctrl+Alt+Delete { quit; }
 
-  Mod+Shift+P { spawn "dms" "dpms" "off"; }
+  Mod+Shift+P { spawn "noctalia" "msg" "dpms-off"; }
 }
 
-// Arquivos auto-gerados pelo DMS (nao editar; o DMS reescreve)
-include "dms/colors.kdl"
-include "dms/wpblur.kdl"
+include "noctalia.kdl"
