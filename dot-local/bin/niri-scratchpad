@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# niri-scratchpad — scratchpad no estilo "special workspace" do Hyprland.
+#
+#   niri-scratchpad <regex-do-app-id> <comando para abrir o app...>
+#
+# Sem janela: abre o app. Com a janela escondida ou em outro workspace: traz para
+# o workspace atual, flutuando e centralizada. Com a janela já em foco aqui:
+# manda para um workspace de estacionamento, sumindo com ela sem fechar nada.
+#
+# Todos os apps escondidos dividem o mesmo workspace, anotado por monitor em
+# $XDG_RUNTIME_DIR. Quando o último sai de lá o Niri apaga o workspace, a anotação
+# fica velha e a próxima chamada escolhe um canto novo.
+
+set -euo pipefail
+
+if (($# < 2)); then
+    echo "uso: ${0##*/} <regex-do-app-id> <comando...>" >&2
+    exit 2
+fi
+
+app_re=$1
+shift
+
+win=$(niri msg --json windows |
+    jq -c --arg re "$app_re" 'map(select(.app_id != null and (.app_id | test($re)))) | first')
+
+# Ainda não está aberto: só abre. A window-rule do Niri já faz nascer flutuando.
+if [[ -z $win || $win == null ]]; then
+    exec "$@"
+fi
+
+id=$(jq -r '.id' <<<"$win")
+win_ws=$(jq -r '.workspace_id' <<<"$win")
+win_focused=$(jq -r '.is_focused' <<<"$win")
+win_floating=$(jq -r '.is_floating' <<<"$win")
+
+workspaces=$(niri msg --json workspaces)
+read -r cur_ws cur_idx cur_out \
+    < <(jq -r '.[] | select(.is_focused) | "\(.id) \(.idx) \(.output)"' <<<"$workspaces")
+
+# Já está aqui e em foco: esconde.
+if [[ $win_ws == "$cur_ws" && $win_focused == true ]]; then
+    state="${XDG_RUNTIME_DIR:-/tmp}/niri-scratchpad.${cur_out}"
+    park_ws=""
+    park_idx=""
+
+    # Reaproveita o canto da última vez, se ele ainda existir neste monitor
+    if [[ -r $state ]]; then
+        park_ws=$(<"$state")
+        if [[ $park_ws =~ ^[0-9]+$ ]]; then
+            park_idx=$(jq -r --argjson ws "$park_ws" --arg out "$cur_out" \
+                '.[] | select(.id == $ws and .output == $out) | .idx' <<<"$workspaces")
+        else
+            park_ws=""
+        fi
+    fi
+
+    # Sem canto válido: usa o último workspace, que o Niri sempre mantém vazio no fim
+    if [[ -z $park_idx || $park_idx == "$cur_idx" ]]; then
+        park_idx=$(jq -r --arg out "$cur_out" '[.[] | select(.output == $out) | .idx] | max' <<<"$workspaces")
+        park_ws=$(jq -r --arg out "$cur_out" --argjson idx "$park_idx" \
+            '.[] | select(.output == $out and .idx == $idx) | .id' <<<"$workspaces")
+    fi
+
+    if [[ $park_idx == "$cur_idx" ]]; then
+        echo "${0##*/}: nenhum workspace livre para esconder a janela" >&2
+        exit 1
+    fi
+
+    niri msg action move-window-to-workspace --window-id "$id" --focus false "$park_idx"
+    printf '%s\n' "$park_ws" >"$state"
+    exit 0
+fi
+
+# Mostra. O Niri resolve índice de workspace por monitor, então acerta o monitor antes.
+win_out=$(jq -r --argjson ws "$win_ws" '.[] | select(.id == $ws) | .output' <<<"$workspaces")
+[[ $win_out == "$cur_out" ]] || niri msg action move-window-to-monitor --id "$id" "$cur_out"
+
+[[ $win_floating == true ]] || niri msg action move-window-to-floating --id "$id"
+[[ $win_ws == "$cur_ws" ]] || niri msg action move-window-to-workspace --window-id "$id" --focus false "$cur_idx"
+niri msg action center-window --id "$id"
+niri msg action focus-window --id "$id"

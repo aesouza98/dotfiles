@@ -33,7 +33,7 @@ zinit cdreplay -q
 
 # Zoxide + Atuin
 eval "$(zoxide init zsh)"
-eval "$(atuin init zsh)"
+# eval "$(atuin init zsh)"
 
 # Configs de Completion
 source <(carapace _carapace zsh)

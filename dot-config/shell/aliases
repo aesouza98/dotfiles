@@ -19,7 +19,7 @@ alias cd='z'
 alias lg="lazygit"
 
 ### Editor
-alias hx='helix'
+# alias hx='helix'
 alias lvim='NVIM_APPNAME=lazynvim nvim'
 alias vim='helix'
 # alias vim='nvim'

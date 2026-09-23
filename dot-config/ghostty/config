@@ -10,10 +10,10 @@ window-padding-y = 5
 window-padding-balance = true
 
 # Shell
-# command = fish
-# shell-integration = fish
-command = zsh
-shell-integration = zsh
+command = fish
+shell-integration = fish
+# command = zsh
+# shell-integration = zsh
 
 # Keybinding
 # keybind = global:cmd+/=toggle_quick_terminal
