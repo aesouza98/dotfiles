@@ -18,13 +18,14 @@ if status is-interactive
     set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship.toml"
     set -gx EDITOR hx
     set -gx VISUAL hx
+    set -gx EZA_CONFIG_DIR "$HOME/.config/eza"
 
     # Utils
     zoxide init fish | source
 
     # Keybindings
     fzf_configure_bindings --directory=\cf --git_log=\cg --git_status=\cs --processes=\cp --history=\cr
-    bind \cv edit_command_buffer
+    bind \ce edit_command_buffer
 
     # Prompt
     source (/opt/homebrew/bin/starship init fish --print-full-init | psub)
