@@ -62,3 +62,6 @@ home/dot-local/state/
 # ~/.config/herdr: session and logs
 home/dot-config/herdr/herdr-server.log
 home/dot-config/herdr/session.json
+
+# ~/.config/zsh/.zsh_history
+home/dot-config/zsh/.zsh_history
