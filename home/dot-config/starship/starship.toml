@@ -13,7 +13,7 @@ $line_break\
 $character"""
 
 # Set theme
-palette = "catppuccin_mocha"
+palette = "flexoki_dark"
 command_timeout = 1000
 
 [character]
@@ -57,6 +57,78 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
+
+[palettes.flexoki_dark]
+black = "#100f0f"
+red = "#d14d41"
+green = "#879a39"
+yellow = "#d0a215"
+blue = "#4385be"
+purple = "#ce5d97"
+cyan = "#3aa99f"
+white = "#878580"
+bright_black = "#575653"
+bright_red = "#af3029"
+bright_green = "#66800b"
+bright_yellow = "#ad8301"
+bright_blue = "#205ea6"
+bright_purple = "#a02f6f"
+bright_cyan = "#24837b"
+bright_white = "#cecdc3"
+
+[palettes.gruvbox_dark]
+black = "#282828"
+red = "#cc241d"
+green = "#98971a"
+yellow = "#d79921"
+blue = "#458588"
+purple = "#b16286"
+cyan = "#689d6a"
+white = "#a89984"
+bright_black = "#928374"
+bright_red = "#fb4934"
+bright_green = "#b8bb26"
+bright_yellow = "#fabd2f"
+bright_blue = "#83a598"
+bright_purple = "#d3869b"
+bright_cyan = "#8ec07c"
+bright_white = "#ebdbb2"
+
+[palettes.tokyonight_storm]
+black = "#1d202f"
+red = "#f7768e"
+green = "#9ece6a"
+yellow = "#e0af68"
+blue = "#7aa2f7"
+purple = "#bb9af7"
+cyan = "#7dcfff"
+white = "#a9b1d6"
+bright_black = "#4e5575"
+bright_red = "#f7768e"
+bright_green = "#9ece6a"
+bright_yellow = "#e0af68"
+bright_blue = "#7aa2f7"
+bright_purple = "#bb9af7"
+bright_cyan = "#7dcfff"
+bright_white = "#c0caf5"
+
+[palettes.kanagawa_wave]
+black = "#090618"
+red = "#c34043"
+green = "#76946a"
+yellow = "#c0a36e"
+blue = "#7e9cd8"
+purple = "#957fb8"
+cyan = "#6a9589"
+white = "#c8c093"
+bright_black = "#727169"
+bright_red = "#e82424"
+bright_green = "#98bb6c"
+bright_yellow = "#e6c384"
+bright_blue = "#7fb4ca"
+bright_purple = "#938aa9"
+bright_cyan = "#7aa89f"
+bright_white = "#dcd7ba"
 
 [package]
 disabled = true

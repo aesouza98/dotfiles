@@ -26,3 +26,4 @@ alias ping='ping -i 0.2'
 alias lg='lazygit'
 alias notes="nvim ~/Documents/Notes/"
 alias aws-profiles="grep '^\[profile ' ~/.aws/config | grep -v 'root-' | sed 's/^\[profile //; s/\]//'"
+alias aws-list-profiles="aws configure list-profiles"

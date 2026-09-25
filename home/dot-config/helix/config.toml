@@ -1,5 +1,5 @@
 # theme = "flexoki-dark"
-theme = "catppuccin_mocha"
+theme = "flexoki_dark"
 
 [editor]
 line-number = "relative"
