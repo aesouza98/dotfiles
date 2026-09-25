@@ -1,0 +1,45 @@
+2026-08-24T14:06:51.738331Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=14654
+2026-08-24T14:06:51.738395Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-08-24T14:06:51.982762Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-24T14:07:52.305528Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=14654
+2026-08-24T14:46:54.347453Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=19222
+2026-08-24T14:46:54.347712Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-08-24T14:46:54.386325Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-24T14:48:51.175045Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=19222
+2026-08-24T14:48:51.957769Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=19438
+2026-08-24T14:48:51.957848Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-08-24T14:48:52.201508Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-29T14:10:25.259350Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=19438
+2026-08-31T12:02:10.809243Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=41378
+2026-08-31T12:02:10.809332Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-08-31T12:02:10.928855Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-09-02T20:24:35.340807Z  WARN herdr::sound: sound playback failed sound=Done err=player exited with exit status: 1: Error: AudioQueueStart failed (-66681)
+2026-09-02T22:04:47.146413Z  WARN herdr::sound: sound playback failed sound=Done err=player exited with exit status: 1: Error: AudioQueueStart failed (-66681)
+2026-09-10T12:54:12.812303Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=41378
+2026-09-10T13:12:17.939991Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=4590
+2026-09-10T13:12:17.940154Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-09-10T13:12:18.142903Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-09-14T12:50:06.974624Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=47810
+2026-09-14T12:50:06.974750Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-09-14T12:50:07.114679Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-09-15T15:48:10.615505Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=47810
+2026-09-16T15:22:10.065446Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=4590
+2026-09-16T15:49:12.991674Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=3563
+2026-09-16T15:49:12.991809Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-09-16T15:49:13.205443Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-16T17:15:59.120115Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=3563
+2026-09-16T17:16:01.289421Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=42015
+2026-09-16T17:16:01.289490Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-09-16T17:16:01.354578Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-25T14:03:01.138392Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=42015
+2026-09-25T14:19:31.204298Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=5317
+2026-09-25T14:19:31.204692Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-09-25T14:19:31.242124Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-25T21:45:07.331001Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=5317
+2026-09-25T21:45:22.444373Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=92052
+2026-09-25T21:45:22.445536Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-09-25T21:45:22.516079Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-25T21:46:27.260775Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=92052
+2026-09-25T21:46:30.149733Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=92419
+2026-09-25T21:46:30.149771Z  INFO herdr::client: connecting to server path=/Users/adriano.elias/.config/herdr/herdr-client.sock
+2026-09-25T21:46:30.304591Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.1
