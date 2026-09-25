@@ -1,0 +1,55 @@
+#!/bin/bash
+# Renders a mock code snippet colored with the theme's real palette (including
+# background). Used as the fzf --preview command.
+set -euo pipefail
+
+THEME_ROOT="$HOME/.config/theme-switcher/themes"
+name="${1:-}"
+theme_dir="$THEME_ROOT/$name"
+
+[[ -f "$theme_dir/theme.conf" ]] || exit 0
+
+# shellcheck disable=SC1090
+source "$theme_dir/theme.conf"
+
+read -r bg fg red green yellow blue purple cyan <<< "$SWATCH"
+
+hex_to_rgb() {
+  local h=$1
+  printf '%d;%d;%d' "$((16#${h:0:2}))" "$((16#${h:2:2}))" "$((16#${h:4:2}))"
+}
+
+FG_BG=$'\033[48;2;'"$(hex_to_rgb "$bg")"m
+FG_FG=$'\033[38;2;'"$(hex_to_rgb "$fg")"m
+FG_COMMENT=$'\033[38;2;'"$(hex_to_rgb "$cyan")"m
+FG_KEYWORD=$'\033[38;2;'"$(hex_to_rgb "$red")"m
+FG_STRING=$'\033[38;2;'"$(hex_to_rgb "$green")"m
+FG_NUMBER=$'\033[38;2;'"$(hex_to_rgb "$yellow")"m
+FG_FUNC=$'\033[38;2;'"$(hex_to_rgb "$blue")"m
+FG_ACCENT=$'\033[38;2;'"$(hex_to_rgb "$purple")"m
+RESET=$'\033[0m'
+
+WIDTH=42
+
+# print_line "visible text" "colored text (same visible length, with ANSI codes)"
+print_line() {
+  local plain="$1" colored="$2"
+  local pad=$(( WIDTH - ${#plain} ))
+  (( pad < 0 )) && pad=0
+  printf '%s%s%*s%s\n' "${FG_BG}${colored}" "" "$pad" "" "$RESET"
+}
+
+echo "$DISPLAY_NAME"
+echo
+
+print_line "# theme-switcher.sh" "${FG_COMMENT}# theme-switcher.sh"
+print_line "" ""
+print_line "function apply(theme) {" \
+  "${FG_KEYWORD}function ${FG_FUNC}apply${FG_FG}(theme) {"
+print_line "    local accent = \"#89b4fa\"" \
+  "    ${FG_KEYWORD}local ${FG_FG}accent ${FG_FG}= ${FG_STRING}\"#89b4fa\""
+print_line "    local count  = 42        # ok" \
+  "    ${FG_KEYWORD}local ${FG_FG}count  ${FG_FG}= ${FG_NUMBER}42        ${FG_COMMENT}# ok"
+print_line "    return accent" \
+  "    ${FG_KEYWORD}return ${FG_ACCENT}accent"
+print_line "}" "}"

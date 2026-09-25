@@ -1,0 +1,145 @@
+#!/bin/bash
+# Applies a theme across Helix, Neovim, Ghostty, Eza, Starship, Bat, Zellij, Herdr
+# and Firefox (chrome only), then best-effort reloads every one of them live.
+# Usage: theme-switcher-apply <theme-name>
+
+set -euo pipefail
+
+THEME_ROOT="$HOME/.config/theme-switcher/themes"
+STATE_DIR="$HOME/.local/state/theme-switcher"
+
+name="${1:-}"
+theme_dir="$THEME_ROOT/$name"
+
+if [[ -z $name || ! -f "$theme_dir/theme.conf" ]]; then
+  echo "Tema desconhecido: '$name'. Temas disponiveis:" >&2
+  ls "$THEME_ROOT" >&2
+  exit 1
+fi
+
+# shellcheck disable=SC1090
+source "$theme_dir/theme.conf"
+
+# --- Helix: swap the active `theme = "..."` line. Helix watches config.toml and
+# hot-reloads the theme on save, so no extra action is needed. ---
+sed -i '' -E "s/^theme = \".*\"/theme = \"$HELIX_THEME\"/" "$HOME/.config/helix/config.toml"
+
+# --- Neovim: rewrite colorscheme.lua for new instances, and best-effort push the
+# colorscheme live to every already-running instance via its RPC socket. ---
+printf 'vim.cmd("colorscheme %s")\n' "$NVIM_COLORSCHEME" > "$HOME/.config/nvim/lua/colorscheme.lua"
+while IFS= read -r sock; do
+  [[ -S $sock ]] || continue
+  nvim --server "$sock" --remote-send ":colorscheme $NVIM_COLORSCHEME<CR>" >/dev/null 2>&1 || true
+done < <(find "${TMPDIR:-/tmp}" -maxdepth 3 -type s -name 'nvim.*.0' 2>/dev/null)
+
+# --- Ghostty: swap the active `theme = ...` line, then send SIGUSR2, which
+# Ghostty's runtime handles internally as "reload config" (same mechanism Omarchy
+# uses on Linux; the macOS build responds to it too). ---
+sed -i '' -E "s/^theme = .*/theme = $GHOSTTY_THEME/" "$HOME/.config/ghostty/config"
+pgrep -x ghostty >/dev/null 2>&1 && killall -SIGUSR2 ghostty >/dev/null 2>&1 || true
+
+# --- Eza: the only mechanism is swapping the whole theme.yml; it is read fresh
+# on every invocation, so this is already "live". ---
+mkdir -p "$HOME/.config/eza"
+cp "$theme_dir/eza.yml" "$HOME/.config/eza/theme.yml"
+
+# --- Starship: swap the active `palette = "..."` line; read fresh every prompt. ---
+sed -i '' -E "s/^palette = \".*\"/palette = \"$STARSHIP_PALETTE\"/" "$HOME/.config/starship/starship.toml"
+
+# --- Bat: config file drives the theme; read fresh on every invocation. ---
+mkdir -p "$HOME/.config/bat"
+printf -- '--theme="%s"\n' "$BAT_THEME" > "$HOME/.config/bat/config"
+
+# --- Zellij: swap the active `theme "..."` line for new sessions, and use
+# `theme_dark`/`set-dark-theme` as a live-reload trick for sessions already running. ---
+sed -i '' -E "s/^theme \".*\"/theme \"$ZELLIJ_THEME\"/" "$HOME/.config/zellij/config.kdl"
+sed -i '' -E "s/^theme_dark \".*\"/theme_dark \"$ZELLIJ_THEME\"/" "$HOME/.config/zellij/config.kdl"
+while IFS= read -r session; do
+  [[ -n $session ]] || continue
+  zellij --session "$session" action set-dark-theme >/dev/null 2>&1 || true
+done < <(zellij list-sessions --no-formatting 2>/dev/null | grep -v 'EXITED' | awk '{print $1}')
+
+# --- Herdr: rewrite the [theme] (and optional [theme.custom]) section of
+# config.toml, preserving everything else in the file, then reload the server. ---
+herdr_custom=""
+[[ -f "$theme_dir/herdr-custom.toml" ]] && herdr_custom="$theme_dir/herdr-custom.toml"
+mkdir -p "$HOME/.config/herdr"
+HERDR_THEME="$HERDR_THEME" HERDR_CUSTOM_FILE="$herdr_custom" python3 - "$HOME/.config/herdr/config.toml" <<'PYEOF'
+import os, re, sys
+
+path = sys.argv[1]
+theme_name = os.environ["HERDR_THEME"]
+custom_file = os.environ.get("HERDR_CUSTOM_FILE", "")
+
+try:
+    with open(path) as f:
+        content = f.read()
+except FileNotFoundError:
+    content = ""
+
+section_re = re.compile(r"^\[theme(\.custom)?\][^\[]*", re.MULTILINE)
+rest = section_re.sub("", content).strip()
+
+block = f'[theme]\nname = "{theme_name}"\n'
+if custom_file:
+    with open(custom_file) as f:
+        custom_lines = f.read().strip()
+    block += f"\n[theme.custom]\n{custom_lines}\n"
+
+new_content = block + ("\n" + rest + "\n" if rest else "")
+with open(path, "w") as f:
+    f.write(new_content)
+PYEOF
+herdr server reload-config >/dev/null 2>&1 || true
+
+# --- Firefox: substitute the SWATCH colors into the userChrome.css template
+# and drop it into the active profile's chrome dir. No live reload - the
+# window has to be reloaded manually for it to take effect. ---
+read -r bg fg red green yellow blue purple cyan <<< "$SWATCH"
+
+firefox_default_profile_path() {
+  local ini="$HOME/Library/Application Support/Firefox/profiles.ini"
+  [[ -f $ini ]] || return 1
+  awk -F'=' '
+    /^\[Install/ {section="install"; next}
+    /^\[Profile[0-9]+\]/ {section="profile"; path=""; isdef=0; next}
+    /^\[/ {section=""; next}
+    section=="install" && $1=="Default" {install_default=$2}
+    section=="profile" && $1=="Path" {path=$2}
+    section=="profile" && $1=="Default" && $2==1 {isdef=1}
+    section=="profile" && isdef==1 {default_profile_path=path}
+    END {
+      if (install_default != "") print install_default
+      else if (default_profile_path != "") print default_profile_path
+    }
+  ' "$ini"
+}
+
+firefox_rel_path="$(firefox_default_profile_path || true)"
+if [[ -n "${firefox_rel_path:-}" ]]; then
+  firefox_chrome_dir="$HOME/Library/Application Support/Firefox/$firefox_rel_path/chrome"
+  mkdir -p "$firefox_chrome_dir"
+  sed -E \
+    -e "s/__BG__/$bg/g" -e "s/__FG__/$fg/g" \
+    -e "s/__RED__/$red/g" -e "s/__GREEN__/$green/g" \
+    -e "s/__YELLOW__/$yellow/g" -e "s/__BLUE__/$blue/g" \
+    -e "s/__PURPLE__/$purple/g" -e "s/__CYAN__/$cyan/g" \
+    "$HOME/.config/theme-switcher/firefox/userChrome.css" > "$firefox_chrome_dir/userChrome.css"
+fi
+
+mkdir -p "$STATE_DIR"
+printf '%s\n' "$name" > "$STATE_DIR/current"
+
+echo "Tema aplicado: $DISPLAY_NAME"
+echo "  - Helix, Starship, Bat, Eza e Herdr: recarregados automaticamente."
+echo "  - Ghostty: recarregado automaticamente (SIGUSR2)."
+echo "  - Zellij: sessoes ativas recarregadas; sessoes novas ja abrem no tema certo."
+echo "  - Neovim: instancias abertas atualizadas; novas ja abrem no tema certo."
+if [[ -n "${firefox_rel_path:-}" ]]; then
+  echo "  - Firefox: userChrome.css atualizado. Recarregue a janela manualmente."
+fi
+
+# --- Validate: best-effort lint of the applied theme (hex format, Herdr
+# keys, Ghostty color sync). Warn-only - never blocks the apply. ---
+BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+"$BIN_DIR/theme-switcher-validate" "$name" || true

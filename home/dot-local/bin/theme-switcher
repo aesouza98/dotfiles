@@ -1,0 +1,60 @@
+#!/bin/bash
+# Interactive theme picker for Helix, Neovim, Ghostty, Eza, Starship, Bat,
+# Zellij, Herdr and Firefox (chrome only).
+#
+# Usage:
+#   theme-switcher            interactive picker (fzf, with color preview)
+#   theme-switcher list       list available theme names
+#   theme-switcher current   print the currently active theme
+#   theme-switcher set NAME  apply a theme non-interactively
+#   theme-switcher validate [NAME...]   lint theme(s) - hex format, Herdr keys, Ghostty sync
+
+set -euo pipefail
+
+THEME_ROOT="$HOME/.config/theme-switcher/themes"
+STATE_FILE="$HOME/.local/state/theme-switcher/current"
+BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+list_themes() {
+  find "$THEME_ROOT" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort
+}
+
+current_theme() {
+  [[ -f $STATE_FILE ]] && cat "$STATE_FILE" || echo "(nenhum)"
+}
+
+case "${1:-}" in
+  list)
+    list_themes
+    ;;
+  current)
+    current_theme
+    ;;
+  set)
+    [[ -n "${2:-}" ]] || { echo "Uso: theme-switcher set <nome>" >&2; exit 1; }
+    "$BIN_DIR/theme-switcher-apply" "$2"
+    ;;
+  validate)
+    shift
+    "$BIN_DIR/theme-switcher-validate" "$@"
+    ;;
+  ""|pick)
+    selected="$(
+      list_themes | fzf \
+        --prompt="Tema > " \
+        --preview="$BIN_DIR/theme-switcher-preview {}" \
+        --preview-window="right:60%" \
+        --height=60% \
+        --layout=reverse
+    )"
+    [[ -n $selected ]] || exit 0
+    "$BIN_DIR/theme-switcher-apply" "$selected"
+    if command -v osascript >/dev/null 2>&1; then
+      osascript -e "display notification \"$selected\" with title \"Theme Switcher\"" >/dev/null 2>&1 || true
+    fi
+    ;;
+  *)
+    echo "Uso: theme-switcher [list|current|set NAME|validate [NAME...]|pick]" >&2
+    exit 1
+    ;;
+esac

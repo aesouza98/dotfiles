@@ -1,0 +1,158 @@
+#!/usr/bin/env python3
+"""Validate theme-switcher themes: hex format, Herdr keys, Ghostty color sync.
+Usage: theme-switcher-validate [theme-name ...]   (default: all themes)
+Always exits 0 - this is a warn-only linter, never blocks theme-switcher-apply.
+"""
+import os
+import re
+import sys
+import tomllib
+from pathlib import Path
+
+THEME_ROOT = Path(os.path.expanduser("~/.config/theme-switcher/themes"))
+GHOSTTY_THEMES_DIR = Path(
+    "/Applications/Ghostty.app/Contents/Resources/ghostty/themes"
+)
+STARSHIP_TOML = Path(os.path.expanduser("~/.config/starship/starship.toml"))
+
+# Keys herdr's [theme.custom] actually accepts (v0.9.1 config-reference.json)
+HERDR_CUSTOM_KEYS = {
+    "accent", "panel_bg", "sidebar_bg", "active_row_bg", "selection_bg",
+    "surface0", "surface1", "surface_dim", "overlay0", "overlay1",
+    "text", "subtext0", "mauve", "green", "yellow", "red", "blue",
+    "teal", "peach",
+}
+
+# starship ANSI-role key -> ghostty palette index / field
+ANSI_ROLE_TO_GHOSTTY = {
+    "black": 0, "red": 1, "green": 2, "yellow": 3, "blue": 4,
+    "purple": 5, "cyan": 6, "white": 7,
+    "bright_black": 8, "bright_red": 9, "bright_green": 10,
+    "bright_yellow": 11, "bright_blue": 12, "bright_purple": 13,
+    "bright_cyan": 14, "bright_white": 15,
+}
+
+HEX_MISSING_HASH = re.compile(r'(?<!#)(?<![0-9a-fA-F])"([0-9a-fA-F]{6})"')
+
+
+def parse_theme_conf(path):
+    values = {}
+    for line in path.read_text().splitlines():
+        m = re.match(r'^(\w+)="(.*)"$', line.strip())
+        if m:
+            values[m.group(1)] = m.group(2)
+    return values
+
+
+def parse_ghostty_theme(name):
+    path = GHOSTTY_THEMES_DIR / name
+    if not path.is_file():
+        return None
+    colors = {}
+    for line in path.read_text().splitlines():
+        m = re.match(r"^palette\s*=\s*(\d+)=(#[0-9a-fA-F]{6})$", line.strip())
+        if m:
+            colors[int(m.group(1))] = m.group(2).lower()
+    return colors
+
+
+def scan_missing_hash(label, path, issues):
+    if not path.is_file():
+        return
+    for lineno, line in enumerate(path.read_text().splitlines(), 1):
+        for m in HEX_MISSING_HASH.finditer(line):
+            issues.append(f"{label}:{lineno}: hex sem '#' -> \"{m.group(1)}\"")
+
+
+def check_herdr_custom(theme_dir, issues):
+    custom = theme_dir / "herdr-custom.toml"
+    if not custom.is_file():
+        return
+    scan_missing_hash(f"{custom.name}", custom, issues)
+    try:
+        data = tomllib.loads(custom.read_text())
+    except tomllib.TOMLDecodeError as e:
+        issues.append(f"herdr-custom.toml: TOML invalido -> {e}")
+        return
+    for key in data:
+        base_key = key.split(".")[-1] if key.startswith(("light.", "dark.")) else key
+        if base_key not in HERDR_CUSTOM_KEYS:
+            issues.append(
+                f"herdr-custom.toml: chave desconhecida '{key}' "
+                f"(validas: {', '.join(sorted(HERDR_CUSTOM_KEYS))})"
+            )
+
+
+def check_starship_palette(theme_conf, issues):
+    palette_name = theme_conf.get("STARSHIP_PALETTE")
+    ghostty_name = theme_conf.get("GHOSTTY_THEME")
+    if not palette_name or not STARSHIP_TOML.is_file():
+        return
+    starship = tomllib.loads(STARSHIP_TOML.read_text())
+    palette = starship.get("palettes", {}).get(palette_name)
+    if palette is None:
+        issues.append(f"starship.toml: paleta '{palette_name}' nao existe")
+        return
+    for k, v in palette.items():
+        if isinstance(v, str) and re.fullmatch(r"[0-9a-fA-F]{6}", v):
+            issues.append(f"starship.toml [palettes.{palette_name}]: '{k}' sem '#' -> \"{v}\"")
+
+    if not ANSI_ROLE_TO_GHOSTTY.keys() <= palette.keys():
+        return  # named-token palette (e.g. official catppuccin) - nothing to cross-check
+    ghostty_colors = parse_ghostty_theme(ghostty_name) if ghostty_name else None
+    if not ghostty_colors:
+        return
+    for role, idx in ANSI_ROLE_TO_GHOSTTY.items():
+        expected = ghostty_colors.get(idx)
+        actual = str(palette.get(role, "")).lower()
+        if expected and actual != expected:
+            issues.append(
+                f"starship.toml [palettes.{palette_name}]: '{role}' = {actual} "
+                f"mas Ghostty '{ghostty_name}' usa {expected}"
+            )
+
+
+def validate_theme(theme_dir):
+    issues = []
+    conf_path = theme_dir / "theme.conf"
+    if not conf_path.is_file():
+        return [f"{theme_dir.name}: theme.conf ausente"]
+    conf = parse_theme_conf(conf_path)
+
+    scan_missing_hash("eza.yml", theme_dir / "eza.yml", issues)
+    check_herdr_custom(theme_dir, issues)
+    check_starship_palette(conf, issues)
+
+    for custom_dir, key in (("helix/themes", "HELIX_THEME"), ("zellij/themes", "ZELLIJ_THEME")):
+        theme_val = conf.get(key)
+        if not theme_val:
+            continue
+        for ext in (".toml", ".kdl"):
+            candidate = Path(os.path.expanduser(f"~/.config/{custom_dir}/{theme_val}{ext}"))
+            if candidate.is_file():
+                scan_missing_hash(candidate.name, candidate, issues)
+
+    return [f"{theme_dir.name}: {issue}" for issue in issues]
+
+
+def main():
+    names = sys.argv[1:]
+    theme_dirs = (
+        [THEME_ROOT / n for n in names] if names
+        else sorted(p for p in THEME_ROOT.iterdir() if p.is_dir())
+    )
+    all_issues = []
+    for theme_dir in theme_dirs:
+        all_issues.extend(validate_theme(theme_dir))
+
+    if all_issues:
+        print(f"theme-switcher validate: {len(all_issues)} problema(s) encontrado(s)")
+        for issue in all_issues:
+            print(f"  - {issue}")
+    else:
+        print("theme-switcher validate: tudo ok")
+    return 0  # warn-only, never fail the caller
+
+
+if __name__ == "__main__":
+    sys.exit(main())

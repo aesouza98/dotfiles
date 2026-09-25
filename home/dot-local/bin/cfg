@@ -1,0 +1,212 @@
+#!/bin/bash
+# Interactive config picker: escolhe um programa e abre o config no $EDITOR.
+#
+# Usage:
+#   cfg              picker interativo (fzf, com preview)
+#   cfg list         lista os programas disponiveis
+#   cfg NAME         abre direto (match case-insensitive, aceita parcial)
+#
+# Symlinks sao resolvidos para o alvo real (~/.dotfiles/...), para o editor
+# enxergar o repo git do arquivo aberto.
+#
+# Editor: $EDITOR (fallback: hx). Aceita argumentos, ex: EDITOR="code -w"
+
+set -euo pipefail
+
+EDITOR_CMD="${EDITOR:-hx}"
+SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
+PREVIEW_LINES=40
+
+# "Nome|caminho [caminho ...]" - ordem alfabetica, sem espacos dentro dos caminhos.
+# Entradas cujos caminhos nao existem sao omitidas do picker.
+ENTRIES="$(
+  cat <<EOF
+AeroSpace|$HOME/.aerospace.toml
+AWS|$HOME/.aws/config
+Claude Code|$HOME/.claude/CLAUDE.md $HOME/.claude/settings.json
+Cliamp|$HOME/.config/cliamp
+Devin CLI|$HOME/.config/devin/AGENTS.md $HOME/.config/devin/config.json
+Dotfiles|$HOME/.dotfiles
+fish|$HOME/.config/fish
+Ghostty|$HOME/.config/ghostty
+Git|$HOME/.gitconfig $HOME/.gitconfig-ebanx $HOME/.config/git/ignore
+Hammerspoon|$HOME/.hammerspoon
+Helix|$HOME/.config/helix
+Herdr|$HOME/.config/herdr
+Neovim|$HOME/.config/nvim
+Shell|$HOME/.config/shell
+SSH|$HOME/.ssh/config
+Starship|$HOME/.config/starship
+Theme Switcher|$HOME/.config/theme-switcher
+yazi|$HOME/.config/yazi
+zsh|$HOME/.zshrc $HOME/.zshenv $HOME/.zprofile
+EOF
+)"
+
+lower() {
+  printf '%s' "$1" | tr '[:upper:]' '[:lower:]'
+}
+
+tildify() {
+  printf '%s' "${1/#$HOME/~}"
+}
+
+resolve() {
+  local target
+  target="$(realpath "$1" 2>/dev/null || true)"
+  if [[ -n $target ]]; then printf '%s' "$target"; else printf '%s' "$1"; fi
+}
+
+any_path_exists() {
+  local path
+  for path in $1; do
+    if [[ -e $path ]]; then return 0; fi
+  done
+  return 1
+}
+
+# Nomes das entradas que tem ao menos um caminho existente.
+entry_names() {
+  local line
+  while IFS= read -r line; do
+    [[ -n $line ]] || continue
+    if any_path_exists "${line#*|}"; then printf '%s\n' "${line%%|*}"; fi
+  done <<< "$ENTRIES"
+}
+
+# Match exato (case-insensitive); se nao houver, todos os matches parciais.
+matches_for() {
+  local query line name lname exact="" partial=""
+  query="$(lower "$1")"
+  while IFS= read -r line; do
+    [[ -n $line ]] || continue
+    name="${line%%|*}"
+    lname="$(lower "$name")"
+    if [[ $lname == "$query" ]]; then exact="$line"; fi
+    case "$lname" in *"$query"*) partial="$partial$line"$'\n' ;; esac
+  done <<< "$ENTRIES"
+  if [[ -n $exact ]]; then printf '%s\n' "$exact"; else printf '%s' "$partial"; fi
+}
+
+open_entry() {
+  local name="$1" paths="$2" path
+  local targets=()
+  for path in $paths; do
+    [[ -e $path ]] || continue
+    targets+=("$(resolve "$path")")
+  done
+  if [[ ${#targets[@]} -eq 0 ]]; then
+    echo "cfg: nenhum config encontrado para '$name'" >&2
+    return 1
+  fi
+  # $EDITOR pode trazer argumentos (ex: "code -w"), entao separa por espacos.
+  local editor_argv=()
+  read -ra editor_argv <<< "$EDITOR_CMD"
+  command -v "${editor_argv[0]:-}" >/dev/null 2>&1 || {
+    echo "cfg: editor '$EDITOR_CMD' nao encontrado (\$EDITOR)" >&2
+    return 1
+  }
+  exec "${editor_argv[@]}" "${targets[@]}"
+}
+
+open_by_name() {
+  local found count line
+  found="$(matches_for "$1")"
+  if [[ -z $found ]]; then
+    echo "cfg: '$1' nao encontrado. Use 'cfg list'." >&2
+    return 1
+  fi
+  count="$(printf '%s' "$found" | grep -c '' || true)"
+  if [[ $count -gt 1 ]]; then
+    if [[ ${2:-} == "picker" ]] && command -v fzf >/dev/null 2>&1; then
+      pick "$1"
+      return $?
+    fi
+    echo "cfg: '$1' e ambiguo:" >&2
+    printf '%s' "$found" | cut -d'|' -f1 | sed 's/^/  /' >&2
+    return 1
+  fi
+  line="$(printf '%s' "$found" | head -1)"
+  open_entry "${line%%|*}" "${line#*|}"
+}
+
+preview() {
+  local found line name paths path target
+  found="$(matches_for "$1")"
+  [[ -n $found ]] || return 0
+  line="$(printf '%s' "$found" | head -1)"
+  name="${line%%|*}"
+  paths="${line#*|}"
+
+  printf '%s\n\n' "$name"
+  for path in $paths; do
+    target="$(resolve "$path")"
+    if [[ ! -e $path ]]; then
+      printf '%s  (ausente)\n\n' "$(tildify "$path")"
+      continue
+    fi
+    if [[ $target != "$path" ]]; then
+      printf '%s -> %s\n' "$(tildify "$path")" "$(tildify "$target")"
+    else
+      printf '%s\n' "$(tildify "$path")"
+    fi
+    if [[ -d $target ]]; then
+      if command -v eza >/dev/null 2>&1; then
+        eza --tree --level=2 --git-ignore --color=always "$target" 2>/dev/null | head -"$PREVIEW_LINES" || true
+      else
+        ls -1 "$target" | head -"$PREVIEW_LINES" || true
+      fi
+    else
+      if command -v bat >/dev/null 2>&1; then
+        bat --style=numbers --color=always --line-range=":$PREVIEW_LINES" "$target" 2>/dev/null || true
+      else
+        head -"$PREVIEW_LINES" "$target" || true
+      fi
+    fi
+    printf '\n'
+  done
+}
+
+pick() {
+  command -v fzf >/dev/null 2>&1 || {
+    echo "cfg: fzf nao encontrado" >&2
+    return 1
+  }
+  [[ -t 0 ]] || {
+    echo "cfg: o picker precisa de um terminal interativo" >&2
+    return 1
+  }
+  local selected
+  selected="$(
+    entry_names | fzf \
+      --prompt="Config > " \
+      --preview="\"$SELF\" __preview {}" \
+      --preview-window="right:60%" \
+      --height=60% \
+      --layout=reverse \
+      --query="${1:-}" || true
+  )"
+  [[ -n $selected ]] || return 0
+  open_by_name "$selected"
+}
+
+case "${1:-}" in
+  list)
+    entry_names
+    ;;
+  __preview)
+    preview "${2:-}"
+    ;;
+  -h | --help | help)
+    echo "Uso: cfg [list|NAME]"
+    echo "  cfg          picker interativo"
+    echo "  cfg list     lista programas"
+    echo "  cfg NAME     abre o config do programa no \$EDITOR (fallback: hx)"
+    ;;
+  "" | pick)
+    pick
+    ;;
+  *)
+    open_by_name "$1" picker
+    ;;
+esac

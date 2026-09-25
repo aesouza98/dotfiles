@@ -1,8 +1,34 @@
 #! /bin/bash
+#
+# Configure the CodeArtifact pypi index.
+#
+#   codeartifact-login                        writes the index into the global pip config
+#   eval "$(codeartifact-login --export)"     bash/zsh: exports it for the current shell
+#   codeartifact-login --export fish | source fish: same, no global config
+#
+# The exported form works with pip, uv and pipx and leaves no token on disk.
+#
+# The global pip config keeps the token on disk for 12 hours and every pip
+# install starts failing with 401 once it expires. Prefer --export, or
+# aws-secrets-cli-install, which handles the token by itself.
 
 if TOKEN=$(aws codeartifact get-authorization-token --duration-seconds 43200 --domain ebx-cloudops-domain --domain-owner 838648578997 --region us-east-1 --profile root-838648578997 --output text --query 'authorizationToken'); then
     INDEX_URL=https://aws:${TOKEN}@ebx-cloudops-domain-838648578997.d.codeartifact.us-east-1.amazonaws.com/pypi/ebx-cloudops-repo/simple/
+
+    if [ "$1" = "--export" ]; then
+        if [ "$2" = "fish" ]; then
+            echo "set -gx PIP_EXTRA_INDEX_URL '${INDEX_URL}'"
+            echo "set -gx UV_EXTRA_INDEX_URL '${INDEX_URL}'"
+        else
+            echo "export PIP_EXTRA_INDEX_URL='${INDEX_URL}'"
+            echo "export UV_EXTRA_INDEX_URL='${INDEX_URL}'"
+        fi
+        echo "CodeArtifact index exported to this shell, expires in 12 hours at $(date -v+12H)" >&2
+        exit 0
+    fi
+
     pip config set global.extra-index-url "$INDEX_URL"
     echo "Successfully configured pip to use AWS CodeArtifact repository https://ebx-cloudops-domain-838648578997.d.codeartifact.us-east-1.amazonaws.com/pypi/ebx-cloudops-repo/"
     echo "Login expires in 12 hours at $(date -v+12H)"
+    echo "Note: uv and pipx >= 1.16 ignore the pip config, for those use: eval \"\$(codeartifact-login --export)\""
 fi
