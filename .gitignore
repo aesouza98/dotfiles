@@ -30,6 +30,7 @@ home/dot-config/fish/conf.d/secrets.fish
 home/dot-config/zellij/config.kdl.bak
 home/dot-config/zellij/config.kdl.bak.1
 home/dot-config/ghostty/config.bkp
+home/dot-config/fish/fish_variables
 home/dot-config/fish/conf.d/fish_frozen_key_bindings.fish
 home/dot-config/fish/conf.d/fish_frozen_theme.fish
 home/dot-config/fish/conf.d/fish_frozen_theme.fish.bak
@@ -57,3 +58,7 @@ home/dot-local/share/zinit/
 
 # ~/.local/state: all runtime state
 home/dot-local/state/
+
+# ~/.config/herdr: session and logs
+home/dot-config/herdr/herdr-server.log
+home/dot-config/herdr/session.json
