@@ -66,3 +66,7 @@ home/dot-config/herdr/session.json
 # ~/.config/zsh: zsh history and secrets
 home/dot-config/zsh/.zsh_history
 home/dot-config/zsh/secrets.zsh
+
+
+# zsh completion dump (regenerated)
+home/dot-config/zsh/.zcompdump*
