@@ -26,6 +26,9 @@ source "$ZDOTDIR/aliases.zsh"
 # utils
 source "$ZDOTDIR/utils.zsh"
 
+# aws wrapper
+source "$ZDOTDIR/aws.zsh"
+
 # history
 source "$ZDOTDIR/history.zsh"
 
