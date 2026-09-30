@@ -26,9 +26,6 @@ source "$ZDOTDIR/aliases.zsh"
 # utils
 source "$ZDOTDIR/utils.zsh"
 
-# completions
-source "$ZDOTDIR/completions.zsh"
-
 # history
 source "$ZDOTDIR/history.zsh"
 
