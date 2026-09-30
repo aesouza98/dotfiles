@@ -1,6 +1,6 @@
 #!/bin/bash
 # Applies a theme by repointing ~/.config/themes/current at the theme dir, then
-# best-effort reloads Helix, Neovim, Ghostty, Eza and Bat (all read current/).
+# best-effort reloads Helix, Neovim, Ghostty, Eza, Bat and Tmux (all read current/).
 # Starship, Zellij, Herdr and Firefox (chrome only) still get their config edited.
 # Usage: theme-switcher-apply <theme-name>
 
@@ -58,6 +58,11 @@ while IFS= read -r session; do
   [[ -n $session ]] || continue
   zellij --session "$session" action set-dark-theme >/dev/null 2>&1 || true
 done < <(zellij list-sessions --no-formatting 2>/dev/null | grep -v 'EXITED' | awk '{print $1}')
+
+# --- Tmux: palette lives in current/tmux.conf (@t_* options). Re-source it
+# in the running server; new servers read it from ~/.config/tmux/tmux.conf. ---
+tmux source-file "$CURRENT/tmux.conf" >/dev/null 2>&1 || true
+tmux refresh-client -S >/dev/null 2>&1 || true
 
 # --- Herdr: no include support, replace the [theme] (and [theme.custom])
 # sections of config.toml with current/herdr.toml, preserving the rest of the
@@ -124,6 +129,7 @@ fi
 echo "Tema aplicado: $DISPLAY_NAME"
 echo "  - Helix, Starship, Bat, Eza e Herdr: recarregados automaticamente."
 echo "  - Symlink: $CURRENT -> $name"
+echo "  - Tmux: paleta recarregada nos servidores ativos."
 echo "  - Ghostty: recarregado automaticamente (SIGUSR2)."
 echo "  - Zellij: sessoes ativas recarregadas; sessoes novas ja abrem no tema certo."
 echo "  - Neovim: instancias abertas atualizadas; novas ja abrem no tema certo."
