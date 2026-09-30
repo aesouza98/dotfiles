@@ -1,1 +1,1 @@
-vim.cmd("colorscheme flexoki-dark")
+vim.cmd("colorscheme catppuccin-mocha")

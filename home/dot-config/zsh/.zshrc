@@ -11,6 +11,9 @@ setopt inc_append_history
 # env
 source "$ZDOTDIR/.zshenv"
 
+# secrets
+[[ -f "$ZDOTDIR/secrets.zsh" ]] && source "$ZDOTDIR/secrets.zsh"
+
 # settings
 source "$ZDOTDIR/backspace.zsh"
 
