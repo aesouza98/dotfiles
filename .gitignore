@@ -72,3 +72,6 @@ home/dot-config/themes/current
 
 # zsh completion dump (regenerated)
 home/dot-config/zsh/.zcompdump*
+
+# tmux plugins (TPM-managed, reinstall with prefix I)
+home/dot-config/tmux/plugins/
