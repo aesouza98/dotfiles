@@ -1,0 +1,5 @@
+#!/bin/sh
+# Prints "repo/branch" (max 18 chars) for the given dir, nothing outside a git repo
+top=$(git -C "$1" rev-parse --show-toplevel 2>/dev/null) || exit 0
+branch=$(git -C "$1" branch --show-current 2>/dev/null)
+printf '%s/%s' "${top##*/}" "${branch:-detached}" | cut -c1-18

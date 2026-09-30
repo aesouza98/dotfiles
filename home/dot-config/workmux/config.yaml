@@ -1,0 +1,14 @@
+# workmux global config - tmux backend, Claude as default agent
+agent: claude
+nerdfont: true
+merge_strategy: merge
+
+# Tab format is owned by ~/.config/tmux/tmux.conf (@workmux_status)
+status_format: false
+
+# Agent pane (focused) + shell pane below
+panes:
+  - command: <agent>
+    focus: true
+  - split: horizontal
+    size: 25
