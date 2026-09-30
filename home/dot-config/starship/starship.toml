@@ -13,7 +13,7 @@ $line_break\
 $character"""
 
 # Set theme
-palette = "catppuccin_mocha"
+palette = "tokyonight_storm"
 command_timeout = 1000
 
 [character]

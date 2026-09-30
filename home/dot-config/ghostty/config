@@ -1,6 +1,4 @@
 # Appearance
-# theme = Catppuccin Mocha
-theme = Catppuccin Mocha
 background-blur-radius = 20
 background-opacity = 0.95
 mouse-hide-while-typing = true
@@ -29,3 +27,6 @@ copy-on-select = clipboard
 # mouse-scroll-multiplier = 0
 mouse-scroll-multiplier = precision:0.5,discrete:10
 scrollback-limit = 100000000
+
+# Theme (managed by theme-switcher)
+config-file = ?../themes/current/ghostty.conf

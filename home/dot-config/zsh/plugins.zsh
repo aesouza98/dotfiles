@@ -13,6 +13,8 @@ zinit snippet OMZP::aws
 zinit snippet OMZP::sudo
 zinit snippet OMZP::extract
 zinit snippet OMZP::colored-man-pages
+zinit snippet OMZL::git.zsh
+zinit snippet OMZP::git
 
 # deja - auto suggestions
 if (( $+commands[deja] )); then
