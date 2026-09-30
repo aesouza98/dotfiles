@@ -3,7 +3,7 @@
 # background). Used as the fzf --preview command.
 set -euo pipefail
 
-THEME_ROOT="$HOME/.config/theme-switcher/themes"
+THEME_ROOT="$HOME/.config/themes"
 name="${1:-}"
 theme_dir="$THEME_ROOT/$name"
 

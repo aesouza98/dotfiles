@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/opt/homebrew/bin/python3
 """Validate theme-switcher themes: hex format, Herdr keys, Ghostty color sync.
 Usage: theme-switcher-validate [theme-name ...]   (default: all themes)
 Always exits 0 - this is a warn-only linter, never blocks theme-switcher-apply.
@@ -9,7 +9,7 @@ import sys
 import tomllib
 from pathlib import Path
 
-THEME_ROOT = Path(os.path.expanduser("~/.config/theme-switcher/themes"))
+THEME_ROOT = Path(os.path.expanduser("~/.config/themes"))
 GHOSTTY_THEMES_DIR = Path(
     "/Applications/Ghostty.app/Contents/Resources/ghostty/themes"
 )
@@ -44,6 +44,14 @@ def parse_theme_conf(path):
     return values
 
 
+def read_theme_file(theme_dir, filename, pattern):
+    path = theme_dir / filename
+    if not path.is_file():
+        return None
+    m = re.search(pattern, path.read_text(), re.MULTILINE)
+    return m.group(1) if m else None
+
+
 def parse_ghostty_theme(name):
     path = GHOSTTY_THEMES_DIR / name
     if not path.is_file():
@@ -65,27 +73,27 @@ def scan_missing_hash(label, path, issues):
 
 
 def check_herdr_custom(theme_dir, issues):
-    custom = theme_dir / "herdr-custom.toml"
+    custom = theme_dir / "herdr.toml"
     if not custom.is_file():
         return
     scan_missing_hash(f"{custom.name}", custom, issues)
     try:
         data = tomllib.loads(custom.read_text())
     except tomllib.TOMLDecodeError as e:
-        issues.append(f"herdr-custom.toml: TOML invalido -> {e}")
+        issues.append(f"herdr.toml: TOML invalido -> {e}")
         return
-    for key in data:
+    for key in data.get("theme", {}).get("custom", {}):
         base_key = key.split(".")[-1] if key.startswith(("light.", "dark.")) else key
         if base_key not in HERDR_CUSTOM_KEYS:
             issues.append(
-                f"herdr-custom.toml: chave desconhecida '{key}' "
+                f"herdr.toml: chave desconhecida '{key}' "
                 f"(validas: {', '.join(sorted(HERDR_CUSTOM_KEYS))})"
             )
 
 
-def check_starship_palette(theme_conf, issues):
-    palette_name = theme_conf.get("STARSHIP_PALETTE")
-    ghostty_name = theme_conf.get("GHOSTTY_THEME")
+def check_starship_palette(theme_dir, issues):
+    palette_name = read_theme_file(theme_dir, "starship.toml", r'^palette = "(.*)"')
+    ghostty_name = read_theme_file(theme_dir, "ghostty.conf", r"^theme = (.*)$")
     if not palette_name or not STARSHIP_TOML.is_file():
         return
     starship = tomllib.loads(STARSHIP_TOML.read_text())
@@ -121,10 +129,10 @@ def validate_theme(theme_dir):
 
     scan_missing_hash("eza.yml", theme_dir / "eza.yml", issues)
     check_herdr_custom(theme_dir, issues)
-    check_starship_palette(conf, issues)
+    check_starship_palette(theme_dir, issues)
 
-    for custom_dir, key in (("helix/themes", "HELIX_THEME"), ("zellij/themes", "ZELLIJ_THEME")):
-        theme_val = conf.get(key)
+    helix_theme = read_theme_file(theme_dir, "helix.toml", r'^inherits = "(.*)"')
+    for custom_dir, theme_val in (("helix/themes", helix_theme), ("zellij/themes", conf.get("ZELLIJ_THEME"))):
         if not theme_val:
             continue
         for ext in (".toml", ".kdl"):
@@ -139,7 +147,7 @@ def main():
     names = sys.argv[1:]
     theme_dirs = (
         [THEME_ROOT / n for n in names] if names
-        else sorted(p for p in THEME_ROOT.iterdir() if p.is_dir())
+        else sorted(p for p in THEME_ROOT.iterdir() if p.is_dir() and not p.is_symlink())
     )
     all_issues = []
     for theme_dir in theme_dirs:

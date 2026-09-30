@@ -1,12 +1,13 @@
 #!/bin/bash
-# Applies a theme across Helix, Neovim, Ghostty, Eza, Starship, Bat, Zellij, Herdr
-# and Firefox (chrome only), then best-effort reloads every one of them live.
+# Applies a theme by repointing ~/.config/themes/current at the theme dir, then
+# best-effort reloads Helix, Neovim, Ghostty, Eza and Bat (all read current/).
+# Starship, Zellij, Herdr and Firefox (chrome only) still get their config edited.
 # Usage: theme-switcher-apply <theme-name>
 
 set -euo pipefail
 
-THEME_ROOT="$HOME/.config/theme-switcher/themes"
-STATE_DIR="$HOME/.local/state/theme-switcher"
+THEME_ROOT="$HOME/.config/themes"
+CURRENT="$THEME_ROOT/current"
 
 name="${1:-}"
 theme_dir="$THEME_ROOT/$name"
@@ -20,35 +21,34 @@ fi
 # shellcheck disable=SC1090
 source "$theme_dir/theme.conf"
 
-# --- Helix: swap the active `theme = "..."` line. Helix watches config.toml and
-# hot-reloads the theme on save, so no extra action is needed. ---
-sed -i '' -E "s/^theme = \".*\"/theme = \"$HELIX_THEME\"/" "$HOME/.config/helix/config.toml"
+# --- Current: repoint the symlink every program reads its theme from. ---
+ln -sfn "$name" "$CURRENT"
 
-# --- Neovim: rewrite colorscheme.lua for new instances, and best-effort push the
-# colorscheme live to every already-running instance via its RPC socket. ---
-printf 'vim.cmd("colorscheme %s")\n' "$NVIM_COLORSCHEME" > "$HOME/.config/nvim/lua/colorscheme.lua"
+# --- Helix: config has `theme = "current"`, themes/current.toml links to
+# current/helix.toml. SIGUSR1 makes Helix reload config and theme. ---
+pkill -USR1 -x hx >/dev/null 2>&1 || true
+
+# --- Neovim: colorscheme.lua loads current/nvim.lua on startup; push the same
+# file live to every already-running instance via its RPC socket. ---
 while IFS= read -r sock; do
   [[ -S $sock ]] || continue
-  nvim --server "$sock" --remote-send ":colorscheme $NVIM_COLORSCHEME<CR>" >/dev/null 2>&1 || true
+  nvim --server "$sock" --remote-send ":luafile $CURRENT/nvim.lua<CR>" >/dev/null 2>&1 || true
 done < <(find "${TMPDIR:-/tmp}" -maxdepth 3 -type s -name 'nvim.*.0' 2>/dev/null)
 
-# --- Ghostty: swap the active `theme = ...` line, then send SIGUSR2, which
-# Ghostty's runtime handles internally as "reload config" (same mechanism Omarchy
-# uses on Linux; the macOS build responds to it too). ---
-sed -i '' -E "s/^theme = .*/theme = $GHOSTTY_THEME/" "$HOME/.config/ghostty/config"
+# --- Ghostty: config-file include reads current/ghostty.conf. SIGUSR2 is
+# handled internally as "reload config". ---
 pgrep -x ghostty >/dev/null 2>&1 && killall -SIGUSR2 ghostty >/dev/null 2>&1 || true
 
-# --- Eza: the only mechanism is swapping the whole theme.yml; it is read fresh
-# on every invocation, so this is already "live". ---
-mkdir -p "$HOME/.config/eza"
-cp "$theme_dir/eza.yml" "$HOME/.config/eza/theme.yml"
+# --- Eza and Bat: fixed config paths symlinked into current/. Both are read
+# fresh on every invocation, so this is already "live". ---
+mkdir -p "$HOME/.config/eza" "$HOME/.config/bat"
+ln -sfn ../themes/current/eza.yml "$HOME/.config/eza/theme.yml"
+ln -sfn ../themes/current/bat.conf "$HOME/.config/bat/config"
 
-# --- Starship: swap the active `palette = "..."` line; read fresh every prompt. ---
+# --- Starship: no include support, swap the active `palette = "..."` line
+# (copied from current/starship.toml); read fresh every prompt. ---
+STARSHIP_PALETTE="$(sed -n -E 's/^palette = "(.*)"/\1/p' "$CURRENT/starship.toml")"
 sed -i '' -E "s/^palette = \".*\"/palette = \"$STARSHIP_PALETTE\"/" "$HOME/.config/starship/starship.toml"
-
-# --- Bat: config file drives the theme; read fresh on every invocation. ---
-mkdir -p "$HOME/.config/bat"
-printf -- '--theme="%s"\n' "$BAT_THEME" > "$HOME/.config/bat/config"
 
 # --- Zellij: swap the active `theme "..."` line for new sessions, and use
 # `theme_dark`/`set-dark-theme` as a live-reload trick for sessions already running. ---
@@ -59,17 +59,14 @@ while IFS= read -r session; do
   zellij --session "$session" action set-dark-theme >/dev/null 2>&1 || true
 done < <(zellij list-sessions --no-formatting 2>/dev/null | grep -v 'EXITED' | awk '{print $1}')
 
-# --- Herdr: rewrite the [theme] (and optional [theme.custom]) section of
-# config.toml, preserving everything else in the file, then reload the server. ---
-herdr_custom=""
-[[ -f "$theme_dir/herdr-custom.toml" ]] && herdr_custom="$theme_dir/herdr-custom.toml"
+# --- Herdr: no include support, replace the [theme] (and [theme.custom])
+# sections of config.toml with current/herdr.toml, preserving the rest of the
+# file, then reload the server. ---
 mkdir -p "$HOME/.config/herdr"
-HERDR_THEME="$HERDR_THEME" HERDR_CUSTOM_FILE="$herdr_custom" python3 - "$HOME/.config/herdr/config.toml" <<'PYEOF'
-import os, re, sys
+python3 - "$HOME/.config/herdr/config.toml" "$CURRENT/herdr.toml" <<'PYEOF'
+import re, sys
 
-path = sys.argv[1]
-theme_name = os.environ["HERDR_THEME"]
-custom_file = os.environ.get("HERDR_CUSTOM_FILE", "")
+path, theme_path = sys.argv[1:3]
 
 try:
     with open(path) as f:
@@ -80,11 +77,8 @@ except FileNotFoundError:
 section_re = re.compile(r"^\[theme(\.custom)?\][^\[]*", re.MULTILINE)
 rest = section_re.sub("", content).strip()
 
-block = f'[theme]\nname = "{theme_name}"\n'
-if custom_file:
-    with open(custom_file) as f:
-        custom_lines = f.read().strip()
-    block += f"\n[theme.custom]\n{custom_lines}\n"
+with open(theme_path) as f:
+    block = f.read().strip() + "\n"
 
 new_content = block + ("\n" + rest + "\n" if rest else "")
 with open(path, "w") as f:
@@ -124,14 +118,12 @@ if [[ -n "${firefox_rel_path:-}" ]]; then
     -e "s/__RED__/$red/g" -e "s/__GREEN__/$green/g" \
     -e "s/__YELLOW__/$yellow/g" -e "s/__BLUE__/$blue/g" \
     -e "s/__PURPLE__/$purple/g" -e "s/__CYAN__/$cyan/g" \
-    "$HOME/.config/theme-switcher/firefox/userChrome.css" > "$firefox_chrome_dir/userChrome.css"
+    "$THEME_ROOT/firefox-userChrome.css.tpl" > "$firefox_chrome_dir/userChrome.css"
 fi
-
-mkdir -p "$STATE_DIR"
-printf '%s\n' "$name" > "$STATE_DIR/current"
 
 echo "Tema aplicado: $DISPLAY_NAME"
 echo "  - Helix, Starship, Bat, Eza e Herdr: recarregados automaticamente."
+echo "  - Symlink: $CURRENT -> $name"
 echo "  - Ghostty: recarregado automaticamente (SIGUSR2)."
 echo "  - Zellij: sessoes ativas recarregadas; sessoes novas ja abrem no tema certo."
 echo "  - Neovim: instancias abertas atualizadas; novas ja abrem no tema certo."

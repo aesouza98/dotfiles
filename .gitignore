@@ -67,6 +67,8 @@ home/dot-config/herdr/session.json
 home/dot-config/zsh/.zsh_history
 home/dot-config/zsh/secrets.zsh
 
+# Active theme symlink (theme-switcher)
+home/dot-config/themes/current
 
 # zsh completion dump (regenerated)
 home/dot-config/zsh/.zcompdump*
