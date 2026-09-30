@@ -1,0 +1,96 @@
+[alias]
+	st = status --short
+	ch = checkout
+	chb = checkout -b
+	c = commit -m
+	lg = log --color --graph --branches --all --decorate --oneline
+	# Usage: git squash <branch>
+	squash = "!f(){ git reset $(git merge-base $1 $(git branch --show-current)) && git add -A && git commit;};f"
+
+	# Usage: git fixref && git push --force
+	fixref = commit --amend --reset-author -S --no-edit
+
+	# Usage: git sign [branch]   (default: branch atual)
+	# Assina TODOS os commits da branch que ainda nao estao na default branch e faz force-push.
+	# Merge commits sao achatados: nesse caso o rebase e feito na default branch, nao na merge-base.
+	# "Assinado" = commit tem header gpgsig (nao usa %G?, que exige gpg instalado e reporta
+	# assinaturas PGP de terceiros, tipo merges web-flow do GitHub, como ausentes).
+	sign = "!f() { \
+			b=\"${1:-$(git branch --show-current)}\"; \
+			[ -n \"$b\" ] || { echo \"git sign: HEAD desanexado; use: git sign <branch>\" >&2; return 1; }; \
+			d=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD) || d=origin/master; \
+			case \"$b\" in master|main|\"${d#origin/}\") echo \"git sign: recusando force-push em $b\" >&2; return 1;; esac; \
+			[ -z \"$(git status --porcelain)\" ] || { echo \"git sign: working tree sujo; commite ou stashe antes (reset --hard descartaria tudo)\" >&2; return 1; }; \
+			git fetch --quiet origin \"$b\" \"${d#origin/}\" && git checkout --quiet \"$b\" || return 1; \
+			n=$(git rev-list --count \"origin/$b..HEAD\") || return 1; \
+			[ \"$n\" = 0 ] || { echo \"git sign: $n commit(s) local(is) fora de origin/$b; empurre-os antes (reset --hard os descartaria)\" >&2; return 1; }; \
+			git reset --hard -q \"origin/$b\" || return 1; \
+			base=$(git merge-base HEAD \"$d\") || return 1; \
+			[ \"$base\" != \"$(git rev-parse HEAD)\" ] || { echo \"git sign: $b nao tem commits alem de $d\" >&2; return 1; }; \
+			u=0; for c in $(git rev-list \"$d..HEAD\"); do git cat-file commit \"$c\" | awk 'NF==0{exit} /^gpgsig/{s=1} END{exit !s}' || u=$((u+1)); done; \
+			[ \"$u\" != 0 ] || { echo \"git sign: todos os commits de $b ja estao assinados\"; return 0; }; \
+			m=$(git rev-list --count --merges \"$d..HEAD\"); \
+			onto=\"$base\"; \
+			[ \"$m\" = 0 ] || { onto=\"$d\"; echo \"git sign: $m merge commit(s) serao achatados; rebase de $b em $d\"; }; \
+			echo \"git sign: $u commit(s) sem assinatura; rebase de $b em $onto\"; \
+			git rebase --force-rebase --gpg-sign \"$onto\" || { echo \"git sign: rebase parou (conflito?); resolva e rode 'git rebase --continue' ou 'git rebase --abort'. Nada foi enviado.\" >&2; return 1; }; \
+			git push --force-with-lease origin \"$b\"; \
+			}; f"
+
+			main = "!git checkout $(git symbolic-ref --short refs/remotes/origin/HEAD | sed \"s|^origin/||\")"
+
+[user]
+	email = github@nano.slmail.me
+	name = Adriano Elias
+	signingkey = /Users/adriano.elias/.ssh/signing.pub
+
+[gpg]
+	format = ssh
+
+[commit]
+	gpgsign = true
+
+[gpg "ssh"]
+	allowedSignersFile = /Users/adriano.elias/.ssh/allowed_signers
+
+[push]
+	autoSetupRemote = true
+	followTags = true
+
+[pull]
+	rebase = true
+
+[rebase]
+	autoStash = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[rerere]
+	enabled = true
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[column]
+	ui = auto
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	line-numbers = true
+
+[includeIf "gitdir/i:~/Git/"]
+	path = ~/.gitconfig-ebanx
+
+[core]
+	editor = hx
+	pager = delta

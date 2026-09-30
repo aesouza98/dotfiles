@@ -22,6 +22,12 @@ if (( $+commands[deja] )); then
     zinit light Giammarco-Ferranti/deja
 fi
 
+# autopair - quotes only
+typeset -gA AUTOPAIR_PAIRS
+AUTOPAIR_PAIRS=("'" "'" '"' '"')
+zinit ice ver"v1.0"
+zinit light hlissner/zsh-autopair
+
 # syntax highlighting
 zinit light zdharma-continuum/fast-syntax-highlighting
 FAST_HIGHLIGHT[chroma-git]=
