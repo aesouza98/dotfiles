@@ -75,3 +75,4 @@ home/dot-config/zsh/.zcompdump*
 
 # tmux plugins (TPM-managed, reinstall with prefix I)
 home/dot-config/tmux/plugins/
+home/dot-config/tmux/tmux.conf.bak

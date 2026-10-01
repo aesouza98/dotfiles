@@ -302,8 +302,8 @@ web_client {
 // Default: default
 // 
 // theme "flexoki-dark"
-theme "tokyonight_storm"
-theme_dark "tokyonight_storm"
+theme "catppuccin-mocha"
+theme_dark "catppuccin-mocha"
  
 // Choose the base input mode of zellij.
 // Default: normal

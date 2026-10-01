@@ -19,6 +19,7 @@ shell-integration = zsh
 macos-option-as-alt = left
 
 # Font
+font-family = "JetBrainsMono Nerd Font Mono"
 font-size = 13
 font-feature = -calt, -liga, -dlig
 

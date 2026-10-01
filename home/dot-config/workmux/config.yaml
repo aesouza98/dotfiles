@@ -3,8 +3,8 @@ agent: claude
 nerdfont: true
 merge_strategy: merge
 
-# Tab format is owned by ~/.config/tmux/tmux.conf (@workmux_status)
-status_format: false
+# workmux adds agent status icons to the tab format itself
+status_format: true
 
 # Agent pane (focused) + shell pane below
 panes:

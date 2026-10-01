@@ -1,5 +1,5 @@
 [theme]
-name = "tokyo-night"
+name = "catppuccin"
 
 [terminal]
 default_shell = "zsh"
