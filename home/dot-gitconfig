@@ -1,0 +1,55 @@
+[alias]
+	st = status --short
+	ch = checkout
+	chb = checkout -b
+	c = commit -m
+	lg = log --color --graph --branches --all --decorate --oneline
+
+[user]
+	email = github@nano.slmail.me
+	name = Adriano Elias
+
+[gpg]
+	format = ssh
+
+[push]
+	autoSetupRemote = true
+	followTags = true
+
+[pull]
+	rebase = true
+
+[rebase]
+	autoStash = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[rerere]
+	enabled = true
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[column]
+	ui = auto
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	line-numbers = true
+
+[includeIf "gitdir/i:~/Git/"]
+	path = ~/.gitconfig-ebanx
+
+[core]
+	editor = hx
+	pager = delta

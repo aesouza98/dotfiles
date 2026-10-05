@@ -1,0 +1,36 @@
+# options
+setopt append_history
+setopt share_history
+setopt hist_ignore_dups
+setopt hist_expire_dups_first
+setopt hist_find_no_dups
+setopt hist_reduce_blanks
+setopt no_beep
+setopt inc_append_history
+
+# env
+source "$ZDOTDIR/.zshenv"
+
+# secrets
+[[ -f "$ZDOTDIR/secrets.zsh" ]] && source "$ZDOTDIR/secrets.zsh"
+
+# settings
+source "$ZDOTDIR/backspace.zsh"
+
+# plugins & plugin manager
+source "$ZDOTDIR/plugins.zsh"
+
+# aliases
+source "$ZDOTDIR/aliases.zsh"
+
+# utils
+source "$ZDOTDIR/utils.zsh"
+
+# aws wrapper
+source "$ZDOTDIR/aws.zsh"
+
+# history
+source "$ZDOTDIR/history.zsh"
+
+# edit mode
+source "$ZDOTDIR/edit.zsh"
