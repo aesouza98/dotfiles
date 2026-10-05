@@ -4,3 +4,80 @@ dot-config/themes/catppuccin/wallpaper
 dot-config/walker/config.toml
 dot-config/fcitx5/conf/cached_layouts
 dot-config/fcitx5/conf/notifications.conf
+
+
+# Auth tokens / credentials (NEVER commit)
+home/dot-config/gh/hosts.yml
+home/dot-config/github-copilot/
+# pip.conf contains work-specific AWS CodeArtifact URL with embedded credentials.
+# Regenerate with the codeartifact-login script when needed.
+home/dot-config/pip/
+
+# Work / macOS-specific apps with logs and databases
+home/dot-config/AWSVPNClient/
+
+# Auto-generated runtime state and caches
+home/dot-config/atuin/history.db
+home/dot-config/cagent/
+home/dot-config/configstore/
+home/dot-config/containers/
+home/dot-config/uv/
+
+# Editor runtime data (keep settings.json and themes, not runtime data)
+home/dot-config/zed/conversations/
+home/dot-config/zed/prompts/
+
+# Secrets (configure manually on each machine)
+home/dot-config/fish/conf.d/secrets.fish
+
+# Backup / scratch files
+home/dot-config/zellij/config.kdl.bak
+home/dot-config/zellij/config.kdl.bak.1
+home/dot-config/ghostty/config.bkp
+home/dot-config/fish/fish_variables
+home/dot-config/fish/conf.d/fish_frozen_key_bindings.fish
+home/dot-config/fish/conf.d/fish_frozen_theme.fish
+home/dot-config/fish/conf.d/fish_frozen_theme.fish.bak
+
+# ~/.local/bin: machine-specific symlinks and large binaries
+home/dot-local/bin/aws-secrets
+home/dot-local/bin/aws-secrets_beta
+home/dot-local/bin/claude
+home/dot-local/bin/terraform
+home/dot-local/bin/uv
+home/dot-local/bin/uvx
+
+# ~/.local/pipx: Python virtual envs (reinstall with pipx reinstall-all)
+home/dot-local/pipx/
+
+# ~/.local/share: runtime app data (not source-controlled)
+home/dot-local/share/atuin/
+home/dot-local/share/claude/
+home/dot-local/share/containers/
+home/dot-local/share/fish/
+home/dot-local/share/man/
+home/dot-local/share/nvim/
+home/dot-local/share/uv/
+home/dot-local/share/zinit/
+
+# ~/.local/state: all runtime state
+home/dot-local/state/
+
+# ~/.config/herdr: session and logs
+home/dot-config/herdr/herdr-server.log
+home/dot-config/herdr/session.json
+
+# ~/.config/zsh: zsh history and secrets
+home/dot-config/zsh/.zsh_history
+home/dot-config/zsh/secrets.zsh
+
+# Active theme symlink (theme-switcher)
+home/dot-config/themes/current
+
+# zsh completion dump (regenerated)
+home/dot-config/zsh/.zcompdump*
+
+# tmux plugins (TPM-managed, reinstall with prefix I)
+home/dot-config/tmux/plugins/
+home/dot-config/tmux/tmux.conf.bak
+
