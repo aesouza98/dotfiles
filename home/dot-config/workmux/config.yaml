@@ -6,6 +6,9 @@ merge_strategy: merge
 # workmux adds agent status icons to the tab format itself
 status_format: true
 
+sidebar:
+  width: 45
+
 # Agent pane (focused) + shell pane below
 panes:
   - command: <agent>
