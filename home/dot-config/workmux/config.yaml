@@ -12,3 +12,12 @@ panes:
     focus: true
   - split: horizontal
     size: 25
+
+# Layout alternativo com Devin (workmux add feat -l devin)
+layouts:
+  devin:
+    panes:
+      - command: devin-wm
+        focus: true
+      - split: horizontal
+        size: 25

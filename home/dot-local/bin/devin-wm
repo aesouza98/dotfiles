@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Devin wrapper para workmux status tracking
+workmux register-agent 2>/dev/null || true
+workmux set-window-status working 2>/dev/null || true
+devin "$@"
+workmux set-window-status done 2>/dev/null || true
