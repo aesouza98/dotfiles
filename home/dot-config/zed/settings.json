@@ -1,10 +1,24 @@
 {
+  "helix_mode": true,
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "base_keymap": "SublimeText",
   "edit_predictions": {
     "mode": "subtle",
     "provider": "copilot",
   },
   "agent": {
+    "dock": "right",
     "profiles": {
       "code": {
         "default_model": {
@@ -34,10 +48,12 @@
   "session": {
     "trust_all_worktrees": true,
   },
-  "ui_font_size": 16,
+  "ui_font_size": 15,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "buffer_font_size": 15,
   "terminal": {
+    "font_weight": 300.0,
+    "font_size": 13.0,
     "font_family": "JetBrainsMono Nerd Font Mono",
     "shell": {
       "program": "/opt/homebrew/bin/fish",
@@ -48,6 +64,6 @@
     "light": "One Light",
     "dark": "Catppuccin Mocha",
   },
-  "vim_mode": true,
+  "vim_mode": false,
   "relative_line_numbers": "enabled",
 }
