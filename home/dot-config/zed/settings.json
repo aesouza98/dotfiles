@@ -50,13 +50,13 @@
   },
   "ui_font_size": 15,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
-  "buffer_font_size": 15,
+  "buffer_font_size": 13,
   "terminal": {
     "font_weight": 300.0,
     "font_size": 13.0,
     "font_family": "JetBrainsMono Nerd Font Mono",
     "shell": {
-      "program": "/opt/homebrew/bin/fish",
+      "program": "/bin/zsh",
     },
   },
   "theme": {
