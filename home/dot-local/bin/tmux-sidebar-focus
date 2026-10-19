@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Abre a sidebar do workmux se fechada, depois foca o pane dela
+workmux sidebar on 2>/dev/null
+sleep 0.15
+
+for pane_id in $(tmux list-panes -a -F '#{pane_id}'); do
+  pid=$(tmux display-message -p -t "$pane_id" '#{pane_pid}' 2>/dev/null)
+  if ps -p "$pid" -o args= 2>/dev/null | grep -q workmux; then
+    tmux select-pane -t "$pane_id"
+    exit 0
+  fi
+done

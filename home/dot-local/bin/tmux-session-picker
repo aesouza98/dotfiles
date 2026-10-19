@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Session picker: sessions list (top) + workmux agents (bottom preview)
+selected=$(
+  tmux list-sessions -F "#{?session_attached,*,•} #{session_name}  #{session_windows}w  #{t:session_activity}" 2>/dev/null | \
+  fzf \
+    --no-sort \
+    --prompt="session > " \
+    --preview='workmux status 2>/dev/null || echo "no agents running"' \
+    --preview-label=" Workmux Agents " \
+    --preview-window="bottom:40%:wrap" \
+    --header="enter=switch  ctrl-c=cancel" \
+    --color="header:italic,preview-label:bold"
+)
+
+[ -n "$selected" ] || exit 0
+session=$(echo "$selected" | awk '{print $2}')
+tmux switch-client -t "$session"
