@@ -20,9 +20,6 @@ source "$ZDOTDIR/backspace.zsh"
 # plugins & plugin manager
 source "$ZDOTDIR/plugins.zsh"
 
-# aliases
-source "$ZDOTDIR/aliases.zsh"
-
 # utils
 source "$ZDOTDIR/utils.zsh"
 
@@ -34,3 +31,6 @@ source "$ZDOTDIR/history.zsh"
 
 # edit mode
 source "$ZDOTDIR/edit.zsh"
+
+# aliases
+source "$ZDOTDIR/aliases.zsh"

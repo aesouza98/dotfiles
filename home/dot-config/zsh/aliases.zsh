@@ -10,12 +10,13 @@ alias clare='clear'
 
 # utils
 alias ls='eza --icons -s type'
-alias tree='eza --tree'
+alias tree='eza --icons -s type --tree'
 alias find='fd'
 alias grep='rg --no-ignore-vcs'
 alias cat='bat -pp'
 alias bat='bat --style=auto'
 alias cd='z'
+alias c='zi'
 
 # others
 alias ping='ping -i 0.2'
