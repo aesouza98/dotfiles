@@ -5,6 +5,3 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Python.org system install (not homebrew — may not exist on all machines)
 [[ -d "/Library/Frameworks/Python.framework/Versions/3.12/bin" ]] && \
     PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:${PATH}"
-
-# safe-chain (work tool)
-export PATH="$HOME/.safe-chain/shims:$HOME/.safe-chain/bin:$PATH"
