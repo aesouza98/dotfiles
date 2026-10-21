@@ -11,7 +11,12 @@ Personal dotfiles for macOS and Linux, managed with GNU Stow.
 
 ## Setup
 
-1. Install GNU Stow
+1. Install GNU Stow and the tools used by the config:
+
+```sh
+brew install stow eza fd ripgrep bat zoxide fzf lazygit helix neovim
+```
+
 2. Clone the repo:
 
 ```sh
@@ -26,15 +31,6 @@ git checkout macos   # or master for Linux
 stow --dotfiles -t ~ home
 ```
 
-The `--dotfiles` flag maps `dot-SOMETHING` to `.SOMETHING` in `~`, so `home/dot-config/` becomes `~/.config/`, `home/dot-zshrc` becomes `~/.zshrc`, and so on.
+The `--dotfiles` flag maps `dot-SOMETHING` to `.SOMETHING` in `~`, so `home/dot-config/` becomes `~/.config/`, `home/dot-zshenv` becomes `~/.zshenv`, and so on.
 
-## Secrets
-
-Copy `home/dot-config/fish/conf.d/secrets.fish.template` to `secrets.fish` in the same directory and fill in your values. The file is gitignored and sourced automatically by fish.
-
-## Notes
-
-Two PATH entries are not managed by Homebrew and must be set up manually on each machine:
-
-- `$HOME/.safe-chain/` is a work tool installed separately.
-- `/Library/Frameworks/Python.framework/Versions/3.12/bin` is a Python.org install. The entry is conditional and only activates if that directory exists, so it is safe to skip on machines that do not have it.
+4. Open a new shell. zinit clones itself and installs the zsh plugins on first start.
