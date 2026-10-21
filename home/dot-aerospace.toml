@@ -250,7 +250,7 @@ gaps.outer.right =      0
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
-    alt-d = 'mode launch'
+    # alt-d = 'mode launch'
     alt-w = 'close --quit-if-last-window'
 
 # 'service' binding mode declaration.
@@ -269,6 +269,6 @@ gaps.outer.right =      0
     # alt-shift-k = ['join-with up', 'mode main']
     # alt-shift-l = ['join-with right', 'mode main']
 
-[mode.launch.binding]
-    esc = ['reload-config', 'mode main']
-    t = ['exec-and-forget open -na /Applications/Ghostty.app', 'mode main']
+# [mode.launch.binding]
+#     esc = ['reload-config', 'mode main']
+#     t = ['exec-and-forget open -na /Applications/Ghostty.app', 'mode main']
