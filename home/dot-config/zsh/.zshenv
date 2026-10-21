@@ -15,5 +15,5 @@ export EZA_CONFIG_DIR="$HOME/.config/eza"
 # path
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.config/scripts:$PATH"
-export PATH="/Users/adriano.elias/.codeium/windsurf/bin:$PATH"
+export PATH="$HOME.codeium/windsurf/bin:$PATH"
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
