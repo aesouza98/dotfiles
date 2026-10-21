@@ -1,5 +1,4 @@
-#Aliases
-### É difícil digitar clear
+# clear
 alias clera='clear'
 alias claer='clear'
 alias clrea='clear'
@@ -9,21 +8,17 @@ alias clrae='clear'
 alias clrea='clear'
 alias clare='clear'
 
-#Addons
+# utils
 alias ls='eza --icons -s type'
+alias tree='eza --icons -s type --tree'
 alias find='fd'
-alias grep='rg'
-alias ggrep='rg --no-ignore-vcs'
+alias grep='rg --no-ignore-vcs'
 alias cat='bat -pp'
 alias bat='bat --style=auto'
 alias vim='hx'
-# alias vim='nvim'
-alias lvim='NVIM_APPNAME=lazynvim nvim'
 alias cd='z'
+alias c='zi'
 
-#Others
+# others
 alias ping='ping -i 0.2'
 alias lg='lazygit'
-alias notes="nvim ~/Documents/Notes/"
-alias aws-profiles="grep '^\[profile ' ~/.aws/config | grep -v 'root-' | sed 's/^\[profile //; s/\]//'"
-alias aws-list-profiles="aws configure list-profiles"
