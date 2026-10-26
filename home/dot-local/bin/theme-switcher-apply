@@ -64,9 +64,9 @@ done < <(zellij list-sessions --no-formatting 2>/dev/null | grep -v 'EXITED' | a
 tmux source-file "$CURRENT/tmux.conf" >/dev/null 2>&1 || true
 tmux refresh-client -S >/dev/null 2>&1 || true
 
-# --- Herdr: no include support, replace the [theme] (and [theme.custom])
-# sections of config.toml with current/herdr.toml, preserving the rest of the
-# file, then reload the server. ---
+# --- Herdr: no include support, replace the [theme] (and [theme.*]) sections
+# of config.toml in place with current/herdr.toml, keeping top-level keys
+# first and the rest of the file intact, then reload the server. ---
 mkdir -p "$HOME/.config/herdr"
 python3 - "$HOME/.config/herdr/config.toml" "$CURRENT/herdr.toml" <<'PYEOF'
 import re, sys
@@ -75,19 +75,45 @@ path, theme_path = sys.argv[1:3]
 
 try:
     with open(path) as f:
-        content = f.read()
+        lines = f.read().splitlines()
 except FileNotFoundError:
-    content = ""
-
-section_re = re.compile(r"^\[theme(\.custom)?\][^\[]*", re.MULTILINE)
-rest = section_re.sub("", content).strip()
+    lines = []
 
 with open(theme_path) as f:
-    block = f.read().strip() + "\n"
+    block = f.read().strip()
 
-new_content = block + ("\n" + rest + "\n" if rest else "")
+# split into preamble + tables; comments above a header stay with it
+header_re = re.compile(r"^\s*\[\[?\s*([^\]]+?)\s*\]\]?\s*(#.*)?$")
+chunks, names = [[]], [None]
+for line in lines:
+    m = header_re.match(line)
+    if not m:
+        chunks[-1].append(line)
+        continue
+    cur = chunks[-1]
+    i = len(cur)
+    while i > 0 and (not cur[i - 1].strip() or cur[i - 1].lstrip().startswith("#")):
+        i -= 1
+    chunks[-1], lead = cur[:i], cur[i:]
+    chunks.append(lead + [line])
+    names.append(m.group(1))
+
+# swap theme tables for the new block, same position
+out, inserted = [], False
+for name, chunk in zip(names, chunks):
+    if name and (name == "theme" or name.startswith("theme.")):
+        if not inserted:
+            out.append(block)
+            inserted = True
+        continue
+    text = "\n".join(chunk).strip("\n")
+    if text.strip():
+        out.append(text)
+if not inserted:
+    out.insert(1 if "\n".join(chunks[0]).strip() else 0, block)
+
 with open(path, "w") as f:
-    f.write(new_content)
+    f.write("\n\n".join(out) + "\n")
 PYEOF
 herdr server reload-config >/dev/null 2>&1 || true
 
