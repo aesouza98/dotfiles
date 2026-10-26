@@ -65,6 +65,7 @@ home/dot-config/herdr/herdr-client.log
 home/dot-config/herdr/session.json
 home/dot-config/herdr/herdr.sock.agent
 home/dot-config/herdr/session-snapshots/
+home/dot-config/herdr/plugins/
 
 # ~/.config/zsh: zsh history and secrets
 home/dot-config/zsh/.zsh_history

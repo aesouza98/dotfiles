@@ -1,0 +1,69 @@
+[
+  {
+    "plugin_id": "drovr",
+    "name": "drovr",
+    "version": "0.4.8",
+    "min_herdr_version": "0.7.4",
+    "description": "Drive your herd: move the focused tab or pane, live agents included, anywhere with an fzf picker.",
+    "manifest_path": "/Users/adriano.elias/.dotfiles/home/dot-config/herdr/plugins/github-installations/drovr-4bf708966830/65728-0/checkout/herdr-plugin.toml",
+    "plugin_root": "/Users/adriano.elias/.dotfiles/home/dot-config/herdr/plugins/github-installations/drovr-4bf708966830/65728-0/checkout",
+    "enabled": true,
+    "platforms": [
+      "linux",
+      "macos"
+    ],
+    "actions": [
+      {
+        "id": "move-pane",
+        "title": "Move pane to tab…",
+        "contexts": [
+          "pane"
+        ],
+        "command": [
+          "node",
+          "--import",
+          "./compile-cache.js",
+          "open-picker.ts",
+          "pane"
+        ]
+      },
+      {
+        "id": "move-tab",
+        "title": "Move tab to workspace…",
+        "contexts": [
+          "tab"
+        ],
+        "command": [
+          "node",
+          "--import",
+          "./compile-cache.js",
+          "open-picker.ts",
+          "tab"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "picker",
+        "title": "drovr",
+        "placement": "popup",
+        "width": 64,
+        "height": 28,
+        "command": [
+          "node",
+          "--import",
+          "./compile-cache.js",
+          "pick-and-move.ts"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "AVGVSTVS96",
+      "repo": "herdr-drovr",
+      "resolved_commit": "03f38edba501f63d3f7044fc99cf3ae55438401e",
+      "managed_path": "/Users/adriano.elias/.config/herdr/plugins/github-installations/drovr-4bf708966830/65728-0/checkout",
+      "installed_unix_ms": 1792508815932
+    }
+  }
+]
