@@ -1,12 +1,5 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "helix_mode": true,
   "icon_theme": "Material Icon Theme",
   "project_panel": {
     "dock": "left",
@@ -39,30 +32,9 @@
     "light": "Flexoki Light",
     "dark": "Flexoki Dark",
   },
-  "lsp": {
-    "beancount": {
-      "binary": {
-        "path": "/usr/bin/beancount-language-server",
-        "arguments": ["--stdio"],
-      },
-      "initialization_options": {
-        "journal_file": "~/Documentos/Beancount/main.bean",
-        "formatting": {
-          "prefix_width": 30,
-          "currency_column": 60,
-          "number_currency_spacing": 1,
-        },
-      },
-    },
-  },
-  "languages": {
-    "Beancount": {
-      "language_servers": ["beancount"],
-    },
-  },
   "terminal": {
     "shell": {
-      "program": "/usr/bin/zsh",
+      "program": "/run/current-system/sw/bin/zsh",
     },
   },
 }
