@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# defaults
+base="127.0.0.1 localhost
+::1 localhost
+127.0.0.2 $(hostname)"
+
+# switch hosts
+if grep -q '^0\.0\.0\.0 ' /etc/hosts; then
+  new="$base"
+  msg="hosts: sem filtros"
+else
+  new="$base
+$(cat /etc/hosts-blocklist)"
+  msg="hosts: com filtros"
+fi
+
+# nixos fix 
+sudo rm -f /etc/hosts
+echo "$new" | sudo tee /etc/hosts >/dev/null
+echo "$msg"
