@@ -1,4 +1,5 @@
 onboarding = false
+
 [theme]
 name = "catppuccin"
 
@@ -23,6 +24,25 @@ command = "zsh -c 'read \"n?workspace name: \"; [ -n \"$n\" ] && herdr workspace
 width = 50
 height = 2
 
+# copycat: save and open workspaces
+[[keys.command]]
+key = "prefix+shift+s"
+type = "shell"
+command = "herdr plugin action invoke save --plugin scantinibudden.herdr-copycat"
+description = "copycat: save workspace"
+
+[[keys.command]]
+key = "prefix+shift+o"
+type = "shell"
+command = "herdr plugin action invoke open --plugin scantinibudden.herdr-copycat"
+description = "copycat: open saved workspace"
+
+[[keys.command]]
+key = "prefix+ctrl+d"
+type = "shell"
+command = "herdr plugin action invoke delete --plugin scantinibudden.herdr-copycat"
+description = "copycat: delete saved workspace"
+
 [terminal]
 default_shell = "zsh"
 
@@ -39,5 +59,3 @@ delivery = "system"
 
 [ui.sound]
 enabled = true
-
-

@@ -65,5 +65,98 @@
       "managed_path": "/Users/adriano.elias/.config/herdr/plugins/github-installations/drovr-4bf708966830/65728-0/checkout",
       "installed_unix_ms": 1792508815932
     }
+  },
+  {
+    "plugin_id": "scantinibudden.herdr-copycat",
+    "name": "herdr-copycat",
+    "version": "0.1.0",
+    "min_herdr_version": "0.9.0",
+    "description": "Save any herdr workspace as a named space (tabs, splits, folders, agents and programs) and open copies of it whenever you like.",
+    "manifest_path": "/Users/adriano.elias/.dotfiles/home/dot-config/herdr/plugins/github-installations/scantinibudden.herdr-copycat-9e48e7a911ff/25365-0/checkout/herdr-plugin.toml",
+    "plugin_root": "/Users/adriano.elias/.dotfiles/home/dot-config/herdr/plugins/github-installations/scantinibudden.herdr-copycat-9e48e7a911ff/25365-0/checkout",
+    "enabled": true,
+    "platforms": [
+      "linux",
+      "macos"
+    ],
+    "actions": [
+      {
+        "id": "delete",
+        "title": "Copycat: delete saved space…",
+        "contexts": [
+          "workspace"
+        ],
+        "command": [
+          "bash",
+          "scripts/launch.sh",
+          "delete"
+        ]
+      },
+      {
+        "id": "open",
+        "title": "Copycat: open saved space…",
+        "contexts": [
+          "workspace"
+        ],
+        "command": [
+          "bash",
+          "scripts/launch.sh",
+          "open"
+        ]
+      },
+      {
+        "id": "save",
+        "title": "Copycat: save this workspace as…",
+        "contexts": [
+          "workspace"
+        ],
+        "command": [
+          "bash",
+          "scripts/launch.sh",
+          "save"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "delete-ui",
+        "title": "Delete space",
+        "placement": "overlay",
+        "command": [
+          "bash",
+          "-c",
+          "exec \"$HERDR_PLUGIN_ROOT/scripts/ui.sh\" delete"
+        ]
+      },
+      {
+        "id": "open-ui",
+        "title": "Open space",
+        "placement": "overlay",
+        "command": [
+          "bash",
+          "-c",
+          "exec \"$HERDR_PLUGIN_ROOT/scripts/ui.sh\" open"
+        ]
+      },
+      {
+        "id": "save-ui",
+        "title": "Save space",
+        "placement": "overlay",
+        "command": [
+          "bash",
+          "-c",
+          "exec \"$HERDR_PLUGIN_ROOT/scripts/ui.sh\" save"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "scantinibudden",
+      "repo": "herdr-copycat",
+      "requested_ref": "a48082081930e1fe3129c69201fe21bc35129d53",
+      "resolved_commit": "a48082081930e1fe3129c69201fe21bc35129d53",
+      "managed_path": "/Users/adriano.elias/.config/herdr/plugins/github-installations/scantinibudden.herdr-copycat-9e48e7a911ff/25365-0/checkout",
+      "installed_unix_ms": 1793803800965
+    }
   }
 ]
