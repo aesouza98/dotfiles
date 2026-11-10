@@ -1,0 +1,76 @@
+[
+  // new thread: default agent
+  {
+    "context": "AgentPanel",
+    "use_key_equivalents": true,
+    "bindings": {
+      "cmd-n": ["agent::NewExternalAgentThread", { "agent": "devin" }]
+    }
+  },
+  {
+    "context": "AcpThread",
+    "use_key_equivalents": true,
+    "bindings": {
+      "cmd-n": ["agent::NewExternalAgentThread", { "agent": "devin" }]
+    }
+  },
+  {
+    "context": "AgentPanel > Terminal",
+    "use_key_equivalents": true,
+    "bindings": {
+      "cmd-n": ["agent::NewExternalAgentThread", { "agent": "devin" }]
+    }
+  },
+  // new thread: pick agent
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-alt-1": ["agent::NewExternalAgentThread", { "agent": "claude-acp" }],
+      "cmd-alt-2": ["agent::NewExternalAgentThread", { "agent": "devin" }]
+    }
+  },
+  // swap palette and file finder
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-p": "command_palette::Toggle",
+      "cmd-shift-p": "file_finder::Toggle"
+    }
+  },
+  // helix normal mode
+  {
+    "context": "Editor && mode == full && VimControl && vim_mode == helix_normal && !menu && !BufferSearchBar",
+    "bindings": {
+      // jump to word
+      "enter": "vim::HelixJumpToWord",
+      "return": "vim::HelixJumpToWord",
+      // save
+      "ctrl-s": "workspace::Save",
+      // lazygit task
+      "ctrl-g": ["task::Spawn", { "task_name": "lazygit", "reveal_target": "center" }],
+      // file browser
+      "ctrl-y": "project_panel::ToggleFocus",
+      // space menu
+      "space b": "editor::ToggleGitBlameInline",
+      "space shift-b": "tab_switcher::OpenInActivePane",
+      "space n": "editor::GoToDiagnostic",
+      "space p": "editor::GoToPreviousDiagnostic"
+    }
+  },
+  // helix normal and select mode
+  {
+    "context": "Editor && mode == full && (vim_mode == helix_normal || vim_mode == helix_select) && !menu",
+    "bindings": {
+      // toggle comments
+      "ctrl-/": ["editor::ToggleComments", { "advance_downwards": false, "comment_empty_lines": false }]
+    }
+  },
+  // helix insert mode
+  {
+    "context": "Editor && mode == full && helix_mode && vim_mode == insert",
+    "bindings": {
+      // leave insert, then save
+      "ctrl-s": ["workspace::SendKeystrokes", "escape cmd-s"]
+    }
+  }
+]

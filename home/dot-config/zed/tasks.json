@@ -1,0 +1,12 @@
+[
+  // git ui in center terminal
+  {
+    "label": "lazygit",
+    "command": "lazygit",
+    "args": ["-p", "$ZED_WORKTREE_ROOT"],
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "on_success"
+  }
+]
