@@ -37,6 +37,13 @@
       "cmd-shift-p": "file_finder::Toggle"
     }
   },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-alt-o": "projects::OpenRecent",
+      "cmd-alt-p": ["task::Spawn", { "task_name": "open project", "reveal_target": "center" }]
+    }
+  },
   // helix normal mode
   {
     "context": "Editor && mode == full && VimControl && vim_mode == helix_normal && !menu && !BufferSearchBar",

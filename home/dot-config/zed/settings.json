@@ -21,7 +21,7 @@
     "dock": "left"
   },
   "outline_panel": {
-    "dock": "left"
+    "dock": "right"
   },
   "collaboration_panel": {
     "button": false,
@@ -86,5 +86,7 @@
     "dark": "Catppuccin Mocha",
   },
   "vim_mode": false,
+  "use_system_path_prompts": false,
+  "close_panel_on_toggle": true,
   "relative_line_numbers": "enabled",
 }
