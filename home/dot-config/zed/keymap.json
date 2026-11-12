@@ -44,6 +44,20 @@
       "cmd-alt-p": ["task::Spawn", { "task_name": "open project", "reveal_target": "center" }]
     }
   },
+  // fullscreen terminal: open and zoom
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-cmd-j": ["action::Sequence", ["terminal_panel::ToggleFocus", "workspace::ToggleZoom"]]
+    }
+  },
+  // fullscreen terminal: zoom or unzoom
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-cmd-j": "workspace::ToggleZoom"
+    }
+  },
   // helix normal mode
   {
     "context": "Editor && mode == full && VimControl && vim_mode == helix_normal && !menu && !BufferSearchBar",

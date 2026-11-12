@@ -11,7 +11,7 @@
     "claude-acp": {
       "default_config_options": {
         "effort": "high",
-        "model": "opus"
+        "model": "sonnet"
       },
       "type": "registry"
     }
@@ -73,6 +73,8 @@
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "buffer_font_size": 13,
   "terminal": {
+    "dock": "bottom",
+    "starts_open": true,
     "font_weight": 300.0,
     "font_size": 13.0,
     "font_family": "JetBrainsMono Nerd Font Mono",
