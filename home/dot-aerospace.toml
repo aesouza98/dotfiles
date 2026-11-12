@@ -150,8 +150,10 @@ gaps.outer.right =      0
     alt-ctrl-shift-o = 'exec-and-forget /usr/bin/open "obsidian://open?vault=chisano"'
 
     # cycle windows in workspace
-    alt-backtick = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-next'
-    alt-shift-backtick = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-prev'
+    alt-ctrl-shift-cmd-backtick = '''exec-and-forget ids=$(/opt/homebrew/bin/aerospace list-windows --workspace focused --format '%{window-id}' | /usr/bin/sort -n)
+        cur=$(/opt/homebrew/bin/aerospace list-windows --focused --format '%{window-id}')
+        next=$(printf '%s\n' "$ids" | /usr/bin/awk -v c="$cur" 'NR==1{f=$0} h&&!d{print;d=1} $0==c{h=1} END{if(!d)print f}')
+        [ -n "$next" ] && /opt/homebrew/bin/aerospace focus --window-id "$next"'''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     # alt-slash = 'layout tiles horizontal vertical'
