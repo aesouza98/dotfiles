@@ -37,6 +37,7 @@
   },
   "agent": {
     "threads_sidebar": {
+      "position": "right",
       "auto_open": false
     },
     "dock": "right",
@@ -91,4 +92,12 @@
   "use_system_path_prompts": false,
   "close_panel_on_toggle": true,
   "relative_line_numbers": "enabled",
+  "languages": {
+    "JSON": {
+      "formatter": [
+        { "external": { "command": "jsonrepair", "arguments": [] } },
+        "prettier",
+      ],
+    },
+  },
 }
