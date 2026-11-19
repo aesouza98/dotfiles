@@ -4,6 +4,7 @@
 	chb = checkout -b
 	c = commit -m
 	lg = log --color --graph --branches --all --decorate --oneline
+	stat = diff --stat
 	# Usage: git squash <branch>
 	squash = "!f(){ git reset $(git merge-base $1 $(git branch --show-current)) && git add -A && git commit;};f"
 
