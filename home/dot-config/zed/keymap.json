@@ -59,6 +59,13 @@
       "cmd-9": ["pane::ActivateItem", 8]
     }
   },
+  // terminal as center tab
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-~": "workspace::NewCenterTerminal"
+    }
+  },
   // fullscreen terminal: open and zoom
   {
     "context": "Workspace",
