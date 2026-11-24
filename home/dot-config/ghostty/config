@@ -14,8 +14,12 @@ window-padding-balance = true
 command = /bin/zsh
 shell-integration = zsh
 
-# Keybinding
-# keybind = global:cmd+/=toggle_quick_terminal
+# quick terminal
+keybind = global:option+grave_accent=toggle_quick_terminal
+quick-terminal-position = center
+quick-terminal-animation-duration = 0.1
+quick-terminal-autohide = true
+
 macos-option-as-alt = left
 
 # Font
