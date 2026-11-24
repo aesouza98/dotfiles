@@ -82,7 +82,7 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     alt-ctrl-shift-o = 'exec-and-forget /usr/bin/open "obsidian://open?vault=chisano"'
 
     # cycle windows in workspace
-    cmd-backtick = '''exec-and-forget ids=$(/opt/homebrew/bin/aerospace list-windows --workspace focused --format '%{window-id}' | /usr/bin/sort -n)
+    cmd-alt-backtick = '''exec-and-forget ids=$(/opt/homebrew/bin/aerospace list-windows --workspace focused --format '%{window-id}' | /usr/bin/sort -n)
         cur=$(/opt/homebrew/bin/aerospace list-windows --focused --format '%{window-id}')
         next=$(printf '%s\n' "$ids" | /usr/bin/awk -v c="$cur" 'NR==1{f=$0} h&&!d{print;d=1} $0==c{h=1} END{if(!d)print f}')
         [ -n "$next" ] && /opt/homebrew/bin/aerospace focus --window-id "$next"'''
