@@ -1,37 +1,33 @@
-# Appearance
+# appearance
+config-file = ?../themes/current/ghostty.conf
 background-blur-radius = 20
-background-opacity = 0.95
+background-opacity = 0.75
 mouse-hide-while-typing = true
 window-decoration = true
 window-padding-x = 5
 window-padding-y = 5
 window-padding-balance = true
+scrollbar = never
 
-# Shell
-# command = /opt/homebrew/bin/fish
-# shell-integration = fish
-# command = /bin/zsh -l -c "exec zellij"
+# shell
 command = /bin/zsh
 shell-integration = zsh
 
 # quick terminal
-keybind = global:option+grave_accent=toggle_quick_terminal
+keybind = global:cmd+grave_accent=toggle_quick_terminal
 quick-terminal-position = center
 quick-terminal-animation-duration = 0.1
 quick-terminal-autohide = true
 
-macos-option-as-alt = left
 
-# Font
+# font
 font-family = "JetBrainsMono Nerd Font Mono"
 font-size = 13
 font-feature = -calt, -liga, -dlig
 
-# Misc
+# settings
 copy-on-select = clipboard
-# mouse-scroll-multiplier = 0
 mouse-scroll-multiplier = precision:0.5,discrete:10
 scrollback-limit = 100000000
-
-# Theme (managed by theme-switcher)
-config-file = ?../themes/current/ghostty.conf
+macos-option-as-alt = left
+# mouse-scroll-multiplier = 0
