@@ -87,7 +87,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Catppuccin Mocha",
+    "dark": "Flexoki Dark",
   },
   "vim_mode": false,
   "use_system_path_prompts": false,
