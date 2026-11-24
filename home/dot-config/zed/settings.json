@@ -1,4 +1,7 @@
 {
+  "search": {
+    "button": false
+  },
   "agent_servers": {
     "devin": {
       "default_config_options": {
