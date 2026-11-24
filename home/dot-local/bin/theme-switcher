@@ -1,60 +1,68 @@
 #!/bin/bash
-# Interactive theme picker for Helix, Neovim, Ghostty, Eza, Starship, Bat,
-# Zellij, Herdr and Firefox (chrome only). Themes live in ~/.config/themes/<name>/;
-# ~/.config/themes/current is a symlink to the active one.
-#
-# Usage:
-#   theme-switcher            interactive picker (fzf, with color preview)
-#   theme-switcher list       list available theme names
-#   theme-switcher current   print the currently active theme
-#   theme-switcher set NAME  apply a theme non-interactively
-#   theme-switcher validate [NAME...]   lint theme(s) - hex format, Herdr keys, Ghostty sync
-
 set -euo pipefail
 
 THEME_ROOT="$HOME/.config/themes"
-BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CURRENT="$THEME_ROOT/current"
+SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
 
+# manual setup
+MANUAL="Starship Zellij Herdr Firefox Tmux"
+
+# list themes
 list_themes() {
   find "$THEME_ROOT/" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort
 }
 
-current_theme() {
-  [[ -L $THEME_ROOT/current ]] && basename "$(readlink "$THEME_ROOT/current")" || echo "(nenhum)"
+# preview
+# shellcheck disable=SC1090,SC2155
+preview() {
+  # shellcheck disable=SC1091
+  source "$THEME_ROOT/$1/theme.conf"
+  read -r bg fg red green yellow blue purple cyan <<< "$SWATCH"
+  rgb() { printf '%d;%d;%d' "$((16#${1:0:2}))" "$((16#${1:2:2}))" "$((16#${1:4:2}))"; }
+  local B=$'\033[48;2;'"$(rgb "$bg")"m R=$'\033[0m'
+  local c_fg=$'\033[38;2;'"$(rgb "$fg")"m c_cm=$'\033[38;2;'"$(rgb "$cyan")"m
+  local c_kw=$'\033[38;2;'"$(rgb "$red")"m c_st=$'\033[38;2;'"$(rgb "$green")"m
+  local c_nu=$'\033[38;2;'"$(rgb "$yellow")"m c_fn=$'\033[38;2;'"$(rgb "$blue")"m
+  local c_ac=$'\033[38;2;'"$(rgb "$purple")"m
+  line() { printf '%s%-*s%s\n' "$B" $((42 + ${#1} - ${#2})) "$1" "$R"; }
+  echo "$DISPLAY_NAME"; echo
+  line "${c_cm}# theme-switcher.sh" "# theme-switcher.sh"
+  line "" ""
+  line "${c_kw}function ${c_fn}apply${c_fg}(theme) {" "function apply(theme) {"
+  line "    ${c_kw}local ${c_fg}accent = ${c_st}\"#89b4fa\"" "    local accent = \"#89b4fa\""
+  line "    ${c_kw}local ${c_fg}count  = ${c_nu}42        ${c_cm}# ok" "    local count  = 42        # ok"
+  line "    ${c_kw}return ${c_ac}accent" "    return accent"
+  line "${c_fg}}" "}"
 }
 
+# apply
+apply() {
+  local name="$1"
+  [[ -f "$THEME_ROOT/$name/theme.conf" ]] || { echo "Tema desconhecido: $name" >&2; list_themes >&2; exit 1; }
+  ln -sfn "$name" "$CURRENT"
+  mkdir -p "$HOME/.config/eza" "$HOME/.config/bat"
+  ln -sfn ../themes/current/eza.yml "$HOME/.config/eza/theme.yml"
+  ln -sfn ../themes/current/bat.conf "$HOME/.config/bat/config"
+
+  # reload running apps
+  pkill -USR1 -x hx 2>/dev/null || true
+  pkill -USR2 -x ghostty 2>/dev/null || true
+  while IFS= read -r sock; do
+    nvim --server "$sock" --remote-send ":luafile $CURRENT/nvim.lua<CR>" >/dev/null 2>&1 || true
+  done < <(find "${TMPDIR:-/tmp}" -maxdepth 3 -type s -name 'nvim.*.0' 2>/dev/null)
+
+  echo "Tema: $name"
+  echo "  symlink:     $CURRENT -> $name"
+  echo "  recarregado: Helix, Ghostty, Neovim (Eza e Bat leem current/ a cada execucao)"
+  echo "  manual:      $MANUAL (sem suporte a include/symlink)"
+}
+
+# apply no-preview
 case "${1:-}" in
-  list)
-    list_themes
-    ;;
-  current)
-    current_theme
-    ;;
-  set)
-    [[ -n "${2:-}" ]] || { echo "Uso: theme-switcher set <nome>" >&2; exit 1; }
-    "$BIN_DIR/theme-switcher-apply" "$2"
-    ;;
-  validate)
-    shift
-    "$BIN_DIR/theme-switcher-validate" "$@"
-    ;;
-  ""|pick)
-    selected="$(
-      list_themes | fzf \
-        --prompt="Tema > " \
-        --preview="$BIN_DIR/theme-switcher-preview {}" \
-        --preview-window="right:60%" \
-        --height=60% \
-        --layout=reverse
-    )"
-    [[ -n $selected ]] || exit 0
-    "$BIN_DIR/theme-switcher-apply" "$selected"
-    if command -v osascript >/dev/null 2>&1; then
-      osascript -e "display notification \"$selected\" with title \"Theme Switcher\"" >/dev/null 2>&1 || true
-    fi
-    ;;
-  *)
-    echo "Uso: theme-switcher [list|current|set NAME|validate [NAME...]|pick]" >&2
-    exit 1
-    ;;
+  --preview) preview "$2" ;;
+  "") selected="$(list_themes | fzf --prompt="Tema > " --height=60% --layout=reverse \
+        --preview="$SELF --preview {}" --preview-window="right:60%")"
+      [[ -n $selected ]] && apply "$selected" ;;
+  *) apply "$1" ;;
 esac
